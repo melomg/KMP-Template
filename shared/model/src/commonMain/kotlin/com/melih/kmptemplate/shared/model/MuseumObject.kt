@@ -1,4 +1,4 @@
-package com.melih.kmptemplate.data
+package com.melih.kmptemplate.shared.model
 
 import kotlinx.serialization.Serializable
 
