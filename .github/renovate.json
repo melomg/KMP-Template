@@ -1,0 +1,39 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "baseBranches": [
+    "main"
+  ],
+  "branchPrefix": "renovate/",
+  "prHourlyLimit": 10,
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "renovatebot/github-action"
+      ],
+      "extends": [
+        "schedule:weekly"
+      ]
+    },
+    {
+      "matchPackagePrefixes": [
+        "androidx"
+      ],
+      "groupName": "AndroidX"
+    },
+    {
+      "matchPackagePrefixes": [
+        "org.jetbrains.kotlin"
+      ],
+      "groupName": "Kotlin"
+    },
+    {
+      "matchPackagePrefixes": [
+        "ktor"
+      ],
+      "groupName": "Ktor"
+    }
+  ]
+}
