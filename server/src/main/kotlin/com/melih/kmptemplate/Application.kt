@@ -1,5 +1,7 @@
 package com.melih.kmptemplate
 
+import com.melih.kmptemplate.shared.platform.Greeting
+import com.melih.kmptemplate.shared.platform.SERVER_PORT
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
