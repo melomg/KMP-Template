@@ -74,11 +74,30 @@ The KMP template tries to help you get started with these points:
         - [ ] UI Testing
         - [ ] Compose Screenshot testing
 
-## Code of Conduct
+# Architecture
+
+The **KMP Template** is following the [Android official architecture guidance](https://developer.android.com/topic/architecture) as closely as possible.
+
+Some inspiring links;
+
+- [Principles & Practice in Repository Layer](https://proandroiddev.com/principles-practice-in-repository-layer-444551b96cf8)
+- [Architecture Learning Journey in Now in Android](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md)
+
+# Modularization
+
+Over the years, I found below resources helpful for modular design and my aim for **KMP Template** is to follow them as closely as possible;
+
+- [Android at scale @Square](https://www.droidcon.com/2019/11/15/android-at-scale-square/)
+- [Navigating through multi-module Jetpack Compose applications](https://proandroiddev.com/navigating-through-multi-module-jetpack-compose-applications-6c9a31fa12b6)
+- [Modularising Trendyol Android App for Build Efficiency](https://medium.com/trendyol-tech/modularising-trendyol-android-app-for-build-efficiency-94f6b79fc012)
+- [Herding Elephants](https://developer.squareup.com/blog/herding-elephants/)
+- [Modularization learning journey in Now in Android](https://github.com/android/nowinandroid/blob/main/docs/ModularizationLearningJourney.md)
+
+# Code of Conduct
 
 This project is managed by the [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code.
 
-## License
+# License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
