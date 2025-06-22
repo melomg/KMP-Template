@@ -1,5 +1,7 @@
 package com.melih.kmptemplate.data
 
+import com.melih.kmptemplate.shared.model.MuseumObject
+import com.melih.kmptemplate.shared.network.MuseumApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow

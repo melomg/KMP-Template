@@ -26,12 +26,13 @@ You can open the web application by running the Gradle task below:
 The KMP template tries to help you get started with these points:
 
 - [ ] Core
-    - [x] Dependency management: Renovate
+    - [x] Dependency management: [Renovate](https://docs.renovatebot.com/)
+    - [x] DI: [koin](https://insert-koin.io/docs/reference/koin-mp/kmp/)
+    - [x] Network: [ktor](https://ktor.io/)
     - [ ] Logging: [Napier](https://github.com/AAkira/Napier)?
         - [ ] Error reporting
         - [ ] Analytics
         - [ ] Tracing
-    - [ ] Network: [ktor](https://ktor.io/)
     - [ ] Benchmarking
     - [ ] Build conventions
     - [ ] Flavours
@@ -40,7 +41,6 @@ The KMP template tries to help you get started with these points:
     - [ ] Build info
     - [ ] Preferences
     - [ ] Storage
-    - [ ] DI: koin?
     - [ ] Feature flags (local & remote)
     - [ ] Deep linking
     - [ ] Push notifications

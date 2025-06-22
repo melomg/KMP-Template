@@ -66,6 +66,8 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
+            implementation(projects.shared.model)
+            implementation(projects.shared.network)
             implementation(projects.shared.platform)
 
             implementation(compose.runtime)
@@ -93,7 +95,7 @@ kotlin {
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
-            implementation(libs.jetbrains.kotlinx.coroutinesSwing)
+            implementation(libs.jetbrains.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.cio)
         }
         wasmJsMain.dependencies {
