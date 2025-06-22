@@ -18,19 +18,19 @@
       ]
     },
     {
-      "matchPackagePrefixes": [
+      "matchPackageNames": [
         "androidx"
       ],
       "groupName": "AndroidX"
     },
     {
-      "matchPackagePrefixes": [
-        "org.jetbrains.kotlin"
+      "matchPackageNames": [
+        "org.jetbrains"
       ],
-      "groupName": "Kotlin"
+      "groupName": "Jetbrains"
     },
     {
-      "matchPackagePrefixes": [
+      "matchPackageNames": [
         "ktor"
       ],
       "groupName": "Ktor"
