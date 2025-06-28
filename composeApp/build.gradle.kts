@@ -37,7 +37,7 @@ kotlin {
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "composeApp"
+        outputModuleName = "composeApp"
         browser {
             val rootDirPath = project.rootDir.path
             val projectDirPath = project.projectDir.path
@@ -63,7 +63,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.cio)
 
-            implementation(platform("com.google.firebase:firebase-bom:33.16.0"))
+            implementation(project.dependencies.platform(libs.firebase.bom))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -123,9 +123,9 @@ android {
     signingConfigs {
         create("prod") {
             storeFile = file("../tools/release.jks")
-            storePassword =  "..."
+            storePassword = "..."
             keyAlias = "..."
-            keyPassword =  "..."
+            keyPassword = "..."
         }
     }
 
