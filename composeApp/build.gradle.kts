@@ -63,7 +63,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.cio)
 
-            implementation(project.dependencies.platform("com.google.firebase:firebase-bom:33.16.0"))
+            implementation(project.dependencies.platform(libs.firebase.bom))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
