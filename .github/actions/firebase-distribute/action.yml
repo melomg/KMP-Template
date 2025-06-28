@@ -1,0 +1,48 @@
+name: Firebase Android App Distribution
+
+description: Build and upload Android app to Firebase App Distribution
+
+inputs:
+  app-path:
+    description: 'Path to APK or AAB'
+    required: true
+  firebase-app-id:
+    description: 'Firebase App ID'
+    required: true
+  service-account-json:
+    description: 'Base64-encoded Firebase service account JSON'
+    required: true
+  groups:
+    description: 'Comma-separated list of tester groups'
+    required: true
+  release-notes:
+    description: 'Release notes for the testers'
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Decode Firebase Service Account
+      shell: bash
+      run: |
+        echo "${{ inputs.service-account-json }}" | base64 --decode > ${{ github.workspace }}/firebase.json
+
+    - name: Install Firebase CLI
+      shell: bash
+      run: curl -sL https://firebase.tools | bash
+
+    - name: Upload to Firebase App Distribution
+      shell: bash
+      run: |
+        export GOOGLE_APPLICATION_CREDENTIALS="${{ github.workspace }}/firebase.json"
+        CMD="firebase appdistribution:distribute '${{ inputs.app-path }}' --app ${{ inputs.firebase-app-id }}"
+        if [ -n "${{ inputs.testers }}" ]; then
+          CMD="$CMD --testers='${{ inputs.testers }}'"
+        fi
+        if [ -n "${{ inputs.groups }}" ]; then
+          CMD="$CMD --groups='${{ inputs.groups }}'"
+        fi
+        if [ -n "${{ inputs.release-notes }}" ]; then
+          CMD="$CMD --release-notes='${{ inputs.release-notes }}'"
+        fi
+        eval "$CMD"
