@@ -123,9 +123,9 @@ android {
     signingConfigs {
         create("prod") {
             storeFile = file("../tools/release.jks")
-            storePassword =  "..."
+            storePassword = "..."
             keyAlias = "..."
-            keyPassword =  "..."
+            keyPassword = "..."
         }
     }
 
