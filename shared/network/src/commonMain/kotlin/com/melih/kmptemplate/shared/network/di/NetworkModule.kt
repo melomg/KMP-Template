@@ -17,6 +17,7 @@ import com.melih.kmptemplate.shared.network.internal.KtorMuseumApi
 import org.koin.dsl.module
 import io.ktor.client.plugins.logging.Logger as KtorLogger
 
+@Suppress("ForbiddenComment")
 val networkModule = module {
     single<MuseumApi> { KtorMuseumApi(get()) }
     single<MoviesApi> { KtorMoviesApi(get()) }

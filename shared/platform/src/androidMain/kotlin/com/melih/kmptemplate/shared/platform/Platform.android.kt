@@ -1,3 +1,4 @@
+@file:Suppress("MatchingDeclarationName")
 package com.melih.kmptemplate.shared.platform
 
 import android.os.Build

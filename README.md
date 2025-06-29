@@ -1,4 +1,4 @@
-# KMP template ![Work In Progress](https://img.shields.io/badge/WORK%20IN%20PROGRESS-c20404) [![Build Status Android](https://github.com/melomg/KMP-Template/actions/workflows/build-android.yml/badge.svg)](https://github.com/melomg/KMP-Template/actions/workflows/build-android.yml) [![Build Status iOS](https://github.com/melomg/KMP-Template/actions/workflows/build-ios.yml/badge.svg)](https://github.com/melomg/KMP-Template/actions/workflows/build-ios.yml) [![Apache V2 License](https://img.shields.io/badge/License-Apache%20V2-blue)](LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+# KMP template ![Work In Progress](https://img.shields.io/badge/WORK%20IN%20PROGRESS-c20404) [![Build Status android-iOS-web(wasm)-desktop](https://github.com/melomg/KMP-Template/actions/workflows/build-all.yml/badge.svg)](https://github.com/melomg/KMP-Template/actions/workflows/build-all.yml) [![Apache V2 License](https://img.shields.io/badge/License-Apache%20V2-blue)](LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
 
 ## Forked from [Kotlin KMP-App-Template repo](https://github.com/Kotlin/KMP-App-Template)
 
@@ -29,6 +29,8 @@ The KMP template tries to help you get started with these points:
     - [x] Dependency management: [Renovate](https://docs.renovatebot.com/)
     - [x] DI: [koin](https://insert-koin.io/docs/reference/koin-mp/kmp/)
     - [x] Network: [ktor](https://ktor.io/)
+    - [x] Lint
+    - [x] Static code analysis
     - [ ] Logging: [Napier](https://github.com/AAkira/Napier)?
         - [ ] Error reporting
         - [ ] Analytics
@@ -48,8 +50,6 @@ The KMP template tries to help you get started with these points:
     - [ ] Local Formatters
     - [ ] Coroutine Dispatchers
     - [ ] Coroutine Dispatchers Test helper
-    - [ ] Lint
-    - [ ] Static code analysis
     - [ ] Unit testing
     - [ ] Test coverage: Jacoco?
     - [ ] Obfuscation & Shrinking

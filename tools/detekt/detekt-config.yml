@@ -1,0 +1,15 @@
+# Extra detekt config to change the default one.
+naming:
+  FunctionNaming:
+    ignoreAnnotated: [ 'Composable' ]
+
+style:
+  UnusedPrivateMember:
+    active: true
+    ignoreAnnotated: [ 'DevicePreviews', 'Preview' ]
+  MaxLineLength:
+    excludes: [ "**/test/**","**/androidTest/**" ]
+  MagicNumber:
+    excludes: [ "**/test/**","**/androidTest/**" ]
+    ignorePropertyDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
