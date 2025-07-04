@@ -1,8 +1,64 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import java.util.Properties
+
+/**
+ * Gather build flags in one central place.
+ */
+class BuildFlags(project: Project) {
+
+// Reads the Google maps key that is used in the AndroidManifest
+
+    private val localProperties = Properties()
+    private val localPropertiesFile = project.rootProject.file("local.properties")
+
+    init {
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.inputStream().use { input ->
+                localProperties.load(input)
+            }
+        }
+    }
+
+    val isChuckerEnabled = project.findProperty("chuckerEnabled") == "true"
+    val isLeakCanaryEnabled = project.findProperty("leakCanaryEnabled") == "true"
+    val isCI = System.getenv().containsKey("CI")
+    val isPlayStorePublishDryRun = System.getenv().containsKey("PLAY_STORE_PUBLISH_DRY_RUN")
+    val isTestCoverageEnabled = localProperties.getProperty("isTestCoverageEnabled") == "true"
+    val preReleaseResConfig = project.findProperty("preReleaseResConfig") == "true"
+}
+
+val buildFlags = BuildFlags(project)
+
+//val localProperties = Properties()
+//if (project.rootProject.file("local.properties").exists()) {
+//    properties.load(rootProject.file("local.properties").newDataInputStream())
+//}
+//// Getting The Movie DB API key from local.properties
+//val tmdbApiKey = gradleLocalProperties(rootDir).getProperty("tmdb_api_key")
+//
+//def localProperties = new Properties()
+//def localPropertiesFile = rootProject.file('local.properties')
+//if (localPropertiesFile.exists()) {
+//    localPropertiesFile.withReader('UTF-8') { reader ->
+//        localProperties.load(reader)
+//    }
+//}
+//
+//def flutterRoot = localProperties.getProperty('flutter.sdk')
+
+
+val appBuildTypeFromProperty =
+    project.findProperty("appBuildType")?.toString()?.toLowerCase() ?: "debug"
+// You can uncomment the line below to verify which build type is being used during configuration:
+// println("BuildKonfig: Configuring for appBuildType = '$appBuildTypeFromProperty'")
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -11,6 +67,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.buildkonfig)
     id("com.google.gms.google-services")
 }
 
@@ -121,11 +178,19 @@ android {
     }
 
     signingConfigs {
+        val localProperties: java.util.Properties = gradleLocalProperties(rootDir, providers)
+        val localStoreFile: String = localProperties.getProperty("androidReleaseStoreFile", ".")
+        val localStorePassword: String =
+            localProperties.getProperty("androidReleaseStorePassword", "")
+        val localKeyAlias: String = localProperties.getProperty("androidReleaseKeyAlias", "")
+        val localKeyPassword: String = localProperties.getProperty("androidReleaseKeyPassword", "")
+
         create("prod") {
-            storeFile = file("../tools/release.jks")
-            storePassword = "..."
-            keyAlias = "..."
-            keyPassword = "..."
+            // storeFile = file("../tools/release.jks")
+            storeFile = file(localStoreFile).relativeToOrSelf(projectDir)
+            storePassword = localStorePassword//project.storePassword// localStorePassword
+            keyAlias = localKeyAlias//localKeyAlias
+            keyPassword = localKeyPassword//project.keyPassword// localKeyPassword
         }
     }
 
@@ -136,6 +201,7 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
+            versionNameSuffix = "-DEBUG"
             isDebuggable = true
             isMinifyEnabled = false
             isShrinkResources = false
@@ -156,6 +222,7 @@ android {
         create("staging") {
             initWith(getByName("release"))
             applicationIdSuffix = ".staging"
+            versionNameSuffix = "-STAGING"
 
             resValue("string", "app_name", "Staging KMP Template")
             signingConfig = signingConfigs.getByName("debug")
@@ -182,6 +249,12 @@ android {
 }
 
 dependencies {
+    if (buildFlags.isTestCoverageEnabled) {
+        println("melo: Test coverage enabled")
+    }else {
+        println("melo: ${project.findProperty("isTestCoverageEnabled")}")
+        println("melo: Test coverage DISABLED")
+    }
     debugImplementation(compose.uiTooling)
 }
 
@@ -193,6 +266,75 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.melih.kmptemplate"
             packageVersion = "1.0.0"
+        }
+    }
+}
+
+buildkonfig {
+    packageName = "com.melih.kmptemplate" // Your existing package name
+
+    defaultConfigs {
+        // Your existing API_KEY logic
+        val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("apiKey")
+        require(apiKey.isNotEmpty()) {
+            "Register your api key from developer.nytimes.com and place it in local.properties as `apiKey`"
+        }
+        // Ensure the apiKey value passed to buildConfigField is a Kotlin string literal
+        buildConfigField(STRING, "API_KEY", "$apiKey")
+        buildConfigField(STRING, "name", project.name)
+        buildConfigField(STRING, "version", provider { project.version }.toString())
+        buildConfigField(BOOLEAN, "isDebuggable", "true")
+
+
+        // Add build-type specific values
+        val featureFlagEnabled: Boolean // Example of a boolean flag
+
+        when (appBuildTypeFromProperty) {
+            "release" -> {
+                featureFlagEnabled = true // Booleans don't need quotes
+                // Add any other release-specific fields here
+                buildConfigField(STRING, "ENVIRONMENT_NAME", "production")
+            }
+
+            "staging" -> {
+                featureFlagEnabled = true
+                buildConfigField(STRING, "ENVIRONMENT_NAME", "staging")
+            }
+
+            else -> { // "debug" or any other default
+                featureFlagEnabled = false
+                buildConfigField(STRING, "ENVIRONMENT_NAME", "development")
+            }
+        }
+        buildConfigField(
+            com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN,
+            "MY_FEATURE_FLAG",
+            featureFlagEnabled.toString()
+        )
+        buildConfigField(
+            STRING,
+            "EFFECTIVE_BUILD_TYPE",
+            "$appBuildTypeFromProperty"
+        ) // Store the active build type name
+    }
+
+    // Your existing targetConfigs can remain as they are for platform-specific (not build-type specific) overrides
+    targetConfigs {
+        create("jvm") {
+            buildConfigField(
+                FieldSpec.Type.STRING,
+                "target",
+                "jvm"
+            ) // Ensure string values are quoted
+        }
+        create("ios") {
+            buildConfigField(FieldSpec.Type.STRING, "target", "ios")
+        }
+        create("desktop") { // This should align with your jvm("desktop") target
+            buildConfigField(FieldSpec.Type.STRING, "desktopvalue", "desktop")
+        }
+        create("jsCommon") { // This should align with your wasmJs target (or plain js if you had one)
+            buildConfigField(FieldSpec.Type.STRING, "target", "jsCommon")
         }
     }
 }

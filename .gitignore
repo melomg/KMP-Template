@@ -4,6 +4,7 @@
 **/build/
 xcuserdata
 !src/**/build/
+application.properties
 local.properties
 .idea
 .DS_Store
@@ -19,3 +20,5 @@ captures
 ## Google
 **/google-services.json
 **/google-service-account.json
+/release.jks
+**.aab
