@@ -3,18 +3,15 @@ package com.melih.kmptemplate.di
 import com.melih.kmptemplate.data.InMemoryMuseumStorage
 import com.melih.kmptemplate.data.MuseumRepository
 import com.melih.kmptemplate.data.MuseumStorage
-import com.melih.kmptemplate.platform.PlatformProvider
+import com.melih.kmptemplate.platform.platformModule
 import com.melih.kmptemplate.screens.detail.DetailViewModel
 import com.melih.kmptemplate.screens.list.ListViewModel
 import com.melih.kmptemplate.shared.network.MuseumApi
 import com.melih.kmptemplate.shared.network.di.networkModule
+import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
-
-private val platformModule = module {
-    single { PlatformProvider.getPlatform() }
-}
 
 private val dataModule = module {
     includes(networkModule)
@@ -32,11 +29,12 @@ private val viewModelModule = module {
     factoryOf(::DetailViewModel)
 }
 
-fun initKoin() {
+fun initKoin(additionalConfiguration: KoinApplication.() -> Unit = {}) {
     startKoin {
+        additionalConfiguration()
         modules(
+            platformModule(),
             dataModule,
-            platformModule,
             viewModelModule,
         )
     }

@@ -2,7 +2,6 @@ package com.melih.kmptemplate.platform
 
 import com.melih.kmptemplate.shared.model.platform.BuildType
 import com.melih.kmptemplate.shared.model.platform.Platform
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import kotlin.experimental.ExperimentalNativeApi
 
@@ -47,5 +46,5 @@ class WasmJsPlatform() : Platform {
 }
 
 actual fun platformModule() = module {
-    singleOf(::WasmJsPlatform)
+    single<Platform> { WasmJsPlatform() }
 }

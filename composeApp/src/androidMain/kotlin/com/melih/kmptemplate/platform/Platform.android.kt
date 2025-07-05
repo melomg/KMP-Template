@@ -8,16 +8,11 @@ import android.os.Build
 import com.melih.kmptemplate.BuildConfig
 import com.melih.kmptemplate.shared.model.platform.BuildType
 import com.melih.kmptemplate.shared.model.platform.Platform
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 class AndroidPlatform(
-//    private val appContext: Context
+    private val appContext: Context,
 ) : Platform {
-
-    init {
-        println("")
-    }
 
     override val appVersionCode: Int
         get() = BuildConfig.VERSION_CODE
@@ -36,9 +31,9 @@ class AndroidPlatform(
         }
 
     override val isDebuggable: Boolean
-        get() = false//(appContext.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) == 0
+        get() = (appContext.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE) != 0
 }
 
-actual object PlatformProvider {
-    actual fun getPlatform(): Platform = AndroidPlatform()
+actual fun platformModule() = module {
+    single<Platform> { AndroidPlatform(get()) }
 }

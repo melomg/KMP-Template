@@ -1,7 +1,5 @@
 package com.melih.kmptemplate.platform
 
-import com.melih.kmptemplate.shared.model.platform.Platform
+import org.koin.core.module.Module
 
-expect object PlatformProvider {
-    fun getPlatform(): Platform
-}
+expect fun platformModule(): Module

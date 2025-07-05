@@ -40,6 +40,5 @@ class IOSPlatform() : Platform {
 }
 
 actual fun platformModule() = module {
-    singleOf(::IOSPlatform)
+    single<Platform> { IOSPlatform() }
 }
-

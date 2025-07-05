@@ -1,9 +1,9 @@
 @file:Suppress("MatchingDeclarationName")
+
 package com.melih.kmptemplate.platform
 
 import com.melih.kmptemplate.shared.model.platform.BuildType
 import com.melih.kmptemplate.shared.model.platform.Platform
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import java.lang.management.ManagementFactory
 
@@ -39,7 +39,7 @@ class DesktopPlatform() : Platform {
 }
 
 actual fun platformModule() = module {
-    singleOf(::DesktopPlatform)
+    single<Platform> { DesktopPlatform() }
 }
 
 //
