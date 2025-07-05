@@ -1,6 +1,5 @@
 package com.melih.kmptemplate
 
-import com.melih.kmptemplate.shared.platform.Greeting
 import io.ktor.client.request.get
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode

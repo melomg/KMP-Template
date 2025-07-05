@@ -1,6 +1,6 @@
 package com.melih.kmptemplate.shared.network.di
 
-import com.melih.kmptemplate.shared.model.platform.BuildInfo
+import com.melih.kmptemplate.shared.model.platform.Platform
 import com.melih.kmptemplate.shared.network.MoviesApi
 import com.melih.kmptemplate.shared.network.MuseumApi
 import com.melih.kmptemplate.shared.network.internal.KtorMoviesApi
@@ -44,7 +44,7 @@ val networkModule = module {
             }
 
             install(Logging) {
-                level = if (get<BuildInfo>().isDebuggable) {
+                level = if (get<Platform>().isDebuggable) {
                     LogLevel.BODY
                 } else {
                     LogLevel.HEADERS

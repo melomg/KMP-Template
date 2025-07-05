@@ -16,13 +16,13 @@ class BuildFlags(project: Project) {
 
 // Reads the Google maps key that is used in the AndroidManifest
 
-    private val localProperties = Properties()
-    private val localPropertiesFile = project.rootProject.file("local.properties")
+    private val applicationProperties = Properties()
+    private val applicationPropertiesFile = project.rootProject.file("application.properties")
 
     init {
-        if (localPropertiesFile.exists()) {
-            localPropertiesFile.inputStream().use { input ->
-                localProperties.load(input)
+        if (applicationPropertiesFile.exists()) {
+            applicationPropertiesFile.inputStream().use { input ->
+                applicationProperties.load(input)
             }
         }
     }
@@ -31,7 +31,7 @@ class BuildFlags(project: Project) {
     val isLeakCanaryEnabled = project.findProperty("leakCanaryEnabled") == "true"
     val isCI = System.getenv().containsKey("CI")
     val isPlayStorePublishDryRun = System.getenv().containsKey("PLAY_STORE_PUBLISH_DRY_RUN")
-    val isTestCoverageEnabled = localProperties.getProperty("isTestCoverageEnabled") == "true"
+    val isTestCoverageEnabled = applicationProperties.getProperty("isTestCoverageEnabled") == "true"
     val preReleaseResConfig = project.findProperty("preReleaseResConfig") == "true"
 }
 
@@ -54,11 +54,6 @@ val buildFlags = BuildFlags(project)
 //
 //def flutterRoot = localProperties.getProperty('flutter.sdk')
 
-
-val appBuildTypeFromProperty =
-    project.findProperty("appBuildType")?.toString()?.toLowerCase() ?: "debug"
-// You can uncomment the line below to verify which build type is being used during configuration:
-// println("BuildKonfig: Configuring for appBuildType = '$appBuildTypeFromProperty'")
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -128,7 +123,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.shared.model)
             implementation(projects.shared.network)
-            implementation(projects.shared.platform)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -270,6 +264,13 @@ compose.desktop {
     }
 }
 
+
+val appBuildTypeFromProperty =
+    project.findProperty("appBuildType")?.toString()?.toLowerCase() ?: "debug"
+// You can uncomment the line below to verify which build type is being used during configuration:
+// println("BuildKonfig: Configuring for appBuildType = '$appBuildTypeFromProperty'")
+
+
 buildkonfig {
     packageName = "com.melih.kmptemplate" // Your existing package name
 
@@ -284,7 +285,6 @@ buildkonfig {
         buildConfigField(STRING, "name", project.name)
         buildConfigField(STRING, "version", provider { project.version }.toString())
         buildConfigField(BOOLEAN, "isDebuggable", "true")
-
 
         // Add build-type specific values
         val featureFlagEnabled: Boolean // Example of a boolean flag
