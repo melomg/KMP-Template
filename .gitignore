@@ -4,7 +4,7 @@
 **/build/
 xcuserdata
 !src/**/build/
-application.properties
+**/application.properties
 local.properties
 .idea
 .DS_Store

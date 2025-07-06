@@ -1,6 +1,7 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import com.codingfeline.buildkonfig.compiler.FieldSpec
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.INT
 import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
@@ -12,14 +13,35 @@ import java.util.Properties
 /**
  * Gather build flags in one central place.
  */
-class BuildFlags(project: Project) {
+class ApplicationProperties(project: Project) {
 
-// Reads the Google maps key that is used in the AndroidManifest
+//    file(localStoreFile).relativeToOrSelf(projectDir)
+
+    // Reads the Google maps key that is used in the AndroidManifest
+
+    //val localProperties = Properties()
+//if (project.rootProject.file("local.properties").exists()) {
+//    properties.load(rootProject.file("local.properties").newDataInputStream())
+//}
+//// Getting The Movie DB API key from local.properties
+//val tmdbApiKey = gradleLocalProperties(rootDir).getProperty("tmdb_api_key")
+//
+//def localProperties = new Properties()
+//def localPropertiesFile = rootProject.file('local.properties')
+//if (localPropertiesFile.exists()) {
+//    localPropertiesFile.withReader('UTF-8') { reader ->
+//        localProperties.load(reader)
+//    }
+//}
+//
+//def flutterRoot = localProperties.getProperty('flutter.sdk')
+
 
     private val applicationProperties = Properties()
-    private val applicationPropertiesFile = project.rootProject.file("application.properties")
 
     init {
+        // private val applicationPropertiesFile = project.rootProject.file("application.properties")
+        val applicationPropertiesFile = file("application.properties").relativeToOrSelf(projectDir)
         if (applicationPropertiesFile.exists()) {
             applicationPropertiesFile.inputStream().use { input ->
                 applicationProperties.load(input)
@@ -27,15 +49,12 @@ class BuildFlags(project: Project) {
         }
     }
 
-    val isChuckerEnabled = project.findProperty("chuckerEnabled") == "true"
-    val isLeakCanaryEnabled = project.findProperty("leakCanaryEnabled") == "true"
     val isCI = System.getenv().containsKey("CI")
-    val isPlayStorePublishDryRun = System.getenv().containsKey("PLAY_STORE_PUBLISH_DRY_RUN")
+    val appVersionCode = applicationProperties.getProperty("app.versionCode")
     val isTestCoverageEnabled = applicationProperties.getProperty("isTestCoverageEnabled") == "true"
-    val preReleaseResConfig = project.findProperty("preReleaseResConfig") == "true"
 }
 
-val buildFlags = BuildFlags(project)
+val applicationProperties = ApplicationProperties(project)
 
 //val localProperties = Properties()
 //if (project.rootProject.file("local.properties").exists()) {
@@ -53,7 +72,7 @@ val buildFlags = BuildFlags(project)
 //}
 //
 //def flutterRoot = localProperties.getProperty('flutter.sdk')
-
+apply(from = "gradle/releases.gradle.kts")
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -235,6 +254,11 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
+    lint {
+        warningsAsErrors = true
+        abortOnError = applicationProperties.isCI
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -243,9 +267,9 @@ android {
 }
 
 dependencies {
-    if (buildFlags.isTestCoverageEnabled) {
+    if (applicationProperties.isTestCoverageEnabled) {
         println("melo: Test coverage enabled")
-    }else {
+    } else {
         println("melo: ${project.findProperty("isTestCoverageEnabled")}")
         println("melo: Test coverage DISABLED")
     }
@@ -263,7 +287,6 @@ compose.desktop {
         }
     }
 }
-
 
 val appBuildTypeFromProperty =
     project.findProperty("appBuildType")?.toString()?.toLowerCase() ?: "debug"
@@ -284,6 +307,7 @@ buildkonfig {
         buildConfigField(STRING, "API_KEY", "$apiKey")
         buildConfigField(STRING, "name", project.name)
         buildConfigField(STRING, "version", provider { project.version }.toString())
+        buildConfigField(INT, "VERSION_CODE", "1")
         buildConfigField(BOOLEAN, "isDebuggable", "true")
 
         // Add build-type specific values
@@ -332,6 +356,11 @@ buildkonfig {
         }
         create("desktop") { // This should align with your jvm("desktop") target
             buildConfigField(FieldSpec.Type.STRING, "desktopvalue", "desktop")
+            val desktopPackageName =
+                (project.extensions.findByName("compose") as? org.jetbrains.compose.ComposeExtension)
+                    ?.desktop?.application?.nativeDistributions?.packageName
+                    ?: "com.example.defaultdesktop"
+            buildConfigField(STRING, "PACKAGE_NAME", desktopPackageName)
         }
         create("jsCommon") { // This should align with your wasmJs target (or plain js if you had one)
             buildConfigField(FieldSpec.Type.STRING, "target", "jsCommon")

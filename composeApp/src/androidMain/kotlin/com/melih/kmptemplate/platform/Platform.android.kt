@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.os.Build
 import com.melih.kmptemplate.BuildConfig
+import com.melih.kmptemplate.BuildKonfig
 import com.melih.kmptemplate.shared.model.platform.BuildType
 import com.melih.kmptemplate.shared.model.platform.Platform
 import org.koin.dsl.module
@@ -15,7 +16,7 @@ class AndroidPlatform(
 ) : Platform {
 
     override val appVersionCode: Int
-        get() = BuildConfig.VERSION_CODE
+        get() = BuildKonfig.VERSION_CODE
 
     override val appVersionName: String
         get() = BuildConfig.VERSION_NAME
