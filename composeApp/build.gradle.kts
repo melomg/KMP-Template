@@ -10,69 +10,9 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import java.util.Properties
 
-/**
- * Gather build flags in one central place.
- */
-class ApplicationProperties(project: Project) {
-
-//    file(localStoreFile).relativeToOrSelf(projectDir)
-
-    // Reads the Google maps key that is used in the AndroidManifest
-
-    //val localProperties = Properties()
-//if (project.rootProject.file("local.properties").exists()) {
-//    properties.load(rootProject.file("local.properties").newDataInputStream())
-//}
-//// Getting The Movie DB API key from local.properties
-//val tmdbApiKey = gradleLocalProperties(rootDir).getProperty("tmdb_api_key")
-//
-//def localProperties = new Properties()
-//def localPropertiesFile = rootProject.file('local.properties')
-//if (localPropertiesFile.exists()) {
-//    localPropertiesFile.withReader('UTF-8') { reader ->
-//        localProperties.load(reader)
-//    }
-//}
-//
-//def flutterRoot = localProperties.getProperty('flutter.sdk')
-
-
-    private val applicationProperties = Properties()
-
-    init {
-        // private val applicationPropertiesFile = project.rootProject.file("application.properties")
-        val applicationPropertiesFile = file("application.properties").relativeToOrSelf(projectDir)
-        if (applicationPropertiesFile.exists()) {
-            applicationPropertiesFile.inputStream().use { input ->
-                applicationProperties.load(input)
-            }
-        }
-    }
-
-    val isCI = System.getenv().containsKey("CI")
-    val appVersionCode = applicationProperties.getProperty("app.versionCode")
-    val isTestCoverageEnabled = applicationProperties.getProperty("isTestCoverageEnabled") == "true"
-}
 
 val applicationProperties = ApplicationProperties(project)
 
-//val localProperties = Properties()
-//if (project.rootProject.file("local.properties").exists()) {
-//    properties.load(rootProject.file("local.properties").newDataInputStream())
-//}
-//// Getting The Movie DB API key from local.properties
-//val tmdbApiKey = gradleLocalProperties(rootDir).getProperty("tmdb_api_key")
-//
-//def localProperties = new Properties()
-//def localPropertiesFile = rootProject.file('local.properties')
-//if (localPropertiesFile.exists()) {
-//    localPropertiesFile.withReader('UTF-8') { reader ->
-//        localProperties.load(reader)
-//    }
-//}
-//
-//def flutterRoot = localProperties.getProperty('flutter.sdk')
-apply(from = "gradle/releases.gradle.kts")
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -191,19 +131,11 @@ android {
     }
 
     signingConfigs {
-        val localProperties: java.util.Properties = gradleLocalProperties(rootDir, providers)
-        val localStoreFile: String = localProperties.getProperty("androidReleaseStoreFile", ".")
-        val localStorePassword: String =
-            localProperties.getProperty("androidReleaseStorePassword", "")
-        val localKeyAlias: String = localProperties.getProperty("androidReleaseKeyAlias", "")
-        val localKeyPassword: String = localProperties.getProperty("androidReleaseKeyPassword", "")
-
         create("prod") {
-            // storeFile = file("../tools/release.jks")
-            storeFile = file(localStoreFile).relativeToOrSelf(projectDir)
-            storePassword = localStorePassword//project.storePassword// localStorePassword
-            keyAlias = localKeyAlias//localKeyAlias
-            keyPassword = localKeyPassword//project.keyPassword// localKeyPassword
+            storeFile = file(applicationProperties.androidReleaseStoreFilePath).relativeToOrSelf(projectDir)
+            storePassword = applicationProperties.androidReleaseStorePassword
+            keyAlias = applicationProperties.androidReleaseKeyAlias
+            keyPassword = applicationProperties.androidReleaseKeyPassword
         }
     }
 
@@ -294,21 +226,96 @@ val appBuildTypeFromProperty =
 // println("BuildKonfig: Configuring for appBuildType = '$appBuildTypeFromProperty'")
 
 
+/**
+ * Gather build flags in one central place.
+ */
+class ApplicationProperties(project: Project) {
+
+//    file(localStoreFile).relativeToOrSelf(projectDir)
+
+    // Reads the Google maps key that is used in the AndroidManifest
+
+    //val localProperties = Properties()
+//if (project.rootProject.file("local.properties").exists()) {
+//    properties.load(rootProject.file("local.properties").newDataInputStream())
+//}
+//// Getting The Movie DB API key from local.properties
+//val tmdbApiKey = gradleLocalProperties(rootDir).getProperty("tmdb_api_key")
+//
+//def localProperties = new Properties()
+//def localPropertiesFile = rootProject.file('local.properties')
+//if (localPropertiesFile.exists()) {
+//    localPropertiesFile.withReader('UTF-8') { reader ->
+//        localProperties.load(reader)
+//    }
+//}
+//
+//def flutterRoot = localProperties.getProperty('flutter.sdk')
+
+
+    private val applicationProperties = Properties()
+
+    init {
+//         val applicationPropertiesFile = project.rootProject.file("application.properties")
+        val applicationPropertiesFile = file("application.properties").relativeToOrSelf(projectDir)
+        if (applicationPropertiesFile.exists()) {
+            applicationPropertiesFile.inputStream().use { input ->
+                applicationProperties.load(input)
+            }
+        }
+    }
+
+    val isCI = System.getenv().containsKey("CI")
+    val appVersionCode: Int = applicationProperties.getProperty("app.versionCode") as Int
+    val appVersionName: String = applicationProperties.getProperty("app.versionName")
+    val appBuildType: String = applicationProperties.getProperty("app.buildType")
+    val appIsDebuggable: Boolean = applicationProperties.getProperty("app.isDebuggable") == "true"
+    val appName: String = applicationProperties.getProperty("app.name")
+
+    val androidReleaseStoreFilePath: String = applicationProperties.getProperty("signing.android.release.storeFilePath")
+    val androidReleaseStorePassword: String = applicationProperties.getProperty("signing.android.release.storePassword")
+    val androidReleaseKeyAlias: String = applicationProperties.getProperty("signing.android.release.keyAlias")
+    val androidReleaseKeyPassword: String = applicationProperties.getProperty("signing.android.release.keyPassword")
+    val isTestCoverageEnabled: Boolean = applicationProperties.getProperty("isTestCoverageEnabled") == "true"
+}
+
+//val localProperties = Properties()
+//if (project.rootProject.file("local.properties").exists()) {
+//    properties.load(rootProject.file("local.properties").newDataInputStream())
+//}
+//// Getting The Movie DB API key from local.properties
+//val tmdbApiKey = gradleLocalProperties(rootDir).getProperty("tmdb_api_key")
+//
+//def localProperties = new Properties()
+//def localPropertiesFile = rootProject.file('local.properties')
+//if (localPropertiesFile.exists()) {
+//    localPropertiesFile.withReader('UTF-8') { reader ->
+//        localProperties.load(reader)
+//    }
+//}
+//
+//def flutterRoot = localProperties.getProperty('flutter.sdk')
+//apply(from = "gradle/releases.gradle.kts")
+
+
 buildkonfig {
     packageName = "com.melih.kmptemplate" // Your existing package name
 
     defaultConfigs {
         // Your existing API_KEY logic
-        val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("apiKey")
-        require(apiKey.isNotEmpty()) {
-            "Register your api key from developer.nytimes.com and place it in local.properties as `apiKey`"
-        }
-        // Ensure the apiKey value passed to buildConfigField is a Kotlin string literal
-        buildConfigField(STRING, "API_KEY", "$apiKey")
-        buildConfigField(STRING, "name", project.name)
-        buildConfigField(STRING, "version", provider { project.version }.toString())
-        buildConfigField(INT, "VERSION_CODE", "1")
-        buildConfigField(BOOLEAN, "isDebuggable", "true")
+//        val apiKey: String = gradleLocalProperties(rootDir, providers).getProperty("apiKey")
+//        require(apiKey.isNotEmpty()) {
+//            "Register your api key from developer.nytimes.com and place it in local.properties as `apiKey`"
+//        }
+//        // Ensure the apiKey value passed to buildConfigField is a Kotlin string literal
+//        buildConfigField(STRING, "API_KEY", "$apiKey")
+//        buildConfigField(STRING, "name", project.name)
+//        buildConfigField(STRING, "version", provider { project.version }.toString())
+        buildConfigField(INT, "VERSION_CODE", applicationProperties.appVersionCode.toString())
+        buildConfigField(STRING, "VERSION_NAME", applicationProperties.appVersionName)
+        buildConfigField(STRING, "BUILD_TYPE", applicationProperties.appBuildType)
+        buildConfigField(BOOLEAN, "isDebuggable", applicationProperties.appIsDebuggable.toString())
+        buildConfigField(STRING, "APP_NAME", applicationProperties.appName)
 
         // Add build-type specific values
         val featureFlagEnabled: Boolean // Example of a boolean flag

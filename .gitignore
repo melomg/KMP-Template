@@ -20,5 +20,5 @@ captures
 ## Google
 **/google-services.json
 **/google-service-account.json
-/release.jks
+/tools/release.jks
 **.aab
