@@ -71,7 +71,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.shared.model)
             implementation(projects.shared.network)
-            implementation(projects.shared.platform)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -136,10 +135,11 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"
+            versionNameSuffix = "-DEBUG"
             isDebuggable = true
             isMinifyEnabled = false
             isShrinkResources = false
-            resValue("string", "app_name", "Debug KMP Template")
+            resValue("string", "app_name", "KMP Template (Debug)")
         }
         release {
             isDebuggable = false
@@ -147,7 +147,6 @@ android {
             isShrinkResources = true
 
             proguardFiles(
-                // Default file with automatically generated optimization rules.
                 getDefaultProguardFile("proguard-android-optimize.txt")
             )
 
@@ -156,8 +155,9 @@ android {
         create("staging") {
             initWith(getByName("release"))
             applicationIdSuffix = ".staging"
+            versionNameSuffix = "-STAGING"
 
-            resValue("string", "app_name", "Staging KMP Template")
+            resValue("string", "app_name", "KMP Template (Staging)")
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -172,6 +172,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    lint {
+        warningsAsErrors = true
+        abortOnError = false
     }
 
     packaging {
