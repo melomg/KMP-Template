@@ -3,6 +3,7 @@ package com.melih.kmptemplate.screens.list
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -37,12 +38,25 @@ fun ListScreen(
     val viewModel = koinViewModel<ListViewModel>()
     val objects by viewModel.objects.collectAsStateWithLifecycle()
 
-    AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
+    AnimatedContent(objects.first.isNotEmpty()) { objectsAvailable ->
         if (objectsAvailable) {
-            ObjectGrid(
-                objects = objects,
-                onObjectClick = navigateToDetails,
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                val platform = objects.second
+
+                Spacer(modifier = Modifier.height(16.dp))
+                Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+                    Text(text = "appVersionCode: ${platform.appVersionCode}")
+                    Text(text = "appVersionName: ${platform.appVersionName}")
+                    Text(text = "platformVersionName: ${platform.platformVersionName}")
+                    Text(text = "buildType: ${platform.buildType}")
+                    Text(text = "isDebuggable: ${platform.isDebuggable}")
+                }
+
+                ObjectGrid(
+                    objects = objects.first,
+                    onObjectClick = navigateToDetails,
+                )
+            }
         } else {
             EmptyScreenContent(Modifier.fillMaxSize())
         }
