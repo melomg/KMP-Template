@@ -18,7 +18,7 @@ jetbrains-navigation-compose= "2.9.0-beta03"
 kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.2"
 # other
-coil = "3.2.0"
+coil = "3.3.0"
 firebase = "33.16.0"
 junit = "4.13.2"
 koin = "4.1.0"
