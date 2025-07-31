@@ -1,0 +1,5 @@
+TEAM_ID=
+BUNDLE_ID=com.melih.kmptemplate.KMPTemplate.debug
+APP_NAME=KMPTemplate
+APPLICATION_DISPLAY_NAME=KMPTemplate(Debug)
+KOTLIN_FRAMEWORK_BUILD_TYPE=debug

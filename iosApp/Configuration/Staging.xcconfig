@@ -1,0 +1,5 @@
+TEAM_ID=
+BUNDLE_ID=com.melih.kmptemplate.KMPTemplate.staging
+APP_NAME=KMPTemplate
+APPLICATION_DISPLAY_NAME=KMPTemplate(Staging)
+KOTLIN_FRAMEWORK_BUILD_TYPE=release
