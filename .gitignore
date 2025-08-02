@@ -19,3 +19,6 @@ captures
 ## Google
 **/google-services.json
 **/google-service-account.json
+/tools/release.jks
+**.aab
+*.xcscheme
