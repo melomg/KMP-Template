@@ -74,6 +74,10 @@ The KMP template tries to help you get started with these points:
         - [ ] UI Testing
         - [ ] Compose Screenshot testing
 
+# Building
+
+The **KMP Template** needs a Firebase account set up to run. If you haven't already, check [here](https://firebase.google.com/docs/android/setup). You'll need to get the `google-services.json` and put it in `composeApp/` folder.
+
 # Architecture
 
 The **KMP Template** is following the [Android official architecture guidance](https://developer.android.com/topic/architecture) as closely as possible.

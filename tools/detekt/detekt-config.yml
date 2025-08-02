@@ -13,3 +13,5 @@ style:
     excludes: [ "**/test/**","**/androidTest/**" ]
     ignorePropertyDeclaration: true
     ignoreCompanionObjectPropertyDeclaration: true
+  ForbiddenComment:
+    active: false
