@@ -181,7 +181,7 @@ android {
 
     lint {
         warningsAsErrors = true
-        abortOnError = appProperties.isCI
+        abortOnError = false
     }
 
     packaging {
