@@ -1,8 +1,15 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.BOOLEAN
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.INT
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
+import java.util.Properties
+
+val appProperties = ApplicationProperties(project)
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -11,6 +18,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.buildkonfig)
     id("com.google.gms.google-services")
 }
 
@@ -71,7 +79,6 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.shared.model)
             implementation(projects.shared.network)
-            implementation(projects.shared.platform)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -112,20 +119,21 @@ android {
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.melih.kmptemplate"
+        applicationId = appProperties.appIdBase
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "0.0.1"
-        resValue("string", "app_name", "KMP Template")
+        versionCode = appProperties.versionCode
+        versionName = appProperties.versionNameBase
+        resValue("string", "app_name", appProperties.appName)
     }
 
     signingConfigs {
+        val localProperties = gradleLocalProperties(rootDir, providers)
         create("prod") {
             storeFile = file("../tools/release.jks")
-            storePassword = "..."
-            keyAlias = "..."
-            keyPassword = "..."
+            storePassword = localProperties.getProperty("storePassword")
+            keyAlias = localProperties.getProperty("keyAlias")
+            keyPassword = localProperties.getProperty("keyPassword")
         }
     }
 
@@ -135,29 +143,26 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix = ".debug"
+            applicationIdSuffix = appProperties.appIdDebugSuffix
+            versionNameSuffix = appProperties.versionNameDebugSuffix
             isDebuggable = true
             isMinifyEnabled = false
             isShrinkResources = false
-            resValue("string", "app_name", "Debug KMP Template")
         }
         release {
             isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
 
-            proguardFiles(
-                // Default file with automatically generated optimization rules.
-                getDefaultProguardFile("proguard-android-optimize.txt")
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
 
             signingConfig = signingConfigs.getByName("prod")
         }
         create("staging") {
             initWith(getByName("release"))
-            applicationIdSuffix = ".staging"
+            applicationIdSuffix = appProperties.appIdStagingSuffix
+            versionNameSuffix = appProperties.versionNameStagingSuffix
 
-            resValue("string", "app_name", "Staging KMP Template")
             signingConfig = signingConfigs.getByName("debug")
         }
     }
@@ -172,6 +177,11 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    lint {
+        warningsAsErrors = true
+        abortOnError = false
     }
 
     packaging {
@@ -191,8 +201,117 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "com.melih.kmptemplate"
-            packageVersion = "1.0.0"
+            packageName = appProperties.appIdBase
+            packageVersion = appProperties.versionNameBase
+        }
+    }
+}
+
+buildkonfig {
+    packageName = "com.melih.kmptemplate"
+
+    defaultConfigs {
+        buildConfigField(STRING, "APP_NAME", appProperties.appName)
+        buildConfigField(STRING, "EFFECTIVE_BUILD_TYPE", appProperties.effectiveBuildType)
+        buildConfigField(INT, "VERSION_CODE", appProperties.versionCode.toString())
+        buildConfigField(STRING, "VERSION_NAME", appProperties.versionName)
+        buildConfigField(
+            BOOLEAN, "IS_DEBUGGABLE", appProperties.isDebuggable.toString()
+        )
+    }
+}
+
+class ApplicationProperties(project: Project) {
+
+    val effectiveBuildType: String = project.effectiveBuildType()
+    private val properties = Properties()
+    private val propertiesFile: File = project.rootProject.file("application.properties")
+
+    init {
+        if (propertiesFile.exists()) {
+            propertiesFile.inputStream().use { input ->
+                properties.load(input)
+            }
+        }
+    }
+
+    val isCI: Boolean
+        get() = System.getenv().containsKey("CI")
+
+    val appIdBase: String
+        get() = properties.getProperty("appIdBase")
+
+    val appIdDebugSuffix: String
+        get() = properties.getProperty("appIdDebugSuffix")
+
+    val appIdStagingSuffix: String
+        get() = properties.getProperty("appIdStagingSuffix")
+
+    val appName: String
+        get() = when (AppBuildType.byKey(effectiveBuildType)) {
+            AppBuildType.DEBUG -> appNameBase + properties.getProperty("appNameDebugSuffix")
+            AppBuildType.STAGING -> appNameBase + properties.getProperty("appNameStagingSuffix")
+            AppBuildType.RELEASE -> appNameBase
+        }
+
+    private val appNameBase: String
+        get() = properties.getProperty("appNameBase")
+
+    val versionCode: Int
+        get() = properties.getProperty("versionCode").toInt()
+
+    val versionName: String
+        get() = when (AppBuildType.byKey(effectiveBuildType)) {
+            AppBuildType.DEBUG -> versionNameBase + versionNameDebugSuffix
+            AppBuildType.STAGING -> versionNameBase + versionNameStagingSuffix
+            AppBuildType.RELEASE -> versionNameBase
+        }
+
+    val versionNameBase: String
+        get() = properties.getProperty("versionNameBase")
+
+    val versionNameDebugSuffix: String
+        get() = properties.getProperty("versionNameDebugSuffix")
+
+    val versionNameStagingSuffix: String
+        get() = properties.getProperty("versionNameStagingSuffix")
+
+    val isDebuggable: Boolean
+        get() = when (AppBuildType.byKey(effectiveBuildType)) {
+            AppBuildType.DEBUG -> true
+            AppBuildType.STAGING -> false
+            AppBuildType.RELEASE -> false
+        }
+
+    private fun Project.effectiveBuildType(): String = getAndroidBuildTypeOrNull()
+        ?: getIOSBuildTypeOrNull()
+        ?: getSystemBuildTypeOrRelease()
+
+    private fun Project.getAndroidBuildTypeOrNull(): String? {
+        val taskRequests = gradle.startParameter.taskRequests.toString()
+        return when {
+            taskRequests.contains("Debug", ignoreCase = true) -> AppBuildType.DEBUG.key
+            taskRequests.contains("Staging", ignoreCase = true) -> AppBuildType.STAGING.key
+            taskRequests.contains("Release", ignoreCase = true) -> AppBuildType.RELEASE.key
+            else -> null
+        }
+    }
+
+    private fun getIOSBuildTypeOrNull(): String? =
+        System.getenv("CONFIGURATION")?.lowercase()
+
+    private fun getSystemBuildTypeOrRelease(): String =
+        System.getenv().getOrDefault("EFFECTIVE_BUILD_TYPE", AppBuildType.RELEASE.key)
+
+    enum class AppBuildType(val key: String) {
+        DEBUG("debug"),
+        STAGING("staging"),
+        RELEASE("release");
+
+        companion object {
+            fun byKey(key: String): AppBuildType = requireNotNull(values().find { it.key == key }) {
+                "BuildType with key $key does not exist"
+            }
         }
     }
 }
