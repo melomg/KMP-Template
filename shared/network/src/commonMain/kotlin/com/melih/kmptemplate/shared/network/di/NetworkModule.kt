@@ -1,5 +1,10 @@
 package com.melih.kmptemplate.shared.network.di
 
+import com.melih.kmptemplate.shared.model.platform.Platform
+import com.melih.kmptemplate.shared.network.MoviesApi
+import com.melih.kmptemplate.shared.network.MuseumApi
+import com.melih.kmptemplate.shared.network.internal.KtorMoviesApi
+import com.melih.kmptemplate.shared.network.internal.KtorMuseumApi
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.HttpTimeout
@@ -10,10 +15,6 @@ import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.DefaultJson
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import com.melih.kmptemplate.shared.network.MoviesApi
-import com.melih.kmptemplate.shared.network.MuseumApi
-import com.melih.kmptemplate.shared.network.internal.KtorMoviesApi
-import com.melih.kmptemplate.shared.network.internal.KtorMuseumApi
 import org.koin.dsl.module
 import io.ktor.client.plugins.logging.Logger as KtorLogger
 
@@ -43,8 +44,11 @@ val networkModule = module {
             }
 
             install(Logging) {
-                // TODO: Use build types to change the log level
-                level = LogLevel.HEADERS
+                level = if (get<Platform>().isDebuggable) {
+                    LogLevel.BODY
+                } else {
+                    LogLevel.HEADERS
+                }
                 logger = object : KtorLogger {
                     override fun log(message: String) {
                         // TODO: Enable logger instead

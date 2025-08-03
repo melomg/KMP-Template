@@ -1,13 +1,13 @@
 package com.melih.kmptemplate
 
-import com.melih.kmptemplate.shared.platform.Greeting
-import com.melih.kmptemplate.shared.platform.SERVER_PORT
 import io.ktor.server.application.Application
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+
+private const val SERVER_PORT = 8080
 
 fun main() {
     embeddedServer(Netty, port = SERVER_PORT, host = "0.0.0.0", module = Application::module)
@@ -17,7 +17,7 @@ fun main() {
 fun Application.module() {
     routing {
         get("/") {
-            call.respondText("Ktor: ${Greeting().greet()}")
+            call.respondText("Ktor")
         }
     }
 }
