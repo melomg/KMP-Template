@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # TODO enable this later when flakiness is gone. See: https://github.com/gradle/wrapper-validation-action/issues/33
       #      - name: Validate Gradle Wrapper
@@ -55,7 +55,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
         uses: actions/setup-java@v5
@@ -99,7 +99,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
         uses: actions/setup-java@v5
@@ -120,7 +120,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
         uses: actions/setup-java@v5
@@ -152,7 +152,7 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Check out code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK
         uses: actions/setup-java@v5
