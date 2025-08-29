@@ -25,6 +25,19 @@ allprojects {
         ignoreFailures = false
         ignoredBuildTypes = listOf("staging", "release")
     }
+    
+    // Add dependency resolution strategy to resolve the duplicate class issue
+    configurations.all {
+        resolutionStrategy.eachDependency {
+            // Force all io.github.oshai:kotlin-logging-android-debug to use the same version
+            // as io.github.oshai:kotlin-logging-android to avoid duplicate classes
+            if (requested.group == "io.github.oshai" && 
+                (requested.name == "kotlin-logging-android" || 
+                 requested.name == "kotlin-logging-android-debug")) {
+                useVersion(libs.versions.oshai.kotlin.logging.get())
+            }
+        }
+    }
 }
 
 private fun getDetektSourcePaths(): List<File> {

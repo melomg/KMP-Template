@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import java.util.Properties
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val appProperties = ApplicationProperties(project)
 
@@ -28,6 +29,10 @@ kotlin {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
+    }
+
+    compilerOptions {
+        freeCompilerArgs.set(listOf("-Xcontext-parameters"))
     }
 
     listOf(
@@ -77,6 +82,10 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
+            implementation(projects.shared.logging) {
+                // Exclude one of the conflicting dependencies to avoid duplicate classes
+//                exclude(group = "io.github.oshai", module = "kotlin-logging")
+            }
             implementation(projects.shared.model)
             implementation(projects.shared.network)
 

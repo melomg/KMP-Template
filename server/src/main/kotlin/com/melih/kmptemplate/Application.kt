@@ -1,6 +1,7 @@
 package com.melih.kmptemplate
 
 import io.ktor.server.application.Application
+import io.ktor.server.application.log
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import io.ktor.server.response.respondText

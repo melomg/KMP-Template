@@ -2,7 +2,11 @@ package com.melih.kmptemplate.shared.logging
 
 object Klog {
 
-    var kloggers: Set<Klogger> = emptySet()
+    private var kloggers: Set<Klogger> = emptySet()
+
+    fun initialize(kloggers: Set<Klogger>) {
+        this.kloggers = kloggers
+    }
 
     fun v(tag: String, message: String) {
         kloggers.forEach { klog -> klog.v(tag, message) }

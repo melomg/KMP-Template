@@ -7,6 +7,7 @@ import com.melih.kmptemplate.data.MuseumStorage
 import com.melih.kmptemplate.platform.platformVersionName
 import com.melih.kmptemplate.screens.detail.DetailViewModel
 import com.melih.kmptemplate.screens.list.ListViewModel
+import com.melih.kmptemplate.shared.logging.Klogger
 import com.melih.kmptemplate.shared.model.platform.BuildType
 import com.melih.kmptemplate.shared.model.platform.Platform
 import com.melih.kmptemplate.shared.network.MuseumApi
@@ -27,6 +28,19 @@ private val platformModule = module {
         )
     }
 }
+//
+//private val loggingModule = module {
+//    single<Klogger> {
+//        Platform(
+//            appName = BuildKonfig.APP_NAME,
+//            appVersionCode = BuildKonfig.VERSION_CODE,
+//            appVersionName = BuildKonfig.VERSION_NAME,
+//            platformVersionName = platformVersionName,
+//            effectiveBuildType = BuildType.byKey(BuildKonfig.EFFECTIVE_BUILD_TYPE),
+//            isDebuggable = BuildKonfig.IS_DEBUGGABLE,
+//        )
+//    }
+//}
 
 private val dataModule = module {
     includes(networkModule)
