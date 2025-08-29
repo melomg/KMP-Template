@@ -1,5 +1,5 @@
 [versions]
-agp = "8.12.1"
+agp = "8.11.0"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -20,6 +20,7 @@ kotlinx-coroutines = "1.10.2"
 # other
 coil = "3.3.0"
 firebase = "34.1.0"
+square-logcat = "0.4"
 junit = "4.13.2"
 koin = "4.1.0"
 ktor = "3.2.3"
@@ -67,6 +68,8 @@ ktor-serverNetty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "kt
 ktor-serverTestHost = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }
 # firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+# loggin
+square-logcat = { module = "com.squareup.logcat:logcat", version.ref = "square-logcat" }
 # other
 junit = { module = "junit:junit", version.ref = "junit" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
