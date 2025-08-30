@@ -1,34 +1,167 @@
 package com.melih.kmptemplate.shared.logging
 
-interface Klogger {
+import com.melih.kmptemplate.shared.logging.Klog.Forest.tag
 
-    fun v(tag: String, message: String)
+/** A facade for handling logging calls. Install instances via [`Klog.plant()`][.plant]. */
+abstract class Klogger {
 
-    fun v(tag: String, error: Throwable)
+    /** Log a verbose message with optional format args. */
+    open fun v(message: String?, vararg args: Any?) {
+        prepareLog(Log.VERBOSE, null, message, *args)
+    }
 
-    fun v(tag: String, error: Throwable, message: String)
+    /** Log a verbose exception and a message with optional format args. */
+    open fun v(t: Throwable?, message: String?, vararg args: Any?) {
+        prepareLog(Log.VERBOSE, t, message, *args)
+    }
 
-    fun d(tag: String, message: String)
+    /** Log a verbose exception. */
+    open fun v(t: Throwable?) {
+        prepareLog(Log.VERBOSE, t, null)
+    }
 
-    fun d(tag: String, error: Throwable)
+    /** Log a debug message with optional format args. */
+    open fun d(message: String?, vararg args: Any?) {
+        prepareLog(Log.DEBUG, null, message, *args)
+    }
 
-    fun d(tag: String, error: Throwable?, message: String)
+    /** Log a debug exception and a message with optional format args. */
+    open fun d(t: Throwable?, message: String?, vararg args: Any?) {
+        prepareLog(Log.DEBUG, t, message, *args)
+    }
 
-    fun i(tag: String, message: String)
+    /** Log a debug exception. */
+    open fun d(t: Throwable?) {
+        prepareLog(Log.DEBUG, t, null)
+    }
 
-    fun i(tag: String, error: Throwable)
+    /** Log an info message with optional format args. */
+    open fun i(message: String?, vararg args: Any?) {
+        prepareLog(Log.INFO, null, message, *args)
+    }
 
-    fun i(tag: String, error: Throwable, message: String)
+    /** Log an info exception and a message with optional format args. */
+    open fun i(t: Throwable?, message: String?, vararg args: Any?) {
+        prepareLog(Log.INFO, t, message, *args)
+    }
 
-    fun w(tag: String, message: String)
+    /** Log an info exception. */
+    open fun i(t: Throwable?) {
+        prepareLog(Log.INFO, t, null)
+    }
 
-    fun w(tag: String, error: Throwable)
+    /** Log a warning message with optional format args. */
+    open fun w(message: String?, vararg args: Any?) {
+        prepareLog(Log.WARN, null, message, *args)
+    }
 
-    fun w(tag: String, error: Throwable, message: String)
+    /** Log a warning exception and a message with optional format args. */
+    open fun w(t: Throwable?, message: String?, vararg args: Any?) {
+        prepareLog(Log.WARN, t, message, *args)
+    }
 
-    fun e(tag: String, message: String)
+    /** Log a warning exception. */
+    open fun w(t: Throwable?) {
+        prepareLog(Log.WARN, t, null)
+    }
 
-    fun e(tag: String, error: Throwable)
+    /** Log an error message with optional format args. */
+    open fun e(message: String?, vararg args: Any?) {
+        prepareLog(Log.ERROR, null, message, *args)
+    }
 
-    fun e(tag: String, error: Throwable, message: String)
+    /** Log an error exception and a message with optional format args. */
+    open fun e(t: Throwable?, message: String?, vararg args: Any?) {
+        prepareLog(Log.ERROR, t, message, *args)
+    }
+
+    /** Log an error exception. */
+    open fun e(t: Throwable?) {
+        prepareLog(Log.ERROR, t, null)
+    }
+
+    /** Log an assert message with optional format args. */
+    open fun wtf(message: String?, vararg args: Any?) {
+        prepareLog(Log.ASSERT, null, message, *args)
+    }
+
+    /** Log an assert exception and a message with optional format args. */
+    open fun wtf(t: Throwable?, message: String?, vararg args: Any?) {
+        prepareLog(Log.ASSERT, t, message, *args)
+    }
+
+    /** Log an assert exception. */
+    open fun wtf(t: Throwable?) {
+        prepareLog(Log.ASSERT, t, null)
+    }
+
+    /** Log at `priority` a message with optional format args. */
+    open fun log(priority: Int, message: String?, vararg args: Any?) {
+        prepareLog(priority, null, message, *args)
+    }
+
+    /** Log at `priority` an exception and a message with optional format args. */
+    open fun log(priority: Int, t: Throwable?, message: String?, vararg args: Any?) {
+        prepareLog(priority, t, message, *args)
+    }
+
+    /** Log at `priority` an exception. */
+    open fun log(priority: Int, t: Throwable?) {
+        prepareLog(priority, t, null)
+    }
+
+    @Deprecated("Use isLoggable(String, int)", ReplaceWith("this.isLoggable(null, priority)"))
+    protected open fun isLoggable(priority: Int): Boolean = true
+
+    /** Return whether a message at `priority` or `tag` should be logged. */
+    protected open fun isLoggable(tag: String?, priority: Int): Boolean = isLoggable(priority)
+
+    private fun prepareLog(priority: Int, t: Throwable?, message: String?, vararg args: Any?) {
+        // Consume tag even when message is not loggable so that next message is correctly tagged.
+        val tag = tag
+        if (!isLoggable(tag, priority)) {
+            return
+        }
+
+        var message = message
+        if (message.isNullOrEmpty()) {
+            if (t == null) {
+                return  // Swallow message if it's null and there's no throwable.
+            }
+            message = getStackTraceString(t)
+        } else {
+            if (args.isNotEmpty()) {
+                message = formatMessage(message, args)
+            }
+            if (t != null) {
+                message += "\n" + getStackTraceString(t)
+            }
+        }
+
+        log(priority, tag, message, t)
+    }
+
+    /** Formats a log message with optional arguments. */
+    protected open fun formatMessage(message: String, args: Array<out Any?>): String =
+        message.format(*args)
+
+    private fun getStackTraceString(t: Throwable): String {
+        // Don't replace this with Log.getStackTraceString() - it hides
+        // UnknownHostException, which is not what we want.
+        val sw = StringWriter(256)
+        val pw = PrintWriter(sw, false)
+        t.printStackTrace(pw)
+        pw.flush()
+        return sw.toString()
+    }
+
+    /**
+     * Write a log message to its destination. Called for all level-specific methods by default.
+     *
+     * @param priority Log level. See [Log] for constants.
+     * @param tag Explicit or inferred tag. May be `null`.
+     * @param message Formatted log message.
+     * @param t Accompanying exceptions. May be `null`.
+     */
+    protected abstract fun log(priority: Int, tag: String?, message: String, t: Throwable?)
 }

@@ -33,7 +33,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            api(libs.square.logcat)
+//            api(libs.square.logcat)
             // Use api to expose the dependency to dependent modules
             // Use the release variant only
 //            api("io.github.oshai:kotlin-logging-android:${libs.versions.oshai.kotlin.logging.get()}")
@@ -41,18 +41,19 @@ kotlin {
 //            implementation("io.github.oshai:kotlin-logging-android:${libs.versions.oshai.kotlin.logging.get()}") {
 //                exclude(group = "io.github.oshai", module = "kotlin-logging")
 //            }
-            api(libs.oshai.kotlin.logging.android)
         }
 
         commonMain.dependencies {
+//            api(libs.square.logcat)
             // The common API is still exposed for all platforms
-//            api(libs.oshai.kotlin.logging)
+            api(libs.oshai.kotlin.logging)
+            implementation(libs.kermit.logging)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.koin.core)
         }
         jvmMain.dependencies {
-            api(libs.oshai.kotlin.logging.jvm)
-            api(libs.square.logcat)
+//            api(libs.oshai.kotlin.logging.jvm)
+//            api(libs.square.logcat)
         }
     }
 }
