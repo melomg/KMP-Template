@@ -1,5 +1,5 @@
 [versions]
-agp = "8.12.1"
+agp = "8.11.0"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
@@ -17,13 +17,15 @@ jetbrains-material-icons-core = "1.7.3"
 jetbrains-navigation-compose= "2.9.0-beta05"
 kotlin = "2.2.0"
 kotlinx-coroutines = "1.10.2"
+# logging
+kermit-logging = "2.0.8"
+logback = "1.5.18"
 # other
 coil = "3.3.0"
 firebase = "34.1.0"
 junit = "4.13.2"
 koin = "4.1.0"
 ktor = "3.2.3"
-logback = "1.5.18"
 detekt = "1.23.8"
 buildkonfig = "0.17.1"
 
@@ -67,9 +69,11 @@ ktor-serverNetty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "kt
 ktor-serverTestHost = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }
 # firebase
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase" }
+# logging
+kermit-logging = { module = "co.touchlab:kermit", version.ref = "kermit-logging" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 # other
 junit = { module = "junit:junit", version.ref = "junit" }
-logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
