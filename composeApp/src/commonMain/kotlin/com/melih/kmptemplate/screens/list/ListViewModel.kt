@@ -15,6 +15,10 @@ class ListViewModel(museumRepository: MuseumRepository) : ViewModel() {
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
     init {
-        Klog.debug { "ListViewModel initialized" }
+        Klog.verbose { "Verbose log sample" }
+        Klog.debug { "Debug log sample" }
+        Klog.info { "Info log sample" }
+        Klog.warn { "Warn log sample" }
+        Klog.error(throwable = IllegalArgumentException("Illegal argument")) { "Error log sample" }
     }
 }
