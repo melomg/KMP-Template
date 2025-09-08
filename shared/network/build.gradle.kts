@@ -40,6 +40,7 @@ kotlin {
         }
         commonMain.dependencies {
             api(projects.shared.model)
+            api(projects.shared.logging)
 
             implementation(libs.koin.core)
 

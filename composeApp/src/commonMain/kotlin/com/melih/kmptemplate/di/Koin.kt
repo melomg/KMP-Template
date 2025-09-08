@@ -13,6 +13,7 @@ import com.melih.kmptemplate.shared.model.platform.BuildType
 import com.melih.kmptemplate.shared.model.platform.Platform
 import com.melih.kmptemplate.shared.network.MuseumApi
 import com.melih.kmptemplate.shared.network.di.networkModule
+import io.sentry.kotlin.multiplatform.Sentry
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
@@ -55,5 +56,16 @@ fun initKoin() {
         )
     }
 
-    Klog.plant(loggers = getKloggers(koinApp.koin.get<Platform>()))
+    val platform = koinApp.koin.get<Platform>()
+
+    initSentry(platform)
+    Klog.plant(loggers = getKloggers(platform))
+}
+
+private fun initSentry(platform: Platform) {
+    Sentry.init { options ->
+        options.dsn = BuildKonfig.SENTRY_DSN
+        options.debug = true
+        options.environment = platform.effectiveBuildType.key
+    }
 }
