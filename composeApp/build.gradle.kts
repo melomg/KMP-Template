@@ -77,6 +77,7 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
+            implementation(projects.shared.logging)
             implementation(projects.shared.model)
             implementation(projects.shared.network)
 
