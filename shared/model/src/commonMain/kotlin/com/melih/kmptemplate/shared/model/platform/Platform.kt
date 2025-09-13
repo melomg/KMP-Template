@@ -7,6 +7,7 @@ data class Platform(
     val platformVersionName: String,
     val effectiveBuildType: BuildType,
     val isDebuggable: Boolean,
+    val sentryDSN: String,
 )
 
 enum class BuildType(val key: String) {

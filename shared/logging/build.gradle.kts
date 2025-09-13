@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.sentry)
 }
 
 kotlin {
@@ -37,6 +38,7 @@ kotlin {
         commonMain.dependencies {
             api(projects.shared.model)
             implementation(libs.kermit.logging)
+            implementation(libs.sentry)
         }
 
         commonTest.dependencies {

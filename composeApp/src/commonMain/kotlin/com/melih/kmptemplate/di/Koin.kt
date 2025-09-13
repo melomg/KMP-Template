@@ -26,6 +26,7 @@ private val platformModule = module {
             platformVersionName = platformVersionName,
             effectiveBuildType = BuildType.byKey(BuildKonfig.EFFECTIVE_BUILD_TYPE),
             isDebuggable = BuildKonfig.IS_DEBUGGABLE,
+            sentryDSN = BuildKonfig.SENTRY_DSN,
         )
     }
 }
