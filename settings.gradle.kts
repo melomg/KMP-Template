@@ -34,5 +34,6 @@ plugins {
 
 include(":composeApp")
 include(":server")
+include(":shared:logging")
 include(":shared:model")
 include(":shared:network")
