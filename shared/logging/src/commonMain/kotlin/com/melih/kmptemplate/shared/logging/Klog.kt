@@ -1,5 +1,6 @@
 package com.melih.kmptemplate.shared.logging
 
+import com.melih.kmptemplate.shared.logging.internal.resolveTagName
 import kotlin.concurrent.Volatile
 
 class Klog private constructor() {
