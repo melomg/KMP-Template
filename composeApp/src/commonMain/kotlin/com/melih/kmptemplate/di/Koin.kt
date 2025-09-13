@@ -7,6 +7,8 @@ import com.melih.kmptemplate.data.MuseumStorage
 import com.melih.kmptemplate.platform.platformVersionName
 import com.melih.kmptemplate.screens.detail.DetailViewModel
 import com.melih.kmptemplate.screens.list.ListViewModel
+import com.melih.kmptemplate.shared.logging.Klog
+import com.melih.kmptemplate.shared.logging.getKloggers
 import com.melih.kmptemplate.shared.model.platform.BuildType
 import com.melih.kmptemplate.shared.model.platform.Platform
 import com.melih.kmptemplate.shared.network.MuseumApi
@@ -45,11 +47,13 @@ private val viewModelModule = module {
 }
 
 fun initKoin() {
-    startKoin {
+    val koinApp = startKoin {
         modules(
             platformModule,
             dataModule,
             viewModelModule,
         )
     }
+
+    Klog.plant(loggers = getKloggers(koinApp.koin.get<Platform>()))
 }
