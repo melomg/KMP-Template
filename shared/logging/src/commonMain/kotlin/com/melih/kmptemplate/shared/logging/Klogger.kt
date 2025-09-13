@@ -1,6 +1,7 @@
 package com.melih.kmptemplate.shared.logging
 
 /** A facade for handling logging calls. Install instances via [`Klog.plant()`][.plant]. */
+@Suppress("TooManyFunctions")
 interface Klogger {
 
     fun isVerboseEnabled(): Boolean = true

@@ -1,5 +1,6 @@
 package com.melih.kmptemplate.shared.logging
 
+@Suppress("TooManyFunctions")
 class FakeKlogger(
     private val isVerboseEnabled: Boolean = true,
     private val isDebugEnabled: Boolean = true,

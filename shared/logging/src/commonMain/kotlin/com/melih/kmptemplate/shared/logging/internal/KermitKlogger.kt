@@ -4,6 +4,7 @@ import co.touchlab.kermit.Logger
 import com.melih.kmptemplate.shared.logging.Klogger
 import com.melih.kmptemplate.shared.model.platform.Platform
 
+@Suppress("TooManyFunctions")
 internal class KermitKlogger(
     private val platform: Platform
 ) : Klogger {

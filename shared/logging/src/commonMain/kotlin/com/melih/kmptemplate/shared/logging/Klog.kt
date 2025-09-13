@@ -3,6 +3,7 @@ package com.melih.kmptemplate.shared.logging
 import com.melih.kmptemplate.shared.logging.internal.resolveTagName
 import kotlin.concurrent.Volatile
 
+@Suppress("TooManyFunctions")
 class Klog private constructor() {
     init {
         throw AssertionError()
@@ -95,7 +96,7 @@ class Klog private constructor() {
 
         /** Return an immutable snapshot of all planted loggers. */
         fun allLoggers(): List<Klogger> {
-            return listOf(*loggerArray)
+            return loggerArray.asList()
         }
 
         // Both fields guarded by 'loggers'.
