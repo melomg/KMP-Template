@@ -1,7 +1,6 @@
 package com.melih.kmptemplate.shared.logging
 
 import com.melih.kmptemplate.shared.logging.FakeKlogger.LogLevel
-import io.ktor.serialization.WebsocketConverterNotFoundException
 import kotlinx.coroutines.Runnable
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -219,20 +218,20 @@ class KlogTest {
         val unsupportedOperationException = UnsupportedOperationException("Test!")
         val nullPointerException = NullPointerException("Test!")
         val indexOutOfBoundsException = IndexOutOfBoundsException("Test!")
-        val websocketConverterNotFoundException = WebsocketConverterNotFoundException("Test!")
+        val concurrentModificationException = ConcurrentModificationException("Test!")
 
         Klog.verbose(throwable = illegalArgumentException) { "" }
         Klog.debug(throwable = unsupportedOperationException) { "" }
         Klog.info(throwable = nullPointerException) { "" }
         Klog.warn(throwable = indexOutOfBoundsException) { "" }
-        Klog.error(throwable = websocketConverterNotFoundException) { "" }
+        Klog.error(throwable = concurrentModificationException) { "" }
 
         fakeKlogger.assertLog()
             .hasVerboseLog("KlogTest", "", throwable = illegalArgumentException)
             .hasDebugLog("KlogTest", "", throwable = unsupportedOperationException)
             .hasInfoLog("KlogTest", "", throwable = nullPointerException)
             .hasWarnLog("KlogTest", "", throwable = indexOutOfBoundsException)
-            .hasErrorLog("KlogTest", "", throwable = websocketConverterNotFoundException)
+            .hasErrorLog("KlogTest", "", throwable = concurrentModificationException)
     }
 
     @Test

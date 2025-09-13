@@ -37,11 +37,10 @@ kotlin {
         commonMain.dependencies {
             api(projects.shared.model)
             implementation(libs.kermit.logging)
-            implementation(libs.ktor.serialization.kotlinx.json)
-            implementation(libs.koin.core)
         }
 
         commonTest.dependencies {
+            implementation(libs.jetbrains.kotlinx.coroutines.core)
             implementation(libs.jetbrains.kotlin.test)
         }
 
