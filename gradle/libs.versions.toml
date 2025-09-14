@@ -77,6 +77,7 @@ kermit-logging = { module = "co.touchlab:kermit", version.ref = "kermit-logging"
 kermit-crashlytics = { module = "co.touchlab:kermit-crashlytics", version.ref = "kermit-logging" }
 kermit-crashlytics-ios = { module = "co.touchlab.crashkios:crashlytics", version.ref = "kermit-crashlytics-ios" }
 sentry = { module = "io.sentry:sentry-kotlin-multiplatform", version.ref = "sentry" }
+napier = { module = "io.github.aakira:napier", version= "2.7.1" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 # other
 junit = { module = "junit:junit", version.ref = "junit" }
