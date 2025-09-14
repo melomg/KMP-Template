@@ -36,9 +36,7 @@ private val dataModule = module {
 
     single<MuseumStorage> { InMemoryMuseumStorage() }
     single {
-        MuseumRepository(get<MuseumApi>(), get()).apply {
-            initialize()
-        }
+        MuseumRepository(get<MuseumApi>(), get())
     }
 }
 
