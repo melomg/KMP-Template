@@ -6,7 +6,7 @@ import io.ktor.utils.io.CancellationException
 /**
  * Runs the [call], returning its result or `null` if exceptions occurred.
  */
-@Suppress("ForbiddenComment")
+@Suppress("ForbiddenComment", "TooGenericExceptionCaught")
 internal suspend fun <T> safeApiCall(
     call: suspend () -> T,
 ): T? {

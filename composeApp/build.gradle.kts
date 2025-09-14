@@ -287,7 +287,7 @@ class ApplicationProperties(project: Project) {
         }
 
     val sentryDSN: String
-        get() = gradleLocalProperties(rootDir, providers).getProperty("sentry.dsn")
+        get() = gradleLocalProperties(rootDir, providers).getProperty("sentry.dsn") ?: ""
 
     private fun Project.effectiveBuildType(): String = getAndroidBuildTypeOrNull()
         ?: getIOSBuildTypeOrNull()
