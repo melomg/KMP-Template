@@ -1,7 +1,9 @@
 package com.melih.kmptemplate.data
 
+import com.melih.kmptemplate.shared.logging.Klog
 import com.melih.kmptemplate.shared.model.MuseumObject
 import com.melih.kmptemplate.shared.network.MuseumApi
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
@@ -11,13 +13,11 @@ class MuseumRepository(
     private val museumApi: MuseumApi,
     private val museumStorage: MuseumStorage,
 ) {
-    private val scope = CoroutineScope(SupervisorJob())
+//    val handler = CoroutineExceptionHandler { _, exception ->
+//        Klog.error(tag = "MuseumRepository", throwable = exception) { "" }
+//    }
 
-    fun initialize() {
-        scope.launch {
-            refresh()
-        }
-    }
+//    private val scope = CoroutineScope(SupervisorJob() + handler)
 
     suspend fun refresh() {
         museumStorage.saveObjects(museumApi.getData())

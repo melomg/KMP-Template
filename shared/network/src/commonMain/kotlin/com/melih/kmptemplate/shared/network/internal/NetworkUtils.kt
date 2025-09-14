@@ -1,11 +1,12 @@
 package com.melih.kmptemplate.shared.network.internal
 
+import com.melih.kmptemplate.shared.logging.Klog
 import io.ktor.utils.io.CancellationException
 
 /**
  * Runs the [call], returning its result or `null` if exceptions occurred.
  */
-@Suppress("ForbiddenComment")
+@Suppress("ForbiddenComment", "TooGenericExceptionCaught")
 internal suspend fun <T> safeApiCall(
     call: suspend () -> T,
 ): T? {
@@ -13,8 +14,8 @@ internal suspend fun <T> safeApiCall(
         call()
     } catch (e: CancellationException) {
         throw e
-    } catch (_: Exception) {
-        // TODO: appLogger.log(LOG_TAG) { "API call failed: ${e.message}" }
+    } catch (e: Exception) {
+        Klog.error(throwable = e) { "API call failed: ${e.message}" }
         null
     }
 }

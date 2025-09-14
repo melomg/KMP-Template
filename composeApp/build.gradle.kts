@@ -19,6 +19,7 @@ plugins {
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.sentry)
     id("com.google.gms.google-services")
 }
 
@@ -219,6 +220,7 @@ buildkonfig {
         buildConfigField(
             BOOLEAN, "IS_DEBUGGABLE", appProperties.isDebuggable.toString()
         )
+        buildConfigField(STRING, "SENTRY_DSN", appProperties.sentryDSN)
     }
 }
 
@@ -283,6 +285,9 @@ class ApplicationProperties(project: Project) {
             AppBuildType.STAGING -> false
             AppBuildType.RELEASE -> false
         }
+
+    val sentryDSN: String
+        get() = gradleLocalProperties(rootDir, providers).getProperty("sentry.dsn") ?: ""
 
     private fun Project.effectiveBuildType(): String = getAndroidBuildTypeOrNull()
         ?: getIOSBuildTypeOrNull()

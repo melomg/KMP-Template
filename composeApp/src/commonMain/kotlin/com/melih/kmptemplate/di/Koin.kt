@@ -26,6 +26,7 @@ private val platformModule = module {
             platformVersionName = platformVersionName,
             effectiveBuildType = BuildType.byKey(BuildKonfig.EFFECTIVE_BUILD_TYPE),
             isDebuggable = BuildKonfig.IS_DEBUGGABLE,
+            sentryDSN = BuildKonfig.SENTRY_DSN,
         )
     }
 }
@@ -35,9 +36,7 @@ private val dataModule = module {
 
     single<MuseumStorage> { InMemoryMuseumStorage() }
     single {
-        MuseumRepository(get<MuseumApi>(), get()).apply {
-            initialize()
-        }
+        MuseumRepository(get<MuseumApi>(), get())
     }
 }
 

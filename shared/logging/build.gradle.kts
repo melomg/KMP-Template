@@ -37,6 +37,8 @@ kotlin {
         commonMain.dependencies {
             api(projects.shared.model)
             implementation(libs.kermit.logging)
+            implementation(libs.sentry)
+            implementation(libs.napier)
         }
 
         commonTest.dependencies {

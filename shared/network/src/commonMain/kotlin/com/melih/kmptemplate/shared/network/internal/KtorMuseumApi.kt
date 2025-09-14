@@ -6,12 +6,18 @@ import io.ktor.client.request.get
 import com.melih.kmptemplate.shared.model.MuseumObject
 import com.melih.kmptemplate.shared.network.MuseumApi
 import io.ktor.utils.io.core.Closeable
+import kotlinx.io.IOException
 
 internal class KtorMuseumApi(private val client: HttpClient) : MuseumApi, Closeable {
 
-    override suspend fun getData(): List<MuseumObject> = safeApiCall {
-        client.get(API_BASE_URL).body<List<MuseumObject>>()
-    } ?: emptyList()
+    override suspend fun getData(): List<MuseumObject> {
+        throw IOException("Parcelized error")
+        return emptyList()
+    }
+
+//    override suspend fun getData(): List<MuseumObject> = safeApiCall {
+//        client.get(API_BASE_URL).body<List<MuseumObject>>()
+//    } ?: emptyList()
 
     override fun close() {
         client.close()
