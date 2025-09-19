@@ -1,5 +1,6 @@
 package com.melih.kmptemplate.shared.network.di
 
+import com.melih.kmptemplate.shared.logging.Klog
 import com.melih.kmptemplate.shared.model.platform.Platform
 import com.melih.kmptemplate.shared.network.MoviesApi
 import com.melih.kmptemplate.shared.network.MuseumApi
@@ -51,9 +52,7 @@ val networkModule = module {
                 }
                 logger = object : KtorLogger {
                     override fun log(message: String) {
-                        // TODO: Enable logger instead
-                        println(message)
-                        // appLogger.log(LOG_TAG) { message }
+                        Klog.verbose(tag = "Ktor Client") { message }
                     }
                 }
             }
