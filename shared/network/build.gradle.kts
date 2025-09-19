@@ -39,6 +39,7 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
+            api(projects.shared.logging)
             api(projects.shared.model)
 
             implementation(libs.koin.core)
