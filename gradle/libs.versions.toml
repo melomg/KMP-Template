@@ -14,7 +14,7 @@ jetbrains-androidx-lifecycle = "2.9.3"
 jetbrains-compose-hot-reload = "1.0.0-beta06"
 jetbrains-compose-multiplatform = "1.8.2"
 jetbrains-material-icons-core = "1.7.3"
-jetbrains-navigation-compose= "2.9.0-rc01"
+jetbrains-navigation-compose= "2.9.0"
 kotlin = "2.2.10"
 kotlinx-coroutines = "1.10.2"
 # logging
