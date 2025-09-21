@@ -25,7 +25,7 @@ coil = "3.3.0"
 firebase = "34.3.0"
 junit = "4.13.2"
 koin = "4.1.1"
-ktor = "3.2.3"
+ktor = "3.3.0-eap-115"
 detekt = "1.23.8"
 buildkonfig = "0.17.1"
 
