@@ -11,7 +11,6 @@ plugins {
 
 kotlin {
     jvmToolchain(17)
-    jvm("desktop")
 
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -19,6 +18,8 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
+    jvm("desktop")
 
     iosX64()
     iosArm64()
@@ -31,17 +32,28 @@ kotlin {
     }
 
     sourceSets {
-        commonMain.dependencies {
-            api(projects.shared.threading)
+        val androidUnitTest by getting
+        val desktopMain by getting
 
+        androidMain.dependencies {
+            implementation(libs.jetbrains.kotlinx.coroutines.android)
+        }
+        androidUnitTest.dependencies {
             implementation(libs.jetbrains.kotlinx.coroutines.test)
+            implementation(libs.jetbrains.kotlin.test)
+            implementation(libs.jetbrains.kotlin.test.junit5)
+            runtimeOnly(libs.junit.jupiter.engine)
         }
 
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(libs.jetbrains.kotlin.test.junit5)
-                runtimeOnly(libs.junit.jupiter.engine)
-            }
+        desktopMain.dependencies {
+            implementation(libs.jetbrains.kotlinx.coroutines.swing)
+        }
+
+        commonMain.dependencies {
+            api(projects.core.shared.logging)
+            api(projects.core.shared.model)
+
+            implementation(libs.jetbrains.kotlinx.coroutines.core)
         }
     }
 }
@@ -57,8 +69,11 @@ tasks.withType<Test>().configureEach {
 }
 
 android {
-    namespace = "com.melih.kmptemplate.shared.threading.test"
+    namespace = "com.melih.kmptemplate.core.shared.threading"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
+    kotlin {
+        jvmToolchain(17)
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -66,7 +81,7 @@ android {
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
     }
-    kotlin {
-        jvmToolchain(17)
+    packaging {
+        resources.excludes += "DebugProbesKt.bin"
     }
 }

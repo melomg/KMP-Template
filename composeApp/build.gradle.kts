@@ -30,6 +30,8 @@ kotlin {
         }
     }
 
+    jvm("desktop")
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -40,8 +42,6 @@ kotlin {
             isStatic = true
         }
     }
-
-    jvm("desktop")
 
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
@@ -64,6 +64,7 @@ kotlin {
     }
 
     sourceSets {
+        val androidUnitTest by getting
         val desktopMain by getting
 
         androidMain.dependencies {
@@ -73,9 +74,27 @@ kotlin {
 
             implementation(project.dependencies.platform(libs.firebase.bom))
         }
+        androidUnitTest.dependencies {
+            implementation(libs.jetbrains.kotlin.test)
+            implementation(libs.jetbrains.kotlin.test.junit5)
+            runtimeOnly(libs.junit.jupiter.engine)
+        }
+
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.jetbrains.kotlinx.coroutines.swing)
+            implementation(libs.ktor.client.cio)
+            implementation(libs.logback)
+        }
+
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
+
         commonMain.dependencies {
             implementation(projects.core.shared.logging)
             implementation(projects.core.shared.model)
@@ -101,22 +120,6 @@ kotlin {
             implementation(libs.coil.network.ktor)
             implementation(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
-        }
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(libs.jetbrains.kotlin.test)
-                implementation(libs.jetbrains.kotlin.test.junit5)
-                runtimeOnly(libs.junit.jupiter.engine)
-            }
-        }
-        desktopMain.dependencies {
-            implementation(compose.desktop.currentOs)
-            implementation(libs.jetbrains.kotlinx.coroutines.swing)
-            implementation(libs.ktor.client.cio)
-            implementation(libs.logback)
-        }
-        wasmJsMain.dependencies {
-            implementation(libs.ktor.client.js)
         }
     }
 }
