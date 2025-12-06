@@ -97,6 +97,12 @@ Over the years, I found below resources helpful for modular design and my aim fo
 - [Herding Elephants](https://developer.squareup.com/blog/herding-elephants/)
 - [Modularization learning journey in Now in Android](https://github.com/android/nowinandroid/blob/main/docs/ModularizationLearningJourney.md)
 
+# Updating gradle wrapper
+
+```bash
+./gradlew wrapper --gradle-version latest --distribution-type bin
+```
+
 # Code of Conduct
 
 This project is managed by the [Code of Conduct](CODE_OF_CONDUCT.md).
