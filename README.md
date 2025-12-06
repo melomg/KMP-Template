@@ -7,7 +7,8 @@ This is a Kotlin Multiplatform template project targeting Android, iOS, Web, Des
 * `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
     - `commonMain` is for code that’s common for all targets.
-    - `iosMain` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+    - `iosMain` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, you need this
+      entry point for your iOS app. This is also where you should add SwiftUI code for your project.
     - `desktopMain` contains desktop applications that works on Windows, MacOS and Linux.
     - `wasmMain` contains web applications that works on Chrome (not tested on other browsers).
 
@@ -15,7 +16,8 @@ This is a Kotlin Multiplatform template project targeting Android, iOS, Web, Des
 
 * `/shared` is for the code that will be shared between all targets in the project.
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),[Kotlin/Wasm](https://kotl.in/wasm/)…
+Learn more
+about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),[Kotlin/Wasm](https://kotl.in/wasm/)…
 
 You can open the web application by running the Gradle task below:
 
@@ -67,7 +69,8 @@ The KMP template tries to help you get started with these points:
     - [ ] Network image loading: coil
     - [ ] supportsDynamicTheming
     - [ ] Status bar color changing
-    - [ ] App settings with Resource Environment (See: [Source 1](https://github.com/JetBrains/compose-multiplatform/pull/5239), [Source 2](https://github.com/JetBrains/compose-multiplatform/blob/master/components/resources/library/src/androidMain/kotlin/org/jetbrains/compose/resources/ResourceEnvironment.android.kt), [Source 3](https://youtrack.jetbrains.com/issue/CMP-4197) )
+    - [ ] App settings with Resource Environment (
+      See: [Source 1](https://github.com/JetBrains/compose-multiplatform/pull/5239), [Source 2](https://github.com/JetBrains/compose-multiplatform/blob/master/components/resources/library/src/androidMain/kotlin/org/jetbrains/compose/resources/ResourceEnvironment.android.kt), [Source 3](https://youtrack.jetbrains.com/issue/CMP-4197) )
         - [ ] l10n
         - [ ] i18n
     - [ ] Testing
@@ -76,11 +79,14 @@ The KMP template tries to help you get started with these points:
 
 # Building
 
-The **KMP Template** needs a Firebase account set up to run. If you haven't already, check [here](https://firebase.google.com/docs/android/setup). You'll need to get the `google-services.json` and put it in `composeApp/` folder.
+The **KMP Template** needs a Firebase account set up to run. If you haven't already,
+check [here](https://firebase.google.com/docs/android/setup). You'll need to get the `google-services.json` and put it
+in `composeApp/` folder.
 
 # Architecture
 
-The **KMP Template** is following the [Android official architecture guidance](https://developer.android.com/topic/architecture) as closely as possible.
+The **KMP Template** is following
+the [Android official architecture guidance](https://developer.android.com/topic/architecture) as closely as possible.
 
 Some inspiring links;
 
@@ -89,7 +95,8 @@ Some inspiring links;
 
 # Modularization
 
-Over the years, I found below resources helpful for modular design and my aim for **KMP Template** is to follow them as closely as possible;
+Over the years, I found below resources helpful for modular design and my aim for **KMP Template** is to follow them as
+closely as possible;
 
 - [Android at scale @Square](https://www.droidcon.com/2019/11/15/android-at-scale-square/)
 - [Navigating through multi-module Jetpack Compose applications](https://proandroiddev.com/navigating-through-multi-module-jetpack-compose-applications-6c9a31fa12b6)
@@ -101,6 +108,12 @@ Over the years, I found below resources helpful for modular design and my aim fo
 
 ```bash
 ./gradlew wrapper --gradle-version latest --distribution-type bin
+```
+
+# Validate renovate configuration
+
+```bash
+npx --yes --package renovate -- renovate-config-validator --strict
 ```
 
 # Code of Conduct
