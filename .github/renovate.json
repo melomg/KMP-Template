@@ -7,7 +7,7 @@
     "main"
   ],
   "branchPrefix": "renovate/",
-  "prHourlyLimit": 10,
+  "prHourlyLimit": 2,
   "packageRules": [
     {
       "matchPackageNames": [
@@ -18,16 +18,26 @@
       ]
     },
     {
-      "matchPackageNames": [
-        "androidx"
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
       ],
-      "groupName": "AndroidX"
+      "matchCurrentVersion": "!/^0/",
+      "automerge": true,
+      "automergeStrategy": "rebase"
     },
     {
       "matchPackageNames": [
-        "org.jetbrains"
+        "^com.google**",
+        "^androidx.**"
       ],
-      "groupName": "Jetbrains"
+      "groupName": "Google Monorepo"
+    },
+    {
+      "matchPackageNames": [
+        "^org.jetbrains"
+      ],
+      "groupName": "Kotlin Monorepo"
     },
     {
       "matchPackageNames": [
