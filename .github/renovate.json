@@ -1,49 +1,30 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "baseBranches": [
-    "main"
-  ],
+  "extends": ["config:recommended"],
+  "baseBranchPatterns": ["main"],
   "branchPrefix": "renovate/",
   "prHourlyLimit": 2,
   "packageRules": [
     {
-      "matchPackageNames": [
-        "renovatebot/github-action"
-      ],
-      "extends": [
-        "schedule:weekly"
-      ]
+      "matchPackageNames": ["renovatebot/github-action"],
+      "extends": ["schedule:weekly"]
     },
     {
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
+      "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true,
       "automergeStrategy": "rebase"
     },
     {
-      "matchPackageNames": [
-        "^com.google**",
-        "^androidx.**"
-      ],
+      "matchPackageNames": ["^com.google**", "^androidx.**"],
       "groupName": "Google Monorepo"
     },
     {
-      "matchPackageNames": [
-        "^org.jetbrains"
-      ],
+      "matchPackageNames": ["^org.jetbrains"],
       "groupName": "Kotlin Monorepo"
     },
     {
-      "matchPackageNames": [
-        "ktor"
-      ],
-      "groupName": "Ktor"
+      "matchPackageNames": ["ktor"], "groupName": "Ktor"
     }
   ]
 }
