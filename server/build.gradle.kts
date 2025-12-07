@@ -6,6 +6,7 @@ plugins {
 
 group = "com.melih.kmptemplate.server"
 version = "1.0.0"
+
 application {
     mainClass.set("com.melih.kmptemplate.ApplicationKt")
 
