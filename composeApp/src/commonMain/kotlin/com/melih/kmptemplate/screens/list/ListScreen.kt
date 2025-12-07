@@ -26,8 +26,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import com.melih.kmptemplate.core.shared.model.MuseumObject
 import com.melih.kmptemplate.screens.EmptyScreenContent
-import com.melih.kmptemplate.shared.model.MuseumObject
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable

@@ -1,18 +1,18 @@
 package com.melih.kmptemplate.di
 
 import com.melih.kmptemplate.BuildKonfig
+import com.melih.kmptemplate.core.shared.logging.Klog
+import com.melih.kmptemplate.core.shared.logging.getKloggers
+import com.melih.kmptemplate.core.shared.model.platform.BuildType
+import com.melih.kmptemplate.core.shared.model.platform.Platform
+import com.melih.kmptemplate.core.shared.network.MuseumApi
+import com.melih.kmptemplate.core.shared.network.di.networkModule
 import com.melih.kmptemplate.data.InMemoryMuseumStorage
 import com.melih.kmptemplate.data.MuseumRepository
 import com.melih.kmptemplate.data.MuseumStorage
 import com.melih.kmptemplate.platform.platformVersionName
 import com.melih.kmptemplate.screens.detail.DetailViewModel
 import com.melih.kmptemplate.screens.list.ListViewModel
-import com.melih.kmptemplate.shared.logging.Klog
-import com.melih.kmptemplate.shared.logging.getKloggers
-import com.melih.kmptemplate.shared.model.platform.BuildType
-import com.melih.kmptemplate.shared.model.platform.Platform
-import com.melih.kmptemplate.shared.network.MuseumApi
-import com.melih.kmptemplate.shared.network.di.networkModule
 import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module

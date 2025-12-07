@@ -1,6 +1,6 @@
 package com.melih.kmptemplate.data
 
-import com.melih.kmptemplate.shared.model.MuseumObject
+import com.melih.kmptemplate.core.shared.model.MuseumObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
