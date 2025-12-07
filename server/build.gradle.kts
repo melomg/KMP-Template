@@ -18,5 +18,10 @@ dependencies {
     implementation(libs.ktor.serverCore)
     implementation(libs.ktor.serverNetty)
     testImplementation(libs.ktor.serverTestHost)
-    testImplementation(libs.jetbrains.kotlin.testJunit)
+    testImplementation(libs.jetbrains.kotlin.test.junit5)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+}
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }
