@@ -11,7 +11,6 @@ plugins {
 
 kotlin {
     jvmToolchain(17)
-    jvm("desktop")
 
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
@@ -19,6 +18,8 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
+    jvm("desktop")
 
     iosX64()
     iosArm64()
@@ -32,12 +33,23 @@ kotlin {
 
     sourceSets {
         val desktopMain by getting
+
         androidMain.dependencies {
             implementation(libs.ktor.client.cio)
         }
+
+        desktopMain.dependencies {
+            implementation(libs.ktor.client.cio)
+        }
+
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+
+        wasmJsMain.dependencies {
+            implementation(libs.ktor.client.js)
+        }
+
         commonMain.dependencies {
             api(projects.core.shared.logging)
             api(projects.core.shared.model)
@@ -48,12 +60,6 @@ kotlin {
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
-        }
-        desktopMain.dependencies {
-            implementation(libs.ktor.client.cio)
-        }
-        wasmJsMain.dependencies {
-            implementation(libs.ktor.client.js)
         }
         commonTest.dependencies {
             implementation(libs.jetbrains.kotlin.test)
@@ -70,14 +76,14 @@ tasks.withType<KotlinCompile>().all {
 android {
     namespace = "com.melih.kmptemplate.core.shared.network"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
+    kotlin {
+        jvmToolchain(17)
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-    kotlin {
-        jvmToolchain(17)
     }
 }

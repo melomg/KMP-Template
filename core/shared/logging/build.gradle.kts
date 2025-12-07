@@ -12,14 +12,14 @@ plugins {
 kotlin {
     jvmToolchain(17)
 
-    jvm("desktop")
-
     androidTarget {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
         }
     }
+
+    jvm("desktop")
 
     iosX64()
     iosArm64()
@@ -32,24 +32,23 @@ kotlin {
     }
 
     sourceSets {
+        val androidUnitTest by getting
         val desktopMain by getting
 
-        commonMain.dependencies {
-            api(projects.core.shared.model)
-            implementation(libs.kermit.logging)
+        androidUnitTest.dependencies {
+            implementation(libs.jetbrains.kotlinx.coroutines.core)
+            implementation(libs.jetbrains.kotlin.test)
+            implementation(libs.jetbrains.kotlin.test.junit5)
+            runtimeOnly(libs.junit.jupiter.engine)
         }
 
         desktopMain.dependencies {
             implementation(libs.logback)
         }
 
-        val androidUnitTest by getting {
-            dependencies {
-                implementation(libs.jetbrains.kotlinx.coroutines.core)
-                implementation(libs.jetbrains.kotlin.test)
-                implementation(libs.jetbrains.kotlin.test.junit5)
-                runtimeOnly(libs.junit.jupiter.engine)
-            }
+        commonMain.dependencies {
+            api(projects.core.shared.model)
+            implementation(libs.kermit.logging)
         }
     }
 }
@@ -67,14 +66,14 @@ tasks.withType<Test>().configureEach {
 android {
     namespace = "com.melih.kmptemplate.core.shared.logging"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
+    kotlin {
+        jvmToolchain(17)
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-    kotlin {
-        jvmToolchain(17)
     }
 }

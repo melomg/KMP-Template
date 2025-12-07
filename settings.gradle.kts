@@ -34,6 +34,7 @@ plugins {
 
 include(":composeApp")
 include(":server")
+include(":core:android:threading-test-util")
 include(":core:shared:logging")
 include(":core:shared:model")
 include(":core:shared:network")
