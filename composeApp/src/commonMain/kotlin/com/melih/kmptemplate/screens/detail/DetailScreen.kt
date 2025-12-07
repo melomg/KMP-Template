@@ -35,8 +35,8 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import com.melih.kmptemplate.core.shared.model.MuseumObject
 import com.melih.kmptemplate.screens.EmptyScreenContent
-import com.melih.kmptemplate.shared.model.MuseumObject
 import kmp_template.composeapp.generated.resources.Res
 import kmp_template.composeapp.generated.resources.back
 import kmp_template.composeapp.generated.resources.label_artist

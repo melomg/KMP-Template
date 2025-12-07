@@ -2,8 +2,8 @@ package com.melih.kmptemplate.screens.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.melih.kmptemplate.core.shared.model.MuseumObject
 import com.melih.kmptemplate.data.MuseumRepository
-import com.melih.kmptemplate.shared.model.MuseumObject
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

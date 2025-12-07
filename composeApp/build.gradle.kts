@@ -77,9 +77,10 @@ kotlin {
             implementation(libs.ktor.client.darwin)
         }
         commonMain.dependencies {
-            implementation(projects.shared.logging)
-            implementation(projects.shared.model)
-            implementation(projects.shared.network)
+            implementation(projects.core.shared.logging)
+            implementation(projects.core.shared.model)
+            implementation(projects.core.shared.network)
+            implementation(projects.core.shared.threading)
 
             implementation(compose.runtime)
             implementation(compose.foundation)
@@ -101,8 +102,12 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.koin.compose.viewmodel)
         }
-        commonTest.dependencies {
-            implementation(libs.jetbrains.kotlin.test)
+        val androidUnitTest by getting {
+            dependencies {
+                implementation(libs.jetbrains.kotlin.test)
+                implementation(libs.jetbrains.kotlin.test.junit5)
+                runtimeOnly(libs.junit.jupiter.engine)
+            }
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -195,6 +200,10 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+}
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }
 
 compose.desktop {
