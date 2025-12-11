@@ -24,7 +24,7 @@ logback = "1.5.21"
 junit-jupiter = "6.0.1"
 # other
 coil = "3.3.0"
-firebase = "34.6.0"
+firebase = "34.7.0"
 junit = "4.13.2"
 koin = "4.1.1"
 ktor = "3.3.3"
