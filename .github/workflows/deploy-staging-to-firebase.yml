@@ -31,12 +31,12 @@ jobs:
         run: |
           firebase crashlytics:upload-proguard \
             --app ${{ secrets.FIREBASE_APP_ID }} \
-            --mapping composeApp/build/outputs/mapping/staging/mapping.txt
+            --mapping app/build/outputs/mapping/staging/mapping.txt
 
       - name: Distribute to Firebase
         uses: ./.github/actions/firebase-distribute
         with:
-          app-path: composeApp/build/outputs/bundle/staging/composeApp-staging.aab
+          app-path: app/build/outputs/bundle/staging/composeApp-staging.aab
           firebase-app-id: ${{ secrets.FIREBASE_APP_ID }}
           service-account-json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64 }}
           groups: "qa-team"
