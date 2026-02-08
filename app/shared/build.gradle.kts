@@ -8,7 +8,18 @@ import java.util.Properties
 val appProperties = ApplicationProperties(project)
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
+//    alias(libs.plugins.kmptemplate.android.application)
+//    alias(libs.plugins.kmptemplate.android.application.compose)
+//    alias(libs.plugins.kmptemplate.android.application.flavors)
+//    alias(libs.plugins.kmptemplate.android.application.jacoco)
+//    alias(libs.plugins.kmptemplate.android.application.firebase)
+//    alias(libs.plugins.kmptemplate.hilt)
+//    alias(libs.plugins.google.osslicenses)
+//    alias(libs.plugins.baselineprofile)
+//    alias(libs.plugins.roborazzi)
+//    alias(libs.plugins.kotlin.serialization)
+
+    alias(libs.plugins.kmptemplate.kmp.library)
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)

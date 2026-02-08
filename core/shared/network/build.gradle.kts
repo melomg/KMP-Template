@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
-    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kmptemplate.kmp.library)
     alias(libs.plugins.kotlinxSerialization)
 }
 

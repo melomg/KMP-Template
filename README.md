@@ -78,10 +78,10 @@ The KMP template tries to help you get started with these points:
     - [x] Dependency management: [Renovate](https://docs.renovatebot.com/)
     - [x] DI: [koin](https://insert-koin.io/docs/reference/koin-mp/kmp/)
     - [x] Network: [ktor](https://ktor.io/)
-    - [x] Lint
-    - [x] Static code analysis
-    - [ ] Logging: [Napier](https://github.com/AAkira/Napier)?
-        - [ ] Error reporting
+    - [x] Lint & Static code analysis [Detekt](https://medium.com/@mmelihgultekin/starting-a-kmp-project-the-one-with-static-code-analysis-episode-2-0a410146fb68)
+    - [x] Build info [Blog](https://medium.com/@mmelihgultekin/starting-a-kmp-project-the-one-with-build-info-episode-3-54e77dcc0849)
+    - [x] Logging: [Kermit](https://medium.com/@mmelihgultekin/kermikermit-androidstarting-a-kmp-project-the-one-with-logging-episode-4-a5aeaa9f2aeb)
+      - [x] Error reporting
         - [ ] Analytics
         - [ ] Tracing
     - [ ] Benchmarking
@@ -89,7 +89,6 @@ The KMP template tries to help you get started with these points:
     - [ ] Flavours
     - [ ] Mocks
     - [ ] Test fixtures
-    - [ ] Build info
     - [ ] Preferences
     - [ ] Storage
     - [ ] Feature flags (local & remote)

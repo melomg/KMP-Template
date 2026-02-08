@@ -15,6 +15,7 @@ jetbrains-compose-hot-reload = "1.0.0"
 jetbrains-compose-multiplatform = "1.9.3"
 jetbrains-material-icons-core = "1.7.3"
 jetbrains-navigation-compose= "2.9.1"
+compose = "1.10.0"
 kotlin = "2.3.0"
 kotlinx-coroutines = "1.10.2"
 # logging
@@ -30,6 +31,10 @@ koin = "4.1.1"
 ktor = "3.3.3"
 detekt = "1.23.8"
 buildkonfig = "0.17.1"
+
+androidx-lint-gradle = "1.0.0-alpha05"
+ksp = "2.3.1"
+androidTools = "31.13.2"
 
 [libraries]
 # androidx
@@ -80,10 +85,20 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 kermit-logging = { module = "co.touchlab:kermit", version.ref = "kermit-logging" }
 logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
 
+# Dependencies of the included build-logic
+android-gradlePlugin = { module = "com.android.tools.build:gradle-api", version.ref = "agp" }
+android-tools-common = { module = "com.android.tools:common", version.ref = "androidTools" }
+android-compose-gradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+compose-gradlePlugin = { module = "org.jetbrains.compose:org.jetbrains.compose.gradle.plugin", version.ref = "compose" }
+
+kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+ksp-gradlePlugin = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+androidx-lint-gradle = { module = "androidx.lint:lint-gradle", version.ref = "androidx-lint-gradle" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
-androidKotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+androidLint = { id = "com.android.lint", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "jetbrains-compose-hot-reload" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose-multiplatform" }
@@ -93,3 +108,16 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+
+# Plugins defined by this project
+kmptemplate-android-application = { id = "kmptemplate.android.application" }
+kmptemplate-kmp-library = { id = "kmptemplate.kmp.library" }
+kmptemplate-compose-multiplatform = { id = "kmptemplate.compose.multiplatform" }
+kmptemplate-android-application-compose = { id = "kmptemplate.android.application.compose" }
+kmptemplate-android-feature-impl = { id = "kmptemplate.android.feature.impl" }
+kmptemplate-android-feature-api = { id = "kmptemplate.android.feature.api" }
+kmptemplate-android-library = { id = "kmptemplate.android.library" }
+kmptemplate-android-library-compose = { id = "kmptemplate.android.library.compose" }
+kmptemplate-android-lint = { id = "kmptemplate.android.lint" }
+kmptemplate-android-test = { id = "kmptemplate.android.test" }
+kmptemplate-jvm-library = { id = "kmptemplate.jvm.library" }
