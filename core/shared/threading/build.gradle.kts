@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
-    alias(libs.plugins.kmptemplate.kmp.library)
+    alias(libs.plugins.kmptemplate.kotlinMultiplatform.library)
     alias(libs.plugins.kotlinxSerialization)
 }
 

@@ -1,5 +1,4 @@
 import com.melih.kmptemplate.configureComposeMultiplatform
-import com.melih.kmptemplate.configureKotlinMultiplatform
 import com.melih.kmptemplate.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project

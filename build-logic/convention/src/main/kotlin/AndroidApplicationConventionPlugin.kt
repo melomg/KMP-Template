@@ -1,5 +1,4 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.melih.kmptemplate.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.apply
@@ -12,7 +11,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             apply(plugin = "kmptemplate.android.lint")
 
             extensions.configure<ApplicationExtension> {
-                configureKotlinAndroid(this)
+//                configureKotlinAndroid(this)
                 defaultConfig.targetSdk = 36
                 testOptions.animationsDisabled = true
             }

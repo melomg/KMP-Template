@@ -46,11 +46,13 @@ tasks {
 gradlePlugin {
     plugins {
         register("kmpLibrary") {
-            id = libs.plugins.kmptemplate.kmp.library.get().pluginId
+            id = "kmptemplate.kotlinMultiplatform.library"
+            //id = libs.plugins.kmptemplate.kmp.library.get().pluginId
             implementationClass = "KotlinMultiplatformLibraryConventionPlugin"
         }
         register("kmpComposeMultiplatform") {
-            id = libs.plugins.kmptemplate.compose.multiplatform.get().pluginId
+            id = "kmptemplate.compose.multiplatform"
+            //id = libs.plugins.kmptemplate.compose.multiplatform.get().pluginId
             implementationClass = "ComposeMultiplatformConventionPlugin"
         }
         //        register("androidApplicationCompose") {
@@ -85,10 +87,10 @@ gradlePlugin {
 //            id = libs.plugins.kmptemplate.android.library.jacoco.get().pluginId
 //            implementationClass = "AndroidLibraryJacocoConventionPlugin"
 //        }
-        register("androidTest") {
-            id = libs.plugins.kmptemplate.android.test.get().pluginId
-            implementationClass = "AndroidTestConventionPlugin"
-        }
+//        register("androidTest") {
+//            id = libs.plugins.kmptemplate.android.test.get().pluginId
+//            implementationClass = "AndroidTestConventionPlugin"
+//        }
 //        register("androidFlavors") {
 //            id = libs.plugins.kmptemplate.android.application.flavors.get().pluginId
 //            implementationClass = "AndroidApplicationFlavorsConventionPlugin"
@@ -97,9 +99,9 @@ gradlePlugin {
             id = libs.plugins.kmptemplate.android.lint.get().pluginId
             implementationClass = "AndroidLintConventionPlugin"
         }
-        register("jvmLibrary") {
-            id = libs.plugins.kmptemplate.jvm.library.get().pluginId
-            implementationClass = "JvmLibraryConventionPlugin"
-        }
+//        register("jvmLibrary") {
+//            id = libs.plugins.kmptemplate.jvm.library.get().pluginId
+//            implementationClass = "JvmLibraryConventionPlugin"
+//        }
     }
 }

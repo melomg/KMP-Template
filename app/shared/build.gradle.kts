@@ -19,7 +19,7 @@ plugins {
 //    alias(libs.plugins.roborazzi)
 //    alias(libs.plugins.kotlin.serialization)
 
-    alias(libs.plugins.kmptemplate.kmp.library)
+    alias(libs.plugins.kmptemplate.kotlinMultiplatform.library)
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)

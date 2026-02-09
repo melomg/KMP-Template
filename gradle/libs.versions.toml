@@ -111,7 +111,7 @@ buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig"
 
 # Plugins defined by this project
 kmptemplate-android-application = { id = "kmptemplate.android.application" }
-kmptemplate-kmp-library = { id = "kmptemplate.kmp.library" }
+kmptemplate-kotlinMultiplatform-library = { id = "kmptemplate.kotlinMultiplatform.library" }
 kmptemplate-compose-multiplatform = { id = "kmptemplate.compose.multiplatform" }
 kmptemplate-android-application-compose = { id = "kmptemplate.android.application.compose" }
 kmptemplate-android-feature-impl = { id = "kmptemplate.android.feature.impl" }

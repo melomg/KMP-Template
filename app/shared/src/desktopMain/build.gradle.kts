@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.kmptemplate.kmp.library)
+    alias(libs.plugins.kmptemplate.kotlinMultiplatform.library)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
 }
