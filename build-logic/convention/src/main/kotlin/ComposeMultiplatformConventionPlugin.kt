@@ -4,7 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.internal.Actions.with
 import org.gradle.kotlin.dsl.configure
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.KotlinTopLevelExtensionConfig
 
 class ComposeMultiplatformConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -14,7 +14,7 @@ class ComposeMultiplatformConventionPlugin : Plugin<Project> {
                 apply(libs.findPlugin("composeCompiler").get().get().pluginId)
             }
 
-            extensions.configure<KotlinMultiplatformExtension> {
+            extensions.configure<KotlinTopLevelExtensionConfig> {
                 configureComposeMultiplatform(this)
             }
         }
