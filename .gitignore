@@ -11,14 +11,16 @@ captures
 .externalNativeBuild
 .cxx
 *.xcodeproj/*
+*.xcscheme
 !*.xcodeproj/project.pbxproj
 !*.xcodeproj/xcshareddata/
 !*.xcodeproj/project.xcworkspace/
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
+**.jks
+**.aab
+/sentry.properties
 ## Google
 **/google-services.json
 **/google-service-account.json
-/tools/release.jks
-**.aab
-*.xcscheme
+**/GoogleService-Info.plist

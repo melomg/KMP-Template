@@ -2,8 +2,7 @@ plugins {
     // this is necessary to avoid the plugins to be loaded multiple times
     // in each subproject's classloader
     alias(libs.plugins.androidApplication) apply false
-    alias(libs.plugins.androidLibrary) apply false
-    alias(libs.plugins.androidKotlin) apply false
+    alias(libs.plugins.androidMultiplatformLibrary) apply false
     alias(libs.plugins.composeMultiplatform) apply false
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinJvm) apply false
@@ -34,10 +33,10 @@ private fun getDetektSourcePaths(): List<File> {
     subprojects.forEach {
         sourceDirs.add(file("${it.projectDir}/src/main/java"))
         sourceDirs.add(file("${it.projectDir}/src/test/java"))
-        sourceDirs.add(file("${it.projectDir}/src/main/kotlin"))
         sourceDirs.add(file("${it.projectDir}/src/test/kotlin"))
         sourceDirs.add(file("${it.projectDir}/src/androidTest/java"))
 
+        sourceDirs.add(file("${it.projectDir}/src/main/kotlin"))
         sourceDirs.add(file("${it.projectDir}/src/commonMain/kotlin"))
         sourceDirs.add(file("${it.projectDir}/src/androidMain/kotlin"))
         sourceDirs.add(file("${it.projectDir}/src/iosMain/kotlin"))
