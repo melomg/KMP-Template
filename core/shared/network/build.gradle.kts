@@ -1,34 +1,11 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
-    alias(libs.plugins.androidLibrary)
-    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kmptemplate.kotlinMultiplatform.library)
     alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
-    jvmToolchain(17)
-
-    androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
-
-    jvm("desktop")
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        nodejs()
-        binaries.executable()
+    android {
+        namespace = "com.melih.kmptemplate.core.shared.network"
     }
 
     sourceSets {
@@ -64,26 +41,5 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.jetbrains.kotlin.test)
         }
-    }
-}
-
-tasks.withType<KotlinCompile>().all {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
-    }
-}
-
-android {
-    namespace = "com.melih.kmptemplate.core.shared.network"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    kotlin {
-        jvmToolchain(17)
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
     }
 }

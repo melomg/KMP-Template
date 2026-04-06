@@ -1,25 +1,14 @@
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.kmptemplate.kotlinMultiplatform.library)
     alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
-    jvmToolchain(17)
-
-    jvm("desktop")
-
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        nodejs()
-        binaries.executable()
+    android {
+        namespace = "com.melih.kmptemplate.core.shared.model"
     }
 
     sourceSets {
@@ -29,6 +18,7 @@ kotlin {
     }
 }
 
+// TODO: check if necessary
 tasks.withType<KotlinCompile>().all {
     compilerOptions {
         jvmTarget.set(JvmTarget.JVM_17)
