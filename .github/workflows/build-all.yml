@@ -80,14 +80,14 @@ jobs:
         run: ./gradlew testDebugUnitTest
 
       - name: Upload build outputs (APKs)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build-outputs
           path: app/androidApp/build/outputs
 
       - name: Upload build reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build-reports
           path: app/androidApp/build/reports
@@ -139,7 +139,7 @@ jobs:
         run: ./gradlew :app:desktopApp:packageUberJarForCurrentOS --stacktrace
 
       - name: Upload Desktop Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: desktop-app
           path: app/desktopApp/build/compose/jars
@@ -170,7 +170,7 @@ jobs:
         run: ./gradlew wasmJsBrowserDistribution --stacktrace
 
       - name: Upload Wasm Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: wasm-app
           path: app/wasmApp/build/dist/wasmJs/productionExecutable
