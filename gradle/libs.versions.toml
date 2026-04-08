@@ -28,7 +28,7 @@ coil = "3.3.0"
 firebase = "34.11.0"
 junit = "4.13.2"
 koin = "4.1.1"
-ktor = "3.4.0"
+ktor = "3.4.2"
 detekt = "1.23.8"
 buildkonfig = "0.17.1"
 # build logic
