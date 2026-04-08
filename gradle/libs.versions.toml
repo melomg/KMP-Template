@@ -32,7 +32,7 @@ ktor = "3.4.2"
 detekt = "1.23.8"
 buildkonfig = "0.17.1"
 # build logic
-androidx-lint-gradle = "1.0.0-alpha05"
+androidx-lint-gradle = "1.0.0-alpha06"
 ksp = "2.3.6"
 androidTools = "32.0.0"
 
