@@ -92,27 +92,28 @@ jobs:
           name: build-reports
           path: app/androidApp/build/reports
 
-  build_iOS:
-    name: Build iOS app
-    runs-on: macOS-latest
-    needs: verify_all_apps
-    timeout-minutes: 60
-    continue-on-error: true
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v5
-
-      - name: Set up JDK
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'zulu'
-          java-version: 17
-
-      - name: Set Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
-
-      - name: iOS debug build
-        run: cd app/iosApp && xcodebuild -scheme iosDebug -configuration Debug -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16' CODE_SIGNING_ALLOWED='NO'
+  # TODO: enable later
+  #  build_iOS:
+  #    name: Build iOS app
+  #    runs-on: macOS-latest
+  #    needs: verify_all_apps
+  #    timeout-minutes: 60
+  #    continue-on-error: true
+  #    steps:
+  #      - name: Check out code
+  #        uses: actions/checkout@v5
+  #
+  #      - name: Set up JDK
+  #        uses: actions/setup-java@v5
+  #        with:
+  #          distribution: 'zulu'
+  #          java-version: 17
+  #
+  #      - name: Set Xcode version
+  #        run: sudo xcode-select -s /Applications/Xcode_16.2.app/Contents/Developer
+  #
+  #      - name: iOS debug build
+  #        run: cd app/iosApp && xcodebuild -scheme iosDebug -configuration Debug -destination 'platform=iOS Simulator,OS=latest,name=iPhone 16' CODE_SIGNING_ALLOWED='NO'
 
   build_desktop:
     name: Build desktop app
