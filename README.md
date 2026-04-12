@@ -84,8 +84,8 @@ The KMP template tries to help you get started with these points:
       - [x] Error reporting
         - [ ] Analytics
         - [ ] Tracing
+    - [x] Build conventions
     - [ ] Benchmarking
-    - [ ] Build conventions
     - [ ] Flavours
     - [ ] Mocks
     - [ ] Test fixtures

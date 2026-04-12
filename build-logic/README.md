@@ -27,9 +27,7 @@ setup.
 Current list of convention plugins:
 
 - [`kmptemplate.android.application`](convention/src/main/kotlin/AndroidApplicationConventionPlugin.kt),
-  [`kmptemplate.android.library`](convention/src/main/kotlin/AndroidLibraryConventionPlugin.kt),
-  [`kmptemplate.android.test`](convention/src/main/kotlin/AndroidTestConventionPlugin.kt):
-  Configures common Android and Kotlin options.
-- [`kmptemplate.android.application.compose`](convention/src/main/kotlin/AndroidApplicationComposeConventionPlugin.kt),
-  [`kmptemplate.android.library.compose`](convention/src/main/kotlin/AndroidLibraryComposeConventionPlugin.kt):
-  Configures Jetpack Compose options
+- [`kmptemplate.application.properties`](convention/src/main/kotlin/ApplicationPropertiesConventionPlugin.kt),
+  [`kmptemplate.kotlinMultiplatform.library`](convention/src/main/kotlin/KotlinMultiplatformLibraryConventionPlugin.kt),
+  [`kmptemplate-compose-multiplatform`](convention/src/main/kotlin/ComposeMultiplatformConventionPlugin.kt),
+  [`kmptemplate.android.lint`](convention/src/main/kotlin/AndroidLintConventionPlugin.kt)
