@@ -19,7 +19,6 @@ kotlin {
 
     android {
         namespace = "com.melih.kmptemplate.shared"
-        androidResources.enable = true
     }
 
     listOf(
@@ -61,6 +60,7 @@ kotlin {
             api(projects.core.shared.logging)
             api(projects.core.shared.model)
             api(projects.core.shared.network)
+            api(projects.core.shared.resources)
             api(projects.core.shared.threading)
 
             implementation(libs.jetbrains.compose.runtime)
@@ -86,10 +86,6 @@ kotlin {
 dependencies {
     androidRuntimeClasspath(libs.jetbrains.compose.uiTooling)
 }
-
- compose.resources {
-    packageOfResClass = "com.melih.kmptemplate.shared.resources"
- }
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
