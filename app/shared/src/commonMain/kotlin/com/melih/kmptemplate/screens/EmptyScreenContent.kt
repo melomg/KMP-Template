@@ -5,8 +5,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.melih.kmptemplate.shared.resources.Res
-import com.melih.kmptemplate.shared.resources.no_data_available
+import com.melih.kmptemplate.core.shared.resources.Res
+import com.melih.kmptemplate.core.shared.resources.no_data_available
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 

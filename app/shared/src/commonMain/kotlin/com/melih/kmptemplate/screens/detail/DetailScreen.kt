@@ -36,17 +36,17 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.melih.kmptemplate.core.shared.model.MuseumObject
+import com.melih.kmptemplate.core.shared.resources.Res
+import com.melih.kmptemplate.core.shared.resources.back
+import com.melih.kmptemplate.core.shared.resources.label_artist
+import com.melih.kmptemplate.core.shared.resources.label_credits
+import com.melih.kmptemplate.core.shared.resources.label_date
+import com.melih.kmptemplate.core.shared.resources.label_department
+import com.melih.kmptemplate.core.shared.resources.label_dimensions
+import com.melih.kmptemplate.core.shared.resources.label_medium
+import com.melih.kmptemplate.core.shared.resources.label_repository
+import com.melih.kmptemplate.core.shared.resources.label_title
 import com.melih.kmptemplate.screens.EmptyScreenContent
-import com.melih.kmptemplate.shared.resources.Res
-import com.melih.kmptemplate.shared.resources.back
-import com.melih.kmptemplate.shared.resources.label_artist
-import com.melih.kmptemplate.shared.resources.label_credits
-import com.melih.kmptemplate.shared.resources.label_date
-import com.melih.kmptemplate.shared.resources.label_department
-import com.melih.kmptemplate.shared.resources.label_dimensions
-import com.melih.kmptemplate.shared.resources.label_medium
-import com.melih.kmptemplate.shared.resources.label_repository
-import com.melih.kmptemplate.shared.resources.label_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
