@@ -30,7 +30,7 @@ junit = "4.13.2"
 koin = "4.1.1"
 ktor = "3.4.2"
 detekt = "1.23.8"
-buildkonfig = "0.17.1"
+buildkonfig = "0.18.0"
 # build logic
 androidx-lint-gradle = "1.0.0-alpha06"
 ksp = "2.3.6"
