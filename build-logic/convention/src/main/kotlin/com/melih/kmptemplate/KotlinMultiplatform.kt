@@ -13,6 +13,13 @@ internal fun Project.configureKotlinMultiplatform(
 ) = extension.apply {
     jvmToolchain(17)
 
+    compilerOptions {
+        // Enable experimental coroutines APIs, including Flow
+        freeCompilerArgs.add("-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
+        // Enable experimental expect actual classes
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+
     android {
         compileSdk = libs.findVersion("android-compileSdk").get().toString().toInt()
         minSdk = libs.findVersion("android-minSdk").get().toString().toInt()
