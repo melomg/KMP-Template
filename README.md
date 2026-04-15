@@ -94,6 +94,7 @@ The KMP template tries to help you get started with these points:
     - [ ] Feature flags (local & remote)
     - [ ] Deep linking
     - [ ] Push notifications
+    - [ ] Permissions
     - [ ] TimeProvider
     - [ ] Local Formatters
     - [ ] Coroutine Dispatchers
@@ -106,7 +107,7 @@ The KMP template tries to help you get started with these points:
     - [ ] Force updates
 
 - [ ] UI
-    - [ ] Design system
+    - [x] Design system
     - [ ] Gallery App
     - [ ] Navigation
     - [ ] Baseline profiles
