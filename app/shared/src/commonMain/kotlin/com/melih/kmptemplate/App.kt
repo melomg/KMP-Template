@@ -21,21 +21,23 @@ data class DetailDestination(val objectId: Int)
 @Composable
 @Preview
 fun App() {
-    AppTheme {
-        val navController: NavHostController = rememberNavController()
-        NavHost(navController = navController, startDestination = ListDestination) {
-            composable<ListDestination> {
-                ListScreen(navigateToDetails = { objectId ->
-                    navController.navigate(DetailDestination(objectId))
-                })
-            }
-            composable<DetailDestination> { backStackEntry ->
-                DetailScreen(
-                    objectId = backStackEntry.toRoute<DetailDestination>().objectId,
-                    navigateBack = {
-                        navController.popBackStack()
-                    }
-                )
+    AppEnvironment {
+        AppTheme {
+            val navController: NavHostController = rememberNavController()
+            NavHost(navController = navController, startDestination = ListDestination) {
+                composable<ListDestination> {
+                    ListScreen(navigateToDetails = { objectId ->
+                        navController.navigate(DetailDestination(objectId))
+                    })
+                }
+                composable<DetailDestination> { backStackEntry ->
+                    DetailScreen(
+                        objectId = backStackEntry.toRoute<DetailDestination>().objectId,
+                        navigateBack = {
+                            navController.popBackStack()
+                        }
+                    )
+                }
             }
         }
     }

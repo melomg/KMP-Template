@@ -108,17 +108,17 @@ The KMP template tries to help you get started with these points:
 
 - [ ] UI
     - [x] Design system
+    - [-] Dynamic theming → Won't be supported...
+    - [x] Status bar color changing: See [SystemAppearance](/core/shared/designsystem/src/commonMain/kotlin/com/melih/kmptemplate/core/shared/designsystem/internal/theme/Theme.kt)
+    - [ ] App settings with Resource Environment
     - [ ] Gallery App
     - [ ] Navigation
     - [ ] Baseline profiles
     - [ ] Compose compiler metrics
     - [ ] Previews
     - [ ] Network image loading: coil
-    - [ ] supportsDynamicTheming
-    - [ ] Status bar color changing
-    - [ ] App settings with Resource Environment (
       See: [Source 1](https://github.com/JetBrains/compose-multiplatform/pull/5239), [Source 2](https://github.com/JetBrains/compose-multiplatform/blob/master/components/resources/library/src/androidMain/kotlin/org/jetbrains/compose/resources/ResourceEnvironment.android.kt), [Source 3](https://youtrack.jetbrains.com/issue/CMP-4197) )
-        - [ ] l10n
+        - [x] l10n
         - [ ] i18n
     - [ ] Testing
         - [ ] UI Testing

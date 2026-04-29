@@ -2,6 +2,10 @@
 naming:
   FunctionNaming:
     ignoreAnnotated: [ 'Composable' ]
+  ObjectPropertyNaming:
+    active: true
+    # Suppressing ObjectPropertyName does not work, ignoring it in config level
+    excludes: ['**/LocalAppLocaleIso.wasmJs.kt']
 
 style:
   UnusedPrivateMember:
