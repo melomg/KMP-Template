@@ -57,7 +57,9 @@ kotlin {
         }
 
         commonMain.dependencies {
+            api(projects.core.shared.data)
             api(projects.core.shared.designsystem)
+            api(projects.core.shared.domain)
             api(projects.core.shared.logging)
             api(projects.core.shared.model)
             api(projects.core.shared.network)

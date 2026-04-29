@@ -1,0 +1,17 @@
+plugins {
+    alias(libs.plugins.kmptemplate.kotlinMultiplatform.library)
+    alias(libs.plugins.kotlinxSerialization)
+}
+
+kotlin {
+    android {
+        namespace = "com.melih.kmptemplate.core.shared.domain"
+    }
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(projects.core.shared.model)
+            implementation(projects.core.shared.threading)
+        }
+    }
+}

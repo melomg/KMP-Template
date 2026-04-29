@@ -1,11 +1,12 @@
-package com.melih.kmptemplate.data
+package com.melih.kmptemplate.core.shared.data.internal
 
 import com.melih.kmptemplate.core.shared.model.MuseumObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 
-interface MuseumStorage {
+internal interface MuseumStorage {
+
     suspend fun saveObjects(newObjects: List<MuseumObject>)
 
     fun getObjectById(objectId: Int): Flow<MuseumObject?>
@@ -13,7 +14,8 @@ interface MuseumStorage {
     fun getObjects(): Flow<List<MuseumObject>>
 }
 
-class InMemoryMuseumStorage : MuseumStorage {
+internal class InMemoryMuseumStorage : MuseumStorage {
+
     private val storedObjects = MutableStateFlow(emptyList<MuseumObject>())
 
     override suspend fun saveObjects(newObjects: List<MuseumObject>) {

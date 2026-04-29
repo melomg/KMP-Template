@@ -16,18 +16,18 @@ kotlin {
         val desktopMain by getting
 
         androidMain.dependencies {
-            implementation(libs.jetbrains.kotlinx.coroutines.android)
+            api(libs.jetbrains.kotlinx.coroutines.android)
         }
 
         desktopMain.dependencies {
-            implementation(libs.jetbrains.kotlinx.coroutines.swing)
+            api(libs.jetbrains.kotlinx.coroutines.swing)
         }
 
         commonMain.dependencies {
-            api(projects.core.shared.logging)
-            api(projects.core.shared.model)
+            implementation(projects.core.shared.logging)
+            implementation(projects.core.shared.model)
 
-            implementation(libs.jetbrains.kotlinx.coroutines.core)
+            api(libs.jetbrains.kotlinx.coroutines.core)
         }
     }
 }

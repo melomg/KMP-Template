@@ -1,7 +1,7 @@
 package com.melih.kmptemplate.core.shared.network.internal
 
 import com.melih.kmptemplate.core.shared.model.MuseumObject
-import com.melih.kmptemplate.core.shared.network.MuseumApi
+import com.melih.kmptemplate.core.shared.network.api.MuseumApi
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

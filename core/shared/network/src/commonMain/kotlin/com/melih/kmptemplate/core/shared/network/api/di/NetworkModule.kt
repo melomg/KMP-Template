@@ -1,9 +1,9 @@
-package com.melih.kmptemplate.core.shared.network.di
+package com.melih.kmptemplate.core.shared.network.api.di
 
 import com.melih.kmptemplate.core.shared.logging.Klog
 import com.melih.kmptemplate.core.shared.model.platform.Platform
-import com.melih.kmptemplate.core.shared.network.MoviesApi
-import com.melih.kmptemplate.core.shared.network.MuseumApi
+import com.melih.kmptemplate.core.shared.network.api.MoviesApi
+import com.melih.kmptemplate.core.shared.network.api.MuseumApi
 import com.melih.kmptemplate.core.shared.network.internal.KtorMoviesApi
 import com.melih.kmptemplate.core.shared.network.internal.KtorMuseumApi
 import io.ktor.client.HttpClient

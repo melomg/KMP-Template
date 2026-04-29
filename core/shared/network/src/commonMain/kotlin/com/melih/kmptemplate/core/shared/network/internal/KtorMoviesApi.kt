@@ -1,7 +1,7 @@
 package com.melih.kmptemplate.core.shared.network.internal
 
 import com.melih.kmptemplate.core.shared.model.Movies
-import com.melih.kmptemplate.core.shared.network.MoviesApi
+import com.melih.kmptemplate.core.shared.network.api.MoviesApi
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
