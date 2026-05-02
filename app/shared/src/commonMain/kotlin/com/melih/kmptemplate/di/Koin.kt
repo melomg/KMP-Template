@@ -6,11 +6,9 @@ import com.melih.kmptemplate.core.shared.logging.Klog
 import com.melih.kmptemplate.core.shared.logging.getKloggers
 import com.melih.kmptemplate.core.shared.model.platform.BuildType
 import com.melih.kmptemplate.core.shared.model.platform.Platform
+import com.melih.kmptemplate.features.museum.api.di.museumFeatureModule
 import com.melih.kmptemplate.platform.platformVersionName
-import com.melih.kmptemplate.screens.detail.DetailViewModel
-import com.melih.kmptemplate.screens.list.ListViewModel
 import org.koin.core.context.startKoin
-import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
 private val platformModule = module {
@@ -26,17 +24,12 @@ private val platformModule = module {
     }
 }
 
-private val viewModelModule = module {
-    factoryOf(::ListViewModel)
-    factoryOf(::DetailViewModel)
-}
-
 fun initKoin() {
     val koinApp = startKoin {
         modules(
             platformModule,
             dataModule,
-            viewModelModule,
+            museumFeatureModule,
         )
     }
 

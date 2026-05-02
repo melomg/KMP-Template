@@ -1,4 +1,4 @@
-package com.melih.kmptemplate.screens.detail
+package com.melih.kmptemplate.features.museum.internal.detail
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
@@ -46,12 +46,12 @@ import com.melih.kmptemplate.core.shared.resources.label_dimensions
 import com.melih.kmptemplate.core.shared.resources.label_medium
 import com.melih.kmptemplate.core.shared.resources.label_repository
 import com.melih.kmptemplate.core.shared.resources.label_title
-import com.melih.kmptemplate.screens.EmptyScreenContent
+import com.melih.kmptemplate.features.museum.internal.EmptyScreenContent
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun DetailScreen(
+internal fun DetailScreen(
     objectId: Int,
     navigateBack: () -> Unit,
 ) {

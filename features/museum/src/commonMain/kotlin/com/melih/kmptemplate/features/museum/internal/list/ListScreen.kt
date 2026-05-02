@@ -1,4 +1,4 @@
-package com.melih.kmptemplate.screens.list
+package com.melih.kmptemplate.features.museum.internal.list
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
@@ -27,11 +27,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.melih.kmptemplate.core.shared.model.MuseumObject
-import com.melih.kmptemplate.screens.EmptyScreenContent
+import com.melih.kmptemplate.features.museum.internal.EmptyScreenContent
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun ListScreen(
+internal fun ListScreen(
     navigateToDetails: (objectId: Int) -> Unit
 ) {
     val viewModel = koinViewModel<ListViewModel>()

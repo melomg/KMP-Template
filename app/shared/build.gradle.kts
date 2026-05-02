@@ -65,6 +65,7 @@ kotlin {
             api(projects.core.shared.network)
             api(projects.core.shared.resources)
             api(projects.core.shared.threading)
+            api(projects.features.museum)
 
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.foundation)

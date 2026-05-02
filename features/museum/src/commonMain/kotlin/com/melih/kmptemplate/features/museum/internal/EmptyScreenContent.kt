@@ -1,4 +1,4 @@
-package com.melih.kmptemplate.screens
+package com.melih.kmptemplate.features.museum.internal
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
@@ -12,7 +12,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
-fun EmptyScreenContent(
+internal fun EmptyScreenContent(
     modifier: Modifier = Modifier,
 ) {
     Box(
