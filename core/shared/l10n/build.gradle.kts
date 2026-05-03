@@ -6,7 +6,7 @@ plugins {
 
 kotlin {
     android {
-        namespace = "com.melih.kmptemplate.core.shared.resources"
+        namespace = "com.melih.kmptemplate.core.shared.l10n"
         androidResources.enable = true
     }
 
@@ -20,7 +20,7 @@ kotlin {
 
 compose.resources {
     publicResClass = true
-    packageOfResClass = "com.melih.kmptemplate.core.shared.resources"
+    packageOfResClass = "com.melih.kmptemplate.core.shared.l10n"
     generateResClass = always
 }
 

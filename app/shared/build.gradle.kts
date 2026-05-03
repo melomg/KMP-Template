@@ -60,10 +60,10 @@ kotlin {
             api(projects.core.shared.data)
             api(projects.core.shared.designsystem)
             api(projects.core.shared.domain)
+            api(projects.core.shared.l10n)
             api(projects.core.shared.logging)
             api(projects.core.shared.model)
             api(projects.core.shared.network)
-            api(projects.core.shared.resources)
             api(projects.core.shared.threading)
             api(projects.features.museum)
 

@@ -14,8 +14,8 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.shared.designsystem)
             implementation(projects.core.shared.domain)
+            implementation(projects.core.shared.l10n)
             implementation(projects.core.shared.model)
-            implementation(projects.core.shared.resources)
             implementation(projects.core.shared.threading)
 
             implementation(libs.jetbrains.compose.runtime)
