@@ -12,15 +12,17 @@ plugins {
 
 dependencies {
     implementation(projects.app.shared)
+    implementation(project.dependencies.platform(libs.firebase.bom))
+
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.activity.compose)
     implementation(libs.jetbrains.compose.foundation)
 
-    implementation(project.dependencies.platform(libs.firebase.bom))
-
     testImplementation(libs.jetbrains.kotlin.test)
-    testImplementation(libs.jetbrains.kotlin.test.junit5)
+    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.junit.jupiter.params)
     testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.jupiter.launcher)
 }
 
 android {

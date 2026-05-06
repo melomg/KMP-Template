@@ -3,6 +3,8 @@ package com.melih.kmptemplate
 import com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtensionAware
+import org.gradle.api.tasks.testing.Test
+import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -24,6 +26,14 @@ internal fun Project.configureKotlinMultiplatform(
         compileSdk = libs.findVersion("android-compileSdk").get().toString().toInt()
         minSdk = libs.findVersion("android-minSdk").get().toString().toInt()
         compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+        withJava() // enable java compilation support
+        withHostTest {
+            isIncludeAndroidResources = true
+        }
+        withDeviceTest {
+            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            execution = "HOST"
+        }
     }
 
     jvm("desktop")
@@ -49,11 +59,22 @@ internal fun Project.configureKotlinMultiplatform(
             }
         }
 
-        androidUnitTest.dependencies {
+        getByName("androidHostTest").dependencies {
+            implementation(project(":core:android:threading-test-util"))
             implementation(libs.findLibrary("jetbrains.kotlinx.coroutines.core").get())
             implementation(libs.findLibrary("jetbrains.kotlin.test").get())
-            implementation(libs.findLibrary("jetbrains.kotlin.test.junit5").get())
+            implementation(libs.findLibrary("junit.jupiter.api").get())
+            implementation(libs.findLibrary("junit.jupiter.params").get())
+            implementation(libs.findLibrary("junit.jupiter.params").get())
             runtimeOnly(libs.findLibrary("junit.jupiter.engine").get())
+            runtimeOnly(libs.findLibrary("junit.jupiter.launcher").get())
+        }
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+        testLogging {
+            events("passed", "skipped", "failed")
         }
     }
 }

@@ -15,7 +15,7 @@ class ApplicationTest {
             module()
         }
         val response = client.get("/")
-        assertEquals(HttpStatusCode.Companion.OK, response.status)
+        assertEquals(HttpStatusCode.OK, response.status)
         assertEquals("Ktor", response.bodyAsText())
     }
 }

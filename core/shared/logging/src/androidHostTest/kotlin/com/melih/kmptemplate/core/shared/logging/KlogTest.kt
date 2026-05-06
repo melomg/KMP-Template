@@ -62,6 +62,7 @@ class KlogTest {
             .hasNoMoreMessages()
     }
 
+    @Suppress("RedundantInnerClassModifier")
     internal inner class ThisIsAReallyLongClassName {
         fun run() {
             Klog.debug { "Hello, world!" }
@@ -80,6 +81,7 @@ class KlogTest {
             .hasNoMoreMessages()
     }
 
+    @Suppress("ObjectLiteralToLambda")
     @Test
     fun anonymousClassTags() {
         val fakeKlogger = FakeKlogger()
@@ -97,12 +99,14 @@ class KlogTest {
             }
         }.run()
 
+        @Suppress("CanConvertToMultiDollarString")
         fakeKlogger.assertLog()
             .hasDebugLog("anonymousClassTags$1", "Hello, world!")
             .hasDebugLog("anonymousClassTags$1\$run$2", "Hello, world!")
             .hasNoMoreMessages()
     }
 
+    @Suppress("ObjectLiteralToLambda")
     @Test
     fun anonymousClassWithInnerSAMLambda() {
         val fakeKlogger = FakeKlogger()
@@ -122,6 +126,7 @@ class KlogTest {
             .hasNoMoreMessages()
     }
 
+    @Suppress("ObjectLiteralToLambda")
     @Test
     fun anonymousClassMarkerWithOuterSAMLambda() {
         val fakeKlogger = FakeKlogger()

@@ -12,8 +12,10 @@ kotlin {
     dependencies {
         api(projects.core.shared.threading)
         implementation(libs.jetbrains.kotlinx.coroutines.test)
-        implementation(libs.jetbrains.kotlin.test.junit5)
+        implementation(libs.junit.jupiter.api)
+        implementation(libs.junit.jupiter.params)
         runtimeOnly(libs.junit.jupiter.engine)
+        runtimeOnly(libs.junit.jupiter.launcher)
     }
 
     android {

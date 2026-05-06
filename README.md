@@ -85,6 +85,7 @@ The KMP template tries to help you get started with these points:
         - [ ] Analytics
         - [ ] Tracing
     - [x] Build conventions
+    - [x] ADRs
     - [ ] Benchmarking
     - [ ] Flavours
     - [ ] Mocks
@@ -148,7 +149,7 @@ Over the years, I found below resources helpful for modular design and my aim fo
 is to follow them as
 closely as possible;
 
-- [Android at scale @Square](https://www.droidcon.com/2019/11/15/android-at-scale-square/)
+- [Android at scale @Square](https://speakerdeck.com/vrallev/android-at-scale-at-square)
 - [Navigating through multi-module Jetpack Compose applications](https://proandroiddev.com/navigating-through-multi-module-jetpack-compose-applications-6c9a31fa12b6)
 - [Modularising Trendyol Android App for Build Efficiency](https://medium.com/trendyol-tech/modularising-trendyol-android-app-for-build-efficiency-94f6b79fc012)
 - [Herding Elephants](https://developer.squareup.com/blog/herding-elephants/)

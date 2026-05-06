@@ -44,6 +44,10 @@ kotlin {
             implementation(libs.ktor.client.cio)
         }
 
+        androidHostTest.dependencies {
+            implementation(libs.konsist)
+        }
+
         desktopMain.dependencies {
             implementation(libs.ktor.client.cio)
         }
@@ -89,10 +93,6 @@ kotlin {
 
 dependencies {
     androidRuntimeClasspath(libs.jetbrains.compose.uiTooling)
-}
-
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
 }
 
 buildkonfig {

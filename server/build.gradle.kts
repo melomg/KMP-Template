@@ -19,8 +19,11 @@ dependencies {
     implementation(libs.ktor.serverCore)
     implementation(libs.ktor.serverNetty)
     testImplementation(libs.ktor.serverTestHost)
-    testImplementation(libs.jetbrains.kotlin.test.junit5)
+    testImplementation(libs.jetbrains.kotlin.test)
+    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.junit.jupiter.params)
     testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.junit.jupiter.launcher)
 }
 
 tasks.withType<Test>().configureEach {

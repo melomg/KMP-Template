@@ -23,7 +23,3 @@ compose.resources {
     packageOfResClass = "com.melih.kmptemplate.core.shared.l10n"
     generateResClass = always
 }
-
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
-}
