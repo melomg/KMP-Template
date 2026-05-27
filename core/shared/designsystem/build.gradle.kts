@@ -16,6 +16,8 @@ kotlin {
         }
 
         commonMain.dependencies {
+            implementation(projects.core.shared.l10n)
+
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.foundation)
             implementation(libs.jetbrains.compose.material3)
@@ -26,4 +28,8 @@ kotlin {
             implementation(libs.jetbrains.lifecycle.runtimeCompose)
         }
     }
+}
+
+dependencies {
+    androidRuntimeClasspath(libs.jetbrains.compose.uiTooling)
 }

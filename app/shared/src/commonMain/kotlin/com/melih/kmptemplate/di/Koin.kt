@@ -7,6 +7,7 @@ import com.melih.kmptemplate.core.shared.logging.getKloggers
 import com.melih.kmptemplate.core.shared.model.platform.BuildType
 import com.melih.kmptemplate.core.shared.model.platform.Platform
 import com.melih.kmptemplate.features.museum.api.di.museumFeatureModule
+import com.melih.kmptemplate.features.settings.api.di.settingsFeatureModule
 import com.melih.kmptemplate.platform.platformVersionName
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
@@ -30,6 +31,7 @@ fun initKoin() {
             platformModule,
             dataModule,
             museumFeatureModule,
+            settingsFeatureModule,
         )
     }
 

@@ -7,16 +7,15 @@ plugins {
 
 kotlin {
     android {
-        namespace = "com.melih.kmptemplate.features.museum"
+        namespace = "com.melih.kmptemplate.features.settings"
     }
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.shared.designsystem)
-            implementation(projects.core.shared.domain)
-            implementation(projects.core.shared.l10n)
-            implementation(projects.core.shared.model)
-            implementation(projects.core.shared.threading)
+            api(projects.core.shared.designsystem)
+            api(projects.core.shared.model)
+            api(projects.core.shared.l10n)
+            api(projects.core.shared.threading)
 
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.foundation)

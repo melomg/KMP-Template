@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.melih.kmptemplate.core.shared.designsystem.api.theme.AppTheme
 import com.melih.kmptemplate.features.museum.api.MuseumListDestination
 import com.melih.kmptemplate.features.museum.api.museumDestinations
+import com.melih.kmptemplate.features.settings.api.settingsDestinations
 
 @Composable
 @Preview
@@ -17,6 +18,7 @@ fun App() {
             val navController: NavHostController = rememberNavController()
             NavHost(navController = navController, startDestination = MuseumListDestination) {
                 museumDestinations(navController)
+                settingsDestinations(navController)
             }
         }
     }

@@ -14,7 +14,6 @@ dependencies {
     implementation(projects.app.shared)
     implementation(project.dependencies.platform(libs.firebase.bom))
 
-    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.activity.compose)
     implementation(libs.jetbrains.compose.foundation)
 

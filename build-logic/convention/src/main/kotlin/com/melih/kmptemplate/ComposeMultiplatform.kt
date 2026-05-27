@@ -16,7 +16,6 @@ internal fun Project.configureComposeMultiplatform(
     sourceSets.apply {
         androidMain {
             dependencies {
-                implementation(libs.findLibrary("jetbrains-compose-uiToolingPreview").get())
                 implementation(libs.findLibrary("androidx.activity.compose").get())
             }
         }
