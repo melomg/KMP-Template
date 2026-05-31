@@ -17,13 +17,14 @@ kotlin {
             api(projects.core.shared.l10n)
             api(projects.core.shared.threading)
 
+            implementation(libs.bundles.nav3Common)
+
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.foundation)
             implementation(libs.jetbrains.compose.material3)
             implementation(libs.jetbrains.compose.ui)
             implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.uiToolingPreview)
-            implementation(libs.jetbrains.compose.navigation)
             implementation(libs.jetbrains.compose.material.icons.core)
             implementation(libs.jetbrains.lifecycle.runtimeCompose)
 

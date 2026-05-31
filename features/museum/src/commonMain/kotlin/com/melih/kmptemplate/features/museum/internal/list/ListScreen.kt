@@ -32,7 +32,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun ListScreen(
-    navigateToDetails: (objectId: Int) -> Unit
+    onMuseumDetailClicked: (objectId: Int) -> Unit
 ) {
     val viewModel = koinViewModel<ListViewModel>()
     val objects by viewModel.objects.collectAsStateWithLifecycle()
@@ -41,7 +41,7 @@ internal fun ListScreen(
         if (objectsAvailable) {
             ObjectGrid(
                 objects = objects,
-                onObjectClick = navigateToDetails,
+                onObjectClick = onMuseumDetailClicked,
             )
         } else {
             EmptyScreenContent(Modifier.fillMaxSize())

@@ -1,31 +1,31 @@
 package com.melih.kmptemplate.features.museum.api
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
-import androidx.navigation.toRoute
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 import com.melih.kmptemplate.features.museum.internal.detail.DetailScreen
 import com.melih.kmptemplate.features.museum.internal.list.ListScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
-object MuseumListDestination
+sealed interface MuseumDestination : NavKey
 
 @Serializable
-data class MuseumDetailDestination(val objectId: Int)
+object MuseumListDestination : MuseumDestination
 
-fun NavGraphBuilder.museumDestinations(navController: NavHostController) {
-    composable<MuseumListDestination> {
-        ListScreen(navigateToDetails = { objectId ->
-            navController.navigate(MuseumDetailDestination(objectId))
-        })
+@Serializable
+data class MuseumDetailDestination(val objectId: Int) : MuseumDestination
+
+fun EntryProviderScope<NavKey>.museumDestinations(
+    onMuseumDetailClicked: (objectId: Int) -> Unit,
+    onBackClicked: () -> Unit,
+) {
+    entry<MuseumListDestination> {
+        ListScreen(onMuseumDetailClicked = onMuseumDetailClicked)
     }
-    composable<MuseumDetailDestination> { backStackEntry ->
+    entry<MuseumDetailDestination> {
         DetailScreen(
-            objectId = backStackEntry.toRoute<MuseumDetailDestination>().objectId,
-            navigateBack = {
-                navController.popBackStack()
-            }
+            objectId = it.objectId,
+            navigateBack = onBackClicked,
         )
     }
 }

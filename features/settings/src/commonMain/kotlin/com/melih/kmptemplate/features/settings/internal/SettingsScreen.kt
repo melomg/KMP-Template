@@ -34,7 +34,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun SettingsScreen(
-    onNavigationBackClicked: () -> Unit,
+    onBackClicked: () -> Unit,
     onOpenSourceClicked: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>(),
@@ -46,7 +46,7 @@ internal fun SettingsScreen(
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopAppBar(
-                onNavigationBackClicked = onNavigationBackClicked,
+                onNavigationBackClicked = onBackClicked,
             )
         },
         modifier = modifier.fillMaxSize(),
