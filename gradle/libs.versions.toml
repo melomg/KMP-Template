@@ -19,6 +19,7 @@ kotlin = "2.3.20"
 kotlinx-coroutines = "1.10.2"
 # navigation
 jetbrains-nav3-ui = "1.0.0-alpha05"
+jetbrains-material3-adaptive-navigation-suite = "1.9.0-beta03"
 jetbrains-compose-multiplatform-adaptive = "1.3.0-alpha02"
 jetbrains-compose-multiplatform-lifecycle = "2.10.0-alpha05"
 jetbrains-compose-multiplatform-navigation3-browser = "0.2.0"
@@ -67,6 +68,7 @@ jetbrains-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.r
 jetbrains-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 # navigation
 nav3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "jetbrains-nav3-ui" }
+material3-adaptive-navigation-suite = { module = "org.jetbrains.compose.material3:material3-adaptive-navigation-suite", version.ref = "jetbrains-material3-adaptive-navigation-suite" }
 material3-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "jetbrains-compose-multiplatform-adaptive" }
 lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "jetbrains-compose-multiplatform-lifecycle" }
 navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "jetbrains-compose-multiplatform-navigation3-browser" }
@@ -114,6 +116,7 @@ androidx-lint-gradle = { module = "androidx.lint:lint-gradle", version.ref = "an
 [bundles]
 nav3Common = [
     "nav3-ui",
+    "material3-adaptive-navigation-suite",
     "material3-adaptiveNavigation3",
     "lifecycle-viewmodelNavigation3",
 ]

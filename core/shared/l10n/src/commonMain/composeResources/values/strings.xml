@@ -7,6 +7,7 @@
     <string name="no_data_available">No data available</string>
 
     <!-- Museum -->
+    <string name="museums_title">Museums</string>
     <string name="label_title">Title</string>
     <string name="label_artist">Artist</string>
     <string name="label_date">Date</string>

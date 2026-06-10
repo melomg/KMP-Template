@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
@@ -16,6 +17,7 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +32,7 @@ import com.melih.kmptemplate.core.shared.model.MuseumObject
 import com.melih.kmptemplate.features.museum.internal.EmptyScreenContent
 import org.koin.compose.viewmodel.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ListScreen(
     onMuseumDetailClicked: (objectId: Int) -> Unit
@@ -42,6 +45,7 @@ internal fun ListScreen(
             ObjectGrid(
                 objects = objects,
                 onObjectClick = onMuseumDetailClicked,
+                contentPadding = WindowInsets.safeDrawing.asPaddingValues(),
             )
         } else {
             EmptyScreenContent(Modifier.fillMaxSize())
@@ -54,11 +58,12 @@ private fun ObjectGrid(
     objects: List<MuseumObject>,
     onObjectClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
         modifier = modifier.fillMaxSize(),
-        contentPadding = WindowInsets.safeDrawing.asPaddingValues(),
+        contentPadding = contentPadding,
     ) {
         items(objects, key = { it.objectID }) { obj ->
             ObjectFrame(

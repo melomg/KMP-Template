@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -16,10 +18,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.melih.kmptemplate.core.shared.designsystem.api.theme.AppTheme
@@ -32,6 +37,7 @@ import com.melih.kmptemplate.core.shared.l10n.settings_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun SettingsScreen(
     onBackClicked: () -> Unit,
@@ -40,16 +46,19 @@ internal fun SettingsScreen(
     viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
     Scaffold(
         containerColor = Color.Transparent,
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         topBar = {
             SettingsTopAppBar(
                 onNavigationBackClicked = onBackClicked,
+                scrollBehavior = scrollBehavior,
             )
         },
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .windowInsetsPadding(WindowInsets.safeDrawing)
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
     ) { padding ->
         Column(
             modifier = Modifier
@@ -85,6 +94,7 @@ internal fun SettingsScreen(
 private fun SettingsTopAppBar(
     onNavigationBackClicked: () -> Unit,
     modifier: Modifier = Modifier,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
     TopAppBar(
         title = {
@@ -102,10 +112,12 @@ private fun SettingsTopAppBar(
                 )
             }
         },
+        scrollBehavior = scrollBehavior,
         modifier = modifier,
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Preview
 private fun TopAppBarPreviews() {
@@ -113,7 +125,7 @@ private fun TopAppBarPreviews() {
         Scaffold { padding ->
             SettingsTopAppBar(
                 onNavigationBackClicked = {},
-                modifier = Modifier.padding(padding)
+                modifier = Modifier.padding(padding),
             )
         }
     }

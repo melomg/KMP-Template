@@ -7,25 +7,67 @@ import androidx.navigation3.runtime.NavKey
  */
 internal class Navigator(val state: NavigationState) {
 
-    fun navigate(destination: NavKey) {
-        if (destination in state.backStacks.keys) {
-            // This is a top level destination, just switch to it.
-            state.topLevelDestination = destination
-        } else {
-            state.backStacks[state.topLevelDestination]?.add(destination)
+    /**
+     * Navigate to a navigation key
+     *
+     * @param key - the navigation key to navigate to.
+     */
+    fun navigate(key: NavKey) {
+        when (key) {
+            state.currentTopLevelKey -> clearSubStack()
+            in state.topLevelKeys -> goToTopLevel(key)
+            else -> goToKey(key)
         }
     }
 
+    /**
+     * Go back to the previous navigation key.
+     */
     fun goBack() {
-        val currentStack = state.backStacks[state.topLevelDestination]
-            ?: error("Stack for ${state.topLevelDestination} not found")
-        val currentDestination = currentStack.last()
-
-        // If we're at the base of the current destination, go back to the start destination stack.
-        if (currentDestination == state.topLevelDestination) {
-            state.topLevelDestination = state.startDestination
+        val stack = if (state.currentKey == state.currentTopLevelKey) {
+            state.topLevelStack
         } else {
-            currentStack.removeLastOrNull()
+            state.currentSubStack
+        }
+
+        if (stack.size > 1) {
+            stack.removeLast()
+        }
+    }
+
+    /**
+     * Go to a non-top level key.
+     */
+    private fun goToKey(key: NavKey) {
+        state.currentSubStack.apply {
+            // Remove it if it's already in the stack so it's added at the end.
+            remove(key)
+            add(key)
+        }
+    }
+
+    /**
+     * Go to a top level stack.
+     */
+    private fun goToTopLevel(key: NavKey) {
+        state.topLevelStack.apply {
+            if (key == state.startKey) {
+                // This is the start key. Clear the stack so it's added as the only key.
+                clear()
+            } else {
+                // Remove it if it's already in the stack so it's added at the end.
+                remove(key)
+            }
+            add(key)
+        }
+    }
+
+    /**
+     * Clearing all but the root key in the current substack.
+     */
+    private fun clearSubStack() {
+        state.currentSubStack.run {
+            if (size > 1) subList(1, size).clear()
         }
     }
 }

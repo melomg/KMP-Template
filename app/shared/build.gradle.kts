@@ -78,6 +78,9 @@ kotlin {
             implementation(libs.jetbrains.compose.foundation)
             implementation(libs.jetbrains.compose.material3)
             implementation(libs.jetbrains.compose.ui)
+            implementation(libs.jetbrains.compose.components.resources)
+            implementation(libs.jetbrains.compose.uiToolingPreview)
+            implementation(libs.jetbrains.compose.material.icons.core)
             implementation(libs.jetbrains.lifecycle.runtimeCompose)
 
             implementation(libs.coil.compose)

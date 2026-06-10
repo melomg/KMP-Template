@@ -5,12 +5,18 @@ naming:
   ObjectPropertyNaming:
     active: true
     # Suppressing ObjectPropertyName does not work, ignoring it in config level
-    excludes: ['**/LocalAppLocaleIso.wasmJs.kt']
+    excludes: [ '**/LocalAppLocaleIso.wasmJs.kt' ]
 
 style:
   UnusedPrivateMember:
     active: true
-    ignoreAnnotated: [ 'DevicePreviews', 'Preview' ]
+    ignoreAnnotated:
+      - 'Preview'
+      - 'PreviewScreenSizes'
+      - 'PreviewLightDark'
+      - 'PreviewFontScale'
+      - 'PreviewDynamicColors'
+      - 'DevicePreviews'
   MaxLineLength:
     excludes: [ "**/test/**","**/androidTest/**" ]
   MagicNumber:
