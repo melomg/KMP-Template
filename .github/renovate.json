@@ -2,20 +2,21 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-    "schedule:weekly"
-  ],
-  "baseBranchPatterns": [
-    "main"
+    ":dependencyDashboard"
   ],
   "branchPrefix": "renovate/",
-  "prConcurrentLimit": 1,
+  "prConcurrentLimit": 2,
   "prHourlyLimit": 1,
   "packageRules": [
     {
       "matchUpdateTypes": [
         "major"
       ],
-      "dependencyDashboardApproval": true
+      "dependencyDashboardApproval": true,
+      "description": "Schedule every weekend",
+      "schedule": [
+        "* * * * 0,6"
+      ]
     },
     {
       "matchUpdateTypes": [
@@ -24,7 +25,13 @@
       ],
       "matchCurrentVersion": "!/^0/",
       "automerge": true,
-      "automergeStrategy": "rebase"
+      "automergeStrategy": "rebase",
+      "description": "Schedule every weekend",
+      "schedule": [
+        "* * * * 0,6"
+      ]
     }
-  ]
+  ],
+  "semanticCommits": "enabled",
+  "timezone": "Europe/Amsterdam"
 }

@@ -163,6 +163,18 @@ closely as possible;
 
 # Validate renovate configuration
 
+Before validating configuration, check
+[Mend app](https://developer.mend.io/github/melomg/KMP-Template) to see renovate version that is
+being used.
+
+- To install the version mend app is using:
+
+```bash
+npx install -g renovate@{version}
+```
+
+- To validate renovate configuration:
+
 ```bash
 npx --yes --package renovate -- renovate-config-validator --strict
 ```
