@@ -6,8 +6,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
-import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
-import androidx.compose.material3.adaptive.navigation3.rememberListDetailSceneStrategy
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldState
@@ -29,17 +28,19 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
+import androidx.window.core.layout.WindowSizeClass
 import com.melih.kmptemplate.core.shared.l10n.Res
 import com.melih.kmptemplate.core.shared.l10n.museums_title
 import com.melih.kmptemplate.core.shared.l10n.settings_title
+import com.melih.kmptemplate.core.shared.navigation.api.Navigator
+import com.melih.kmptemplate.core.shared.navigation.api.rememberListDetailSceneStrategy
+import com.melih.kmptemplate.core.shared.navigation.api.rememberNavigationState
+import com.melih.kmptemplate.core.shared.navigation.api.toEntries
 import com.melih.kmptemplate.features.museum.api.MuseumDetailDestination
 import com.melih.kmptemplate.features.museum.api.MuseumListDestination
 import com.melih.kmptemplate.features.museum.api.museumDestinations
 import com.melih.kmptemplate.features.settings.api.SettingsDestination
 import com.melih.kmptemplate.features.settings.api.settingsDestinations
-import com.melih.kmptemplate.navigation.Navigator
-import com.melih.kmptemplate.navigation.rememberNavigationState
-import com.melih.kmptemplate.navigation.toEntries
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import org.jetbrains.compose.resources.StringResource
@@ -88,12 +89,12 @@ internal fun AppNavDisplay(
     val navigator = remember { Navigator(navigationState) }
     val entryProvider = rememberEntryProvider(navigator)
 
-    val adaptiveInfo = currentWindowAdaptiveInfo(supportLargeAndXLargeWidth = true)
+    val adaptiveInfo = currentWindowAdaptiveInfoV2()
     val customNavSuiteType = NavigationSuiteScaffoldDefaults.navigationSuiteType(adaptiveInfo)
 
     var shouldShowNavBar by remember { mutableStateOf(true) }
     val nestedScrollConnection = rememberNestedScrollConnection(
-        customNavSuiteType = customNavSuiteType,
+        windowSizeClass = adaptiveInfo.windowSizeClass,
         shouldShowNavBar = shouldShowNavBar,
         onShowNavBarChange = { shouldShowNavBar = it },
     )
@@ -129,7 +130,7 @@ internal fun AppNavDisplay(
         val listDetailStrategy = rememberListDetailSceneStrategy<NavKey>()
         NavDisplay(
             entries = navigationState.toEntries(entryProvider),
-            sceneStrategy = listDetailStrategy,
+            sceneStrategies = listOf(listDetailStrategy),
             onBack = { navigator.goBack() },
         )
     }
@@ -165,18 +166,19 @@ private fun rememberNavigationSuiteScaffoldState(
 
 @Composable
 private fun rememberNestedScrollConnection(
-    customNavSuiteType: NavigationSuiteType,
+    windowSizeClass: WindowSizeClass,
     shouldShowNavBar: Boolean,
     onShowNavBarChange: (Boolean) -> Unit,
-): NestedScrollConnection = remember(customNavSuiteType, shouldShowNavBar) {
+): NestedScrollConnection = remember(windowSizeClass, shouldShowNavBar) {
     object : NestedScrollConnection {
         private val SCROLL_THRESHOLD = 10f
 
         override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-            val isLandscapePhone =
-                customNavSuiteType == NavigationSuiteType.ShortNavigationBarMedium
-            // Only change visibility of nav bar in phone landscape mode
-            if (isLandscapePhone) {
+            val isHeightCompact = !windowSizeClass.isHeightAtLeastBreakpoint(
+                WindowSizeClass.HEIGHT_DP_MEDIUM_LOWER_BOUND
+            )
+            // Only change visibility of nav bar if height is compact
+            if (isHeightCompact) {
                 if (available.y < -SCROLL_THRESHOLD && shouldShowNavBar) {
                     onShowNavBarChange(false)
                 } else if (available.y > SCROLL_THRESHOLD && !shouldShowNavBar) {
@@ -191,15 +193,7 @@ private fun rememberNestedScrollConnection(
 @Composable
 private fun rememberEntryProvider(navigator: Navigator) = remember(navigator) {
     entryProvider {
-        museumDestinations(
-            onMuseumDetailClicked = { objectId ->
-                navigator.navigate(MuseumDetailDestination(objectId))
-            },
-            onBackClicked = { navigator.goBack() },
-        )
-        settingsDestinations(
-            onOpenSourceClicked = { TODO("Not implemented yet!") },
-            onBackClicked = { navigator.goBack() },
-        )
+        museumDestinations(navigator)
+        settingsDestinations(navigator)
     }
 }

@@ -1,4 +1,4 @@
-package com.melih.kmptemplate.navigation
+package com.melih.kmptemplate.core.shared.navigation.api
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -21,7 +21,7 @@ import androidx.savedstate.serialization.SavedStateConfiguration.Companion.DEFAU
  * Create a navigation state that persists config changes and process death.
  */
 @Composable
-internal fun rememberNavigationState(
+fun rememberNavigationState(
     startKey: NavKey,
     topLevelKeys: Set<NavKey>,
     configuration: SavedStateConfiguration = DEFAULT,

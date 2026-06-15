@@ -16,9 +16,8 @@ kotlin {
             implementation(projects.core.shared.domain)
             implementation(projects.core.shared.l10n)
             implementation(projects.core.shared.model)
+            implementation(projects.core.shared.navigation)
             implementation(projects.core.shared.threading)
-
-            implementation(libs.bundles.nav3Common)
 
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.foundation)

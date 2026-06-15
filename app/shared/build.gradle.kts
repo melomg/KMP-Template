@@ -22,7 +22,6 @@ kotlin {
     }
 
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -67,12 +66,11 @@ kotlin {
             api(projects.core.shared.l10n)
             api(projects.core.shared.logging)
             api(projects.core.shared.model)
+            api(projects.core.shared.navigation)
             api(projects.core.shared.network)
             api(projects.core.shared.threading)
             api(projects.features.museum)
             api(projects.features.settings)
-
-            implementation(libs.bundles.nav3Common)
 
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.foundation)

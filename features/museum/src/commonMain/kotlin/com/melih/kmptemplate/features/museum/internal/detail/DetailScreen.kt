@@ -3,11 +3,8 @@ package com.melih.kmptemplate.features.museum.internal.detail
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,7 +30,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -59,14 +55,14 @@ import org.koin.compose.viewmodel.koinViewModel
 @Composable
 internal fun DetailScreen(
     objectId: Int,
-    navigateBack: () -> Unit,
+    onBackClicked: () -> Unit,
 ) {
     val viewModel = koinViewModel<DetailViewModel>()
 
     val obj by viewModel.getObject(objectId).collectAsStateWithLifecycle(initialValue = null)
     AnimatedContent(obj != null) { objectAvailable ->
         if (objectAvailable) {
-            ObjectDetails(obj!!, onBackClick = navigateBack)
+            ObjectDetails(obj!!, onBackClick = onBackClicked)
         } else {
             EmptyScreenContent(Modifier.fillMaxSize())
         }

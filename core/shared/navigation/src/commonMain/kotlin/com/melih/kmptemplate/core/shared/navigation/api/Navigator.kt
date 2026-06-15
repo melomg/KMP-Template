@@ -1,11 +1,11 @@
-package com.melih.kmptemplate.navigation
+package com.melih.kmptemplate.core.shared.navigation.api
 
 import androidx.navigation3.runtime.NavKey
 
 /**
  * Handles navigation events (forward and back) by updating the navigation state.
  */
-internal class Navigator(val state: NavigationState) {
+class Navigator(val state: NavigationState) {
 
     /**
      * Navigate to a navigation key
