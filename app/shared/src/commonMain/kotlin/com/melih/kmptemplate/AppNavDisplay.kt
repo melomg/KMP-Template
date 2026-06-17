@@ -14,6 +14,7 @@ import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.material3.adaptive.navigationsuite.rememberNavigationSuiteScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -99,7 +100,9 @@ internal fun AppNavDisplay(
         onShowNavBarChange = { shouldShowNavBar = it },
     )
 
-    val isTopLevelScreen = navigationState.currentKey == navigationState.currentTopLevelKey
+    val isTopLevelScreen by remember {
+        derivedStateOf { navigationState.currentKey == navigationState.currentTopLevelKey }
+    }
     val navigationSuiteScaffoldState = rememberNavigationSuiteScaffoldState(
         customNavSuiteType = customNavSuiteType,
         isTopLevelScreen = isTopLevelScreen,
