@@ -6,7 +6,7 @@ This is a Kotlin Multiplatform template project targeting Android, iOS, Web, Des
 
 * `/app` is responsible for handling Compose Multiplatform application logic per each supported
   target.
-  See why each target has it's own
+  See why each target has its own
   folder [here](https://kotlinlang.org/docs/multiplatform/multiplatform-project-agp-9-migration.html).
   The subfolders:
     - `shared` is for application code that’s common for all targets.
@@ -138,7 +138,13 @@ The **KMP Template** is following
 the [Android official architecture guidance](https://developer.android.com/topic/architecture) as
 closely as possible.
 
-Some inspiring links;
+## Architecture decision records (ADRs)
+
+See the folder [here](docs/adr) for the recorded decisions. 
+[FitnesseTest.kt](app/shared/src/androidHostTest/kotlin/com/melih/kmptemplate/FitnesseTest.kt) 
+enforces those rules. When writing a new record, use [adr-skill](.agents/skills/adr-skill/SKILL.md).
+
+Some other inspiring links;
 
 - [Principles & Practice in Repository Layer](https://proandroiddev.com/principles-practice-in-repository-layer-444551b96cf8)
 - [Architecture Learning Journey in Now in Android](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md)
