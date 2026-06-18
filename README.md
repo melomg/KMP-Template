@@ -167,6 +167,12 @@ closely as possible;
 ./gradlew wrapper --gradle-version latest --distribution-type bin
 ```
 
+# Cleanup everything
+
+```bash
+./tools/cleanup.sh
+```
+
 # Validate renovate configuration
 
 Before validating configuration, check
