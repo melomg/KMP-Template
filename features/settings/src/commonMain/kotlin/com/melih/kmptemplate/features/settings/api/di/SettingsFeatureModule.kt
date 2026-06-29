@@ -1,9 +1,9 @@
 package com.melih.kmptemplate.features.settings.api.di
 
 import com.melih.kmptemplate.features.settings.internal.SettingsViewModel
-import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
+import org.koin.plugin.module.dsl.viewModel
 
 val settingsFeatureModule = module {
-    factoryOf(::SettingsViewModel)
+    viewModel<SettingsViewModel>()
 }
