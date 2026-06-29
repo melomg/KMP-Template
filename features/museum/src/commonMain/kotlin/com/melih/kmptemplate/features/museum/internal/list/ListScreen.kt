@@ -35,9 +35,9 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ListScreen(
-    onMuseumDetailClicked: (objectId: Int) -> Unit
+    onMuseumDetailClicked: (objectId: Int) -> Unit,
+    viewModel: ListViewModel = koinViewModel<ListViewModel>(),
 ) {
-    val viewModel = koinViewModel<ListViewModel>()
     val objects by viewModel.objects.collectAsStateWithLifecycle()
 
     AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->

@@ -5,7 +5,10 @@ import com.melih.kmptemplate.core.shared.domain.api.MuseumRepository
 import com.melih.kmptemplate.core.shared.model.MuseumObject
 import kotlinx.coroutines.flow.Flow
 
-internal class DetailViewModel(private val museumRepository: MuseumRepository) : ViewModel() {
-    fun getObject(objectId: Int): Flow<MuseumObject?> =
+internal class DetailViewModel(
+    private val objectId: Int,
+    private val museumRepository: MuseumRepository,
+) : ViewModel() {
+    fun getObject(): Flow<MuseumObject?> =
         museumRepository.getObjectById(objectId)
 }

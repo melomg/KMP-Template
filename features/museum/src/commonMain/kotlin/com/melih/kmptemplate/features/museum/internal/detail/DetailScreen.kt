@@ -51,15 +51,15 @@ import com.melih.kmptemplate.core.shared.model.MuseumObject
 import com.melih.kmptemplate.features.museum.internal.EmptyScreenContent
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun DetailScreen(
     objectId: Int,
     onBackClicked: () -> Unit,
+    viewModel: DetailViewModel = koinViewModel<DetailViewModel> { parametersOf(objectId) },
 ) {
-    val viewModel = koinViewModel<DetailViewModel>()
-
-    val obj by viewModel.getObject(objectId).collectAsStateWithLifecycle(initialValue = null)
+    val obj by viewModel.getObject().collectAsStateWithLifecycle(initialValue = null)
     AnimatedContent(obj != null) { objectAvailable ->
         if (objectAvailable) {
             ObjectDetails(obj!!, onBackClick = onBackClicked)

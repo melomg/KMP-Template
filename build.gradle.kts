@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.kotlinxSerialization) apply false
     alias(libs.plugins.detekt)
+    alias(libs.plugins.koinCompiler) apply false
     alias(libs.plugins.buildkonfig) apply false
     id("com.google.gms.google-services") version "4.4.4" apply false
 }

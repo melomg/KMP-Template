@@ -31,7 +31,8 @@ junit-jupiter = "6.1.0"
 # other
 coil = "3.4.0"
 firebase = "34.14.1"
-koin = "4.2.1"
+koin = "4.2.2"
+koin-plugin = "1.0.1"
 konsist = "0.17.3"
 ktor = "3.5.0"
 detekt = "1.23.8"
@@ -122,17 +123,21 @@ nav3Common = [
 ]
 
 [plugins]
+# Android
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 androidLint = { id = "com.android.lint", version.ref = "agp" }
+# Jetbrains
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "jetbrains-compose-hot-reload" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose-multiplatform" }
-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+# Other
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+koinCompiler = { id = "io.insert-koin.compiler.plugin", version.ref = "koin-plugin" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
 
 # Plugins defined by this project
