@@ -9,14 +9,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 internal class DefaultMuseumRepository(
+    applicationScope: CoroutineScope,
     private val museumApi: MuseumApi,
     private val museumStorage: MuseumStorage,
 ) : MuseumRepository {
 
-    private val scope = CoroutineScope(SupervisorJob())
-
     init {
-        scope.launch {
+        applicationScope.launch {
             refresh()
         }
     }

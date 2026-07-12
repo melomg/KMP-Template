@@ -6,6 +6,7 @@ import com.melih.kmptemplate.core.shared.data.internal.MuseumStorage
 import com.melih.kmptemplate.core.shared.domain.api.MuseumRepository
 import com.melih.kmptemplate.core.shared.network.api.MuseumApi
 import com.melih.kmptemplate.core.shared.network.api.di.networkModule
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val dataModule = module {
@@ -13,6 +14,6 @@ val dataModule = module {
 
     single<MuseumStorage> { InMemoryMuseumStorage() }
     single<MuseumRepository> {
-        DefaultMuseumRepository(get<MuseumApi>(), get())
+        DefaultMuseumRepository(get(named("applicationScope")), get<MuseumApi>(), get())
     }
 }
