@@ -5,8 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MuseumRepository {
 
-    fun initialize()
-
     suspend fun refresh()
 
     fun getObjects(): Flow<List<MuseumObject>>
