@@ -15,7 +15,7 @@ internal class DefaultMuseumRepository(
 
     private val scope = CoroutineScope(SupervisorJob())
 
-    override fun initialize() {
+    init {
         scope.launch {
             refresh()
         }
