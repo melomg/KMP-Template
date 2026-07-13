@@ -31,15 +31,15 @@ import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
 import androidx.window.core.layout.WindowSizeClass
 import com.melih.kmptemplate.core.shared.l10n.Res
-import com.melih.kmptemplate.core.shared.l10n.museums_title
+import com.melih.kmptemplate.core.shared.l10n.movies_title
 import com.melih.kmptemplate.core.shared.l10n.settings_title
 import com.melih.kmptemplate.core.shared.navigation.api.Navigator
 import com.melih.kmptemplate.core.shared.navigation.api.rememberListDetailSceneStrategy
 import com.melih.kmptemplate.core.shared.navigation.api.rememberNavigationState
 import com.melih.kmptemplate.core.shared.navigation.api.toEntries
-import com.melih.kmptemplate.features.museum.api.MuseumDetailDestination
-import com.melih.kmptemplate.features.museum.api.MuseumListDestination
-import com.melih.kmptemplate.features.museum.api.museumDestinations
+import com.melih.kmptemplate.features.movies.api.MovieDetailDestination
+import com.melih.kmptemplate.features.movies.api.MovieListDestination
+import com.melih.kmptemplate.features.movies.api.moviesDestinations
 import com.melih.kmptemplate.features.settings.api.SettingsDestination
 import com.melih.kmptemplate.features.settings.api.settingsDestinations
 import kotlinx.serialization.modules.SerializersModule
@@ -50,8 +50,8 @@ import org.jetbrains.compose.resources.stringResource
 private val configuration = SavedStateConfiguration {
     serializersModule = SerializersModule {
         polymorphic(NavKey::class) {
-            subclass(MuseumListDestination::class, MuseumListDestination.serializer())
-            subclass(MuseumDetailDestination::class, MuseumDetailDestination.serializer())
+            subclass(MovieListDestination::class, MovieListDestination.serializer())
+            subclass(MovieDetailDestination::class, MovieDetailDestination.serializer())
             subclass(SettingsDestination::class, SettingsDestination.serializer())
         }
     }
@@ -64,10 +64,10 @@ private data class NavBarItem(
 )
 
 private val TOP_LEVEL_DESTINATIONS: Map<NavKey, NavBarItem> = mapOf(
-    MuseumListDestination to NavBarItem(
-        label = Res.string.museums_title,
+    MovieListDestination to NavBarItem(
+        label = Res.string.movies_title,
         icon = Icons.Default.Home,
-        contentDescription = Res.string.museums_title
+        contentDescription = Res.string.movies_title
     ),
     SettingsDestination to NavBarItem(
         label = Res.string.settings_title,
@@ -82,7 +82,7 @@ internal fun AppNavDisplay(
     modifier: Modifier = Modifier,
 ) {
     val navigationState = rememberNavigationState(
-        startKey = MuseumListDestination,
+        startKey = MovieListDestination,
         topLevelKeys = TOP_LEVEL_DESTINATIONS.keys,
         configuration = configuration,
     )
@@ -196,7 +196,7 @@ private fun rememberNestedScrollConnection(
 @Composable
 private fun rememberEntryProvider(navigator: Navigator) = remember(navigator) {
     entryProvider {
-        museumDestinations(navigator)
+        moviesDestinations(navigator)
         settingsDestinations(navigator)
     }
 }

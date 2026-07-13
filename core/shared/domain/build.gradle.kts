@@ -10,7 +10,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.core.shared.model)
+            api(projects.core.shared.model)
             implementation(projects.core.shared.threading)
         }
     }

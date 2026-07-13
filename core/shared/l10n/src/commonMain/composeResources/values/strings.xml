@@ -6,16 +6,15 @@
     <string name="no">No</string>
     <string name="no_data_available">No data available</string>
 
-    <!-- Museum -->
-    <string name="museums_title">Museums</string>
-    <string name="label_title">Title</string>
-    <string name="label_artist">Artist</string>
-    <string name="label_date">Date</string>
-    <string name="label_dimensions">Dimensions</string>
-    <string name="label_medium">Medium</string>
-    <string name="label_department">Department</string>
-    <string name="label_repository">Repository</string>
-    <string name="label_credits">Credits</string>
+    <!-- Movies -->
+    <string name="movies_title">Movies</string>
+
+    <!-- Movie -->
+    <string name="movie_label_title">Title</string>
+    <string name="movie_label_date">Date</string>
+    <string name="movie_label_overview">Overview</string>
+    <string name="movie_label_rating">Rating</string>
+    <string name="movie_rating">%1$s &#40;%2$s&#41;</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>

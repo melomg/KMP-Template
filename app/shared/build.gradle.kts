@@ -69,7 +69,7 @@ kotlin {
             api(projects.core.shared.navigation)
             api(projects.core.shared.network)
             api(projects.core.shared.threading)
-            api(projects.features.museum)
+            api(projects.features.movies)
             api(projects.features.settings)
 
             implementation(libs.jetbrains.compose.runtime)

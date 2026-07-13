@@ -1,19 +1,21 @@
 package com.melih.kmptemplate.core.shared.data.api.di
 
-import com.melih.kmptemplate.core.shared.data.internal.DefaultMuseumRepository
-import com.melih.kmptemplate.core.shared.data.internal.InMemoryMuseumStorage
-import com.melih.kmptemplate.core.shared.data.internal.MuseumStorage
-import com.melih.kmptemplate.core.shared.domain.api.MuseumRepository
-import com.melih.kmptemplate.core.shared.network.api.MuseumApi
+import com.melih.kmptemplate.core.shared.data.internal.DefaultMoviesRepository
+import com.melih.kmptemplate.core.shared.data.internal.local.InMemoryMoviesDataSource
+import com.melih.kmptemplate.core.shared.data.internal.remote.RemoteMoviesDataSource
+import com.melih.kmptemplate.core.shared.domain.api.MoviesRepository
 import com.melih.kmptemplate.core.shared.network.api.di.networkModule
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import org.koin.plugin.module.dsl.factory
 
 val dataModule = module {
     includes(networkModule)
 
-    single<MuseumStorage> { InMemoryMuseumStorage() }
-    single<MuseumRepository> {
-        DefaultMuseumRepository(get(named("applicationScope")), get<MuseumApi>(), get())
+    single<MoviesRepository> {
+        DefaultMoviesRepository(get(named("applicationScope")), get(), get())
     }
+
+    factory<RemoteMoviesDataSource>()
+    factory<InMemoryMoviesDataSource>()
 }

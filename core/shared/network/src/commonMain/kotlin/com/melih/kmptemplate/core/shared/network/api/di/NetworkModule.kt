@@ -2,13 +2,13 @@ package com.melih.kmptemplate.core.shared.network.api.di
 
 import com.melih.kmptemplate.core.shared.logging.Klog
 import com.melih.kmptemplate.core.shared.model.platform.Platform
-import com.melih.kmptemplate.core.shared.network.api.MoviesApi
-import com.melih.kmptemplate.core.shared.network.api.MuseumApi
-import com.melih.kmptemplate.core.shared.network.internal.KtorMoviesApi
-import com.melih.kmptemplate.core.shared.network.internal.KtorMuseumApi
+import com.melih.kmptemplate.core.shared.network.BuildKonfig
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BearerTokens
+import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
@@ -21,9 +21,6 @@ import io.ktor.client.plugins.logging.Logger as KtorLogger
 
 @Suppress("ForbiddenComment")
 val networkModule = module {
-    single<MuseumApi> { KtorMuseumApi(get()) }
-    single<MoviesApi> { KtorMoviesApi(get()) }
-
     single {
         HttpClient {
             val json = Json(DefaultJson) { ignoreUnknownKeys = true }
@@ -37,6 +34,14 @@ val networkModule = module {
 
             install(HttpTimeout) {
                 requestTimeoutMillis = 5000
+            }
+
+            install(Auth) {
+                bearer {
+                    loadTokens {
+                        BearerTokens(BuildKonfig.TMDB_ACCESS_TOKEN, "")
+                    }
+                }
             }
 
             install(HttpRequestRetry) {
