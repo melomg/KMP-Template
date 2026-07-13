@@ -6,8 +6,8 @@ import com.melih.kmptemplate.core.shared.logging.Klog
 import com.melih.kmptemplate.core.shared.logging.getKloggers
 import com.melih.kmptemplate.core.shared.model.platform.BuildType
 import com.melih.kmptemplate.core.shared.model.platform.Platform
+import com.melih.kmptemplate.features.movies.api.di.moviesFeatureModule
 import com.melih.kmptemplate.core.shared.threading.DispatcherProvider
-import com.melih.kmptemplate.features.museum.api.di.museumFeatureModule
 import com.melih.kmptemplate.features.settings.api.di.settingsFeatureModule
 import com.melih.kmptemplate.platform.platformVersionName
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -49,7 +49,7 @@ fun initKoin() {
             appModule,
             platformModule,
             dataModule,
-            museumFeatureModule,
+            moviesFeatureModule,
             settingsFeatureModule,
         )
     }

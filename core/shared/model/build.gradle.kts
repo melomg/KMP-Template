@@ -10,12 +10,6 @@ kotlin {
     android {
         namespace = "com.melih.kmptemplate.core.shared.model"
     }
-
-    sourceSets {
-        commonMain.dependencies {
-            implementation(libs.ktor.serialization.kotlinx.json)
-        }
-    }
 }
 
 // TODO: check if necessary

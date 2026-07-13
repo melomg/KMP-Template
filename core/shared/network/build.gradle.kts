@@ -1,6 +1,10 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING
+
 plugins {
     alias(libs.plugins.kmptemplate.kotlinMultiplatform.library)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.buildkonfig)
 }
 
 kotlin {
@@ -33,6 +37,7 @@ kotlin {
 
             implementation(libs.koin.core)
 
+            implementation(libs.ktor.client.auth)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.logging)
             implementation(libs.ktor.client.content.negotiation)
@@ -41,5 +46,19 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.jetbrains.kotlin.test)
         }
+    }
+}
+
+val localProperties = gradleLocalProperties(rootDir, providers)
+
+buildkonfig {
+    packageName = "com.melih.kmptemplate.core.shared.network"
+
+    defaultConfigs {
+        buildConfigField(
+            STRING,
+            "TMDB_ACCESS_TOKEN",
+            localProperties.getProperty("tmdb.access.token") ?: ""
+        )
     }
 }
