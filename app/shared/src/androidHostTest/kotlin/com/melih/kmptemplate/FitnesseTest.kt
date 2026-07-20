@@ -4,12 +4,11 @@ import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.koscope.declarationsOf
 import com.lemonappdev.konsist.api.provider.modifier.KoVisibilityModifierProvider
 import com.lemonappdev.konsist.api.verify.assertFalse
-import org.junit.jupiter.api.Test
+import de.infix.testBalloon.framework.core.testSuite
 
-class FitnesseTest {
+val FitnesseTest by testSuite {
 
-    @Test
-    fun `Declarations in internal packages must NOT have public visibility`() {
+    test("Declarations in internal packages must NOT have public visibility") {
         Konsist
             .scopeFromPackage("..internal..")
             .declarationsOf<KoVisibilityModifierProvider>(includeNested = false)
@@ -18,8 +17,7 @@ class FitnesseTest {
             ) { it.hasPublicOrDefaultModifier }
     }
 
-    @Test
-    fun `Logs are NOT logged by Klog`() {
+    test("Logs are NOT logged by Klog") {
         val project = Konsist
             .scopeFromProduction()
 

@@ -59,19 +59,15 @@ internal fun Project.configureKotlinMultiplatform(
         }
 
         getByName("androidHostTest").dependencies {
-            implementation(project(":core:android:threading-test-util"))
+            implementation(project(":core:shared:testutil"))
             implementation(libs.findLibrary("jetbrains.kotlinx.coroutines.core").get())
             implementation(libs.findLibrary("jetbrains.kotlin.test").get())
-            implementation(libs.findLibrary("junit.jupiter.api").get())
-            implementation(libs.findLibrary("junit.jupiter.params").get())
-            implementation(libs.findLibrary("junit.jupiter.params").get())
-            runtimeOnly(libs.findLibrary("junit.jupiter.engine").get())
-            runtimeOnly(libs.findLibrary("junit.jupiter.launcher").get())
+            implementation(libs.findLibrary("testBalloon.framework.core").get())
         }
     }
 
-    tasks.withType<Test> {
-        useJUnitPlatform()
+    tasks.withType<Test>().configureEach {
+        failOnNoDiscoveredTests.set(true)
         testLogging {
             events("passed", "skipped", "failed")
         }

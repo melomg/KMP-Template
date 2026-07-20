@@ -18,10 +18,7 @@ dependencies {
     implementation(libs.jetbrains.compose.foundation)
 
     testImplementation(libs.jetbrains.kotlin.test)
-    testImplementation(libs.junit.jupiter.api)
-    testImplementation(libs.junit.jupiter.params)
-    testRuntimeOnly(libs.junit.jupiter.engine)
-    testRuntimeOnly(libs.junit.jupiter.launcher)
+    testImplementation(libs.testBalloon.framework.core)
 }
 
 android {
@@ -81,8 +78,4 @@ android {
             enableSplit = false
         }
     }
-}
-
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
 }

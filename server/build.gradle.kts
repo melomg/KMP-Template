@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
+    alias(libs.plugins.testBalloon)
     application
 }
 
@@ -20,12 +21,5 @@ dependencies {
     implementation(libs.ktor.serverNetty)
     testImplementation(libs.ktor.serverTestHost)
     testImplementation(libs.jetbrains.kotlin.test)
-    testImplementation(libs.junit.jupiter.api)
-    testImplementation(libs.junit.jupiter.params)
-    testRuntimeOnly(libs.junit.jupiter.engine)
-    testRuntimeOnly(libs.junit.jupiter.launcher)
-}
-
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
+    testImplementation(libs.testBalloon.framework.core)
 }

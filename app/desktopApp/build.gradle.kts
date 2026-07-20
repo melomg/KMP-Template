@@ -41,7 +41,3 @@ compose.desktop {
         }
     }
 }
-
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
-}

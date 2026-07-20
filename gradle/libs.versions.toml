@@ -26,8 +26,6 @@ jetbrains-compose-multiplatform-navigation3-browser = "1.1.0"
 # logging
 kermit-logging = "2.1.0"
 logback = "1.5.38"
-# junit
-junit-jupiter = "6.1.1"
 # other
 coil = "3.5.0"
 firebase = "34.16.0"
@@ -37,6 +35,7 @@ konsist = "0.17.3"
 ktor = "3.5.1"
 detekt = "1.23.8"
 buildkonfig = "0.22.0"
+testBalloon = "1.0.1-K2.4.0"
 # build logic
 androidx-lint-gradle = "1.0.0"
 ksp = "2.3.6"
@@ -73,11 +72,9 @@ material3-adaptive-navigation-suite = { module = "org.jetbrains.compose.material
 material3-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "jetbrains-compose-multiplatform-adaptive" }
 lifecycle-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "jetbrains-compose-multiplatform-lifecycle" }
 navigation3-browser = { module = "com.github.terrakok:navigation3-browser", version.ref = "jetbrains-compose-multiplatform-navigation3-browser" }
-# junit
-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
-junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit-jupiter" }
-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
-junit-jupiter-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-jupiter" }
+# testBalloon
+testBalloon-framework-core = { module = "de.infix.testBalloon:testBalloon-framework-core", version.ref = "testBalloon" }
+testBalloon-gradlePlugin = { module = "de.infix.testBalloon:testBalloon-gradle-plugin", version.ref = "testBalloon" }
 # coil
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
@@ -143,6 +140,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
 koinCompiler = { id = "io.insert-koin.compiler.plugin", version.ref = "koin-plugin" }
 buildkonfig = { id = "com.codingfeline.buildkonfig", version.ref = "buildkonfig" }
+testBalloon = { id = "de.infix.testBalloon", version.ref = "testBalloon" }
 
 # Plugins defined by this project
 kmptemplate-application-properties = { id = "kmptemplate.application.properties" }
