@@ -26,6 +26,7 @@ internal fun Project.configureKotlinMultiplatform(
         compileSdk = libs.findVersion("android-compileSdk").get().toString().toInt()
         minSdk = libs.findVersion("android-minSdk").get().toString().toInt()
         compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+        androidResources.enable = true
         withJava() // enable java compilation support
         withHostTest {
             isIncludeAndroidResources = true
