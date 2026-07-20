@@ -16,6 +16,6 @@ val dataModule = module {
         DefaultMoviesRepository(get(named("applicationScope")), get(), get())
     }
 
-    factory<RemoteMoviesDataSource>()
-    factory<InMemoryMoviesDataSource>()
+    factory { RemoteMoviesDataSource(get()) }
+    factory { InMemoryMoviesDataSource() }
 }

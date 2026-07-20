@@ -12,21 +12,17 @@ plugins {
     alias(libs.plugins.koinCompiler) apply false
     alias(libs.plugins.buildkonfig) apply false
     alias(libs.plugins.testBalloon) apply false
-    id("com.google.gms.google-services") version "4.4.4" apply false
+    id("com.google.gms.google-services") version "4.5.0" apply false
 }
 
-allprojects {
-    apply(plugin = "io.gitlab.arturbosch.detekt")
-
-    detekt {
-        toolVersion = "1.23.8"
-        parallel = true
-        buildUponDefaultConfig = true
-        config.setFrom(files("${rootProject.projectDir}/tools/detekt/detekt-config.yml"))
-        source.setFrom(getDetektSourcePaths())
-        ignoreFailures = false
-        ignoredBuildTypes = listOf("staging", "release")
-    }
+detekt {
+    toolVersion = libs.versions.detekt.get()
+    parallel = true
+    buildUponDefaultConfig = true
+    config.setFrom(files("${rootProject.projectDir}/tools/detekt/detekt-config.yml"))
+    source.setFrom(getDetektSourcePaths())
+    ignoreFailures = false
+    ignoredBuildTypes = listOf("staging", "release")
 }
 
 private fun getDetektSourcePaths(): List<File> {
