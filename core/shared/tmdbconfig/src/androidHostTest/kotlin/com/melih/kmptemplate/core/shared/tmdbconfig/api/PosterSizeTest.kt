@@ -1,23 +1,22 @@
 package com.melih.kmptemplate.core.shared.tmdbconfig.api
 
-import org.junit.jupiter.api.Test
+import com.melih.kmptemplate.core.shared.test.util.cartesianProduct
+import de.infix.testBalloon.framework.core.testSuite
 import kotlin.test.assertEquals
 
-internal class PosterSizeTest {
+val PosterSizeTest by testSuite {
 
-    @Test
-    fun `if value contains slash, then base url is added correctly`() {
-        assertEquals(
-            expected = "https://image.tmdb.org/t/p/w342/Test",
-            actual = "/Test".addBaseUrlForSize(PosterSize.W342),
-        )
-    }
+    val baseUrl = "https://image.tmdb.org/t/p/"
+    val values = listOf("/Test", "Test")
+    val testCases = PosterSize.entries.cartesianProduct(values)
 
-    @Test
-    fun `if value do NOT contains slash, then base url is added correctly`() {
-        assertEquals(
-            expected = "https://image.tmdb.org/t/p/w342/Test",
-            actual = "Test".addBaseUrlForSize(PosterSize.W342),
-        )
+    testCases.forEach { (posterSize, value) ->
+        test("base url is added correctly to '$value' with size '$posterSize'") {
+            val expectedUrl = "$baseUrl${posterSize.value}/Test"
+            assertEquals(
+                expected = expectedUrl,
+                actual = value.addBaseUrlForSize(posterSize),
+            )
+        }
     }
 }

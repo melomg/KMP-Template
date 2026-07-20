@@ -32,6 +32,8 @@ dependencies {
 
     compileOnly(libs.ksp.gradlePlugin)
     lintChecks(libs.androidx.lint.gradle)
+
+    compileOnly(libs.testBalloon.gradlePlugin)
 }
 
 tasks {

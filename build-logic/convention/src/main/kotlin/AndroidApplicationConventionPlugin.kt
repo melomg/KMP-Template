@@ -12,6 +12,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             with(pluginManager) {
                 apply(libs.findPlugin("androidApplication").get().get().pluginId)
                 apply(libs.findPlugin("kmptemplate-android-lint").get().get().pluginId)
+                apply(libs.findPlugin("testBalloon").get().get().pluginId)
             }
 
             extensions.configure<ApplicationExtension> {

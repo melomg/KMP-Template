@@ -15,6 +15,7 @@ class KotlinMultiplatformLibraryConventionPlugin : Plugin<Project> {
                 apply(libs.findPlugin("kotlinMultiplatform").get().get().pluginId)
                 apply(libs.findPlugin("kmptemplate-android-lint").get().get().pluginId)
                 apply(libs.findPlugin("koinCompiler").get().get().pluginId)
+                apply(libs.findPlugin("testBalloon").get().get().pluginId)
             }
 
             extensions.configure<KotlinMultiplatformExtension> {
