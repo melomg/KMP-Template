@@ -3,10 +3,8 @@ package com.melih.kmptemplate
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.compose.ComposePlugin
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
-@OptIn(ExperimentalWasmDsl::class)
 internal fun Project.configureComposeMultiplatform(
     extension: KotlinMultiplatformExtension,
 ) = extension.apply {

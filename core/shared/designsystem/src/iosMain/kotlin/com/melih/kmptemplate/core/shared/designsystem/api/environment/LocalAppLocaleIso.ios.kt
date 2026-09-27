@@ -3,12 +3,10 @@ package com.melih.kmptemplate.core.shared.designsystem.api.environment
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.InternalComposeUiApi
 import platform.Foundation.NSLocale
 import platform.Foundation.NSUserDefaults
 import platform.Foundation.preferredLanguages
 
-@OptIn(InternalComposeUiApi::class)
 actual object LocalAppLocaleIso {
 
     private const val LANG_KEY = "AppleLanguages"

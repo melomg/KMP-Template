@@ -5,7 +5,6 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.material3.adaptive.ExperimentalMaterial3AdaptiveApi
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfoV2
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffoldDefaults
@@ -76,7 +75,6 @@ private val TOP_LEVEL_DESTINATIONS: Map<NavKey, NavBarItem> = mapOf(
     ),
 )
 
-@OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
 internal fun AppNavDisplay(
     modifier: Modifier = Modifier,
