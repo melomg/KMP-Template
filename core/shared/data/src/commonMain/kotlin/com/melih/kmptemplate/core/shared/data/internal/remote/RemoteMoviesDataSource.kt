@@ -22,6 +22,6 @@ internal class RemoteMoviesDataSource(private val client: HttpClient) : Closeabl
     }
 
     private companion object {
-        private const val API_BASE_URL: String = "https://api.themoviedb.org/3/"
+        private const val API_BASE_URL: String = "https://api.themoviedb.org/3"
     }
 }
