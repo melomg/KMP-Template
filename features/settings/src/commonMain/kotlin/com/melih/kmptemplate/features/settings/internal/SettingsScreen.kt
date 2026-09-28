@@ -46,7 +46,7 @@ internal fun SettingsScreen(
     viewModel: SettingsViewModel = koinViewModel<SettingsViewModel>(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
         containerColor = Color.Transparent,
