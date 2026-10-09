@@ -33,7 +33,7 @@ kotlin {
         }
 
         androidHostTest.dependencies {
-            implementation(projects.core.shared.testutil)
+            implementation(projects.core.shared.testutils)
         }
     }
 }

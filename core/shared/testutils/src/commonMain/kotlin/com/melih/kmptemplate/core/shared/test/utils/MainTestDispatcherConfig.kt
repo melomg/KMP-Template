@@ -1,4 +1,4 @@
-package com.melih.kmptemplate.core.shared.test.util
+package com.melih.kmptemplate.core.shared.test.utils
 
 import com.melih.kmptemplate.core.shared.model.annotations.VisibleForTesting
 import com.melih.kmptemplate.core.shared.threading.DispatcherProvider

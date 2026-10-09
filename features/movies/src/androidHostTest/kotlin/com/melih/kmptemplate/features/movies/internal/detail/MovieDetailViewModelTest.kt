@@ -2,9 +2,9 @@ package com.melih.kmptemplate.features.movies.internal.detail
 
 import com.melih.kmptemplate.core.shared.data.api.TestMoviesRepository
 import com.melih.kmptemplate.core.shared.model.Movie
-import com.melih.kmptemplate.core.shared.test.util.launchInBackground
-import com.melih.kmptemplate.core.shared.test.util.withKoin
-import com.melih.kmptemplate.core.shared.test.util.withMainTestDispatcher
+import com.melih.kmptemplate.core.shared.test.utils.launchInBackground
+import com.melih.kmptemplate.core.shared.test.utils.withKoin
+import com.melih.kmptemplate.core.shared.test.utils.withMainTestDispatcher
 import de.infix.testBalloon.framework.core.TestConfig
 import de.infix.testBalloon.framework.core.testSuite
 import kotlinx.coroutines.flow.toList

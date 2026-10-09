@@ -1,4 +1,4 @@
-package com.melih.kmptemplate.core.shared.test.util
+package com.melih.kmptemplate.core.shared.test.utils
 
 import com.melih.kmptemplate.core.shared.data.api.di.dataTestModule
 import de.infix.testBalloon.framework.core.TestConfig

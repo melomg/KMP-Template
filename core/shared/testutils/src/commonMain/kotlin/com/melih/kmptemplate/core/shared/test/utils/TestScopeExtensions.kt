@@ -1,4 +1,4 @@
-package com.melih.kmptemplate.core.shared.test.util
+package com.melih.kmptemplate.core.shared.test.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

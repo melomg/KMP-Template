@@ -4,7 +4,7 @@ plugins {
 
 kotlin {
     android {
-        namespace = "com.melih.kmptemplate.core.shared.testutil"
+        namespace = "com.melih.kmptemplate.core.shared.testutils"
     }
 
     sourceSets {
