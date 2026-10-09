@@ -30,6 +30,10 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.koin.compose.viewmodel)
         }
+
+        androidHostTest.dependencies {
+            implementation(projects.core.shared.testutils)
+        }
     }
 }
 
