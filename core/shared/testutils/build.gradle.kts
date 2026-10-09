@@ -9,7 +9,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.core.shared.dataTestUtils)
+            api(projects.core.shared.dataTestfixtures)
             implementation(projects.core.shared.model)
             implementation(projects.core.shared.threading)
             implementation(libs.jetbrains.kotlinx.coroutines.test)
