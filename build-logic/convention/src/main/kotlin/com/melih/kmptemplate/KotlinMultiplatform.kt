@@ -56,14 +56,14 @@ internal fun Project.configureKotlinMultiplatform(
         commonMain {
             dependencies {
                 implementation(libs.findLibrary("koin.core").get())
+                implementation(libs.findLibrary("jetbrains.kotlinx.coroutines.core").get())
             }
         }
 
         getByName("androidHostTest").dependencies {
-            implementation(project(":core:shared:testutil"))
-            implementation(libs.findLibrary("jetbrains.kotlinx.coroutines.core").get())
             implementation(libs.findLibrary("jetbrains.kotlin.test").get())
             implementation(libs.findLibrary("testBalloon.framework.core").get())
+            implementation(libs.findLibrary("koin.test").get().get())
         }
     }
 
