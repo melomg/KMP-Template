@@ -12,8 +12,10 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.shared.logging)
             implementation(projects.core.shared.model)
+        }
 
-            api(libs.jetbrains.kotlinx.coroutines.core)
+        androidHostTest.dependencies {
+            implementation(projects.core.shared.testutils)
         }
     }
 }

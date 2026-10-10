@@ -12,11 +12,11 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(projects.core.shared.designsystem)
-            api(projects.core.shared.l10n)
-            api(projects.core.shared.model)
-            api(projects.core.shared.navigation)
-            api(projects.core.shared.threading)
+            implementation(projects.core.shared.designsystem)
+            implementation(projects.core.shared.l10n)
+            implementation(projects.core.shared.model)
+            implementation(projects.core.shared.navigation)
+            implementation(projects.core.shared.threading)
 
             implementation(libs.jetbrains.compose.runtime)
             implementation(libs.jetbrains.compose.foundation)
