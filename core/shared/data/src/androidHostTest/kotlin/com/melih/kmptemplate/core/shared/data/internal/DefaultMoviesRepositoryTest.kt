@@ -194,4 +194,4 @@ internal val DefaultMoviesRepositoryTest by testSuite(
     }
 }
 
-val MOVIES = listOf(fakeMovie(id = 1L, title = "Inception"))
+private val MOVIES = listOf(fakeMovie(id = 1L, title = "Inception"))
