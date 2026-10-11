@@ -63,7 +63,8 @@ internal fun Project.configureKotlinMultiplatform(
         getByName("androidHostTest").dependencies {
             implementation(libs.findLibrary("jetbrains.kotlin.test").get())
             implementation(libs.findLibrary("testBalloon.framework.core").get())
-            implementation(libs.findLibrary("koin.test").get().get())
+            implementation(libs.findLibrary("koin.test").get())
+            implementation(libs.findLibrary("mockk").get())
         }
     }
 

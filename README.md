@@ -89,7 +89,7 @@ The KMP template tries to help you get started with these points:
     - [ ] Benchmarking
     - [ ] Flavours
     - [ ] Mocks
-    - [ ] Test fixtures
+    - [x] Test fixtures
     - [ ] Preferences
     - [ ] Storage
     - [ ] Feature flags (local & remote)
@@ -100,7 +100,7 @@ The KMP template tries to help you get started with these points:
     - [ ] Local Formatters
     - [ ] Coroutine Dispatchers
     - [ ] Coroutine Dispatchers Test helper
-    - [ ] Unit testing
+    - [x] Unit testing
     - [ ] Test coverage: Jacoco?
     - [ ] Obfuscation & Shrinking
     - [ ] Pipelines
