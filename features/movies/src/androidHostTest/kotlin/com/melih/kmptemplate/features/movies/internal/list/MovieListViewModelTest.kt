@@ -9,15 +9,16 @@ import de.infix.testBalloon.framework.core.TestConfig
 import de.infix.testBalloon.framework.core.testSuite
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.advanceUntilIdle
-import org.koin.java.KoinJavaComponent.inject
+import org.koin.test.KoinTest
+import org.koin.test.inject
 import kotlin.test.assertEquals
 
 internal val MovieListViewModelTest by testSuite(
     testConfig = TestConfig.withMainTestDispatcher().withKoin(),
 ) {
     testFixture {
-        object {
-            val repository: TestMoviesRepository by inject(TestMoviesRepository::class.java)
+        object : KoinTest {
+            val repository: TestMoviesRepository by inject()
             val viewModel = MovieListViewModel(repository)
         }
     } asContextForEach {

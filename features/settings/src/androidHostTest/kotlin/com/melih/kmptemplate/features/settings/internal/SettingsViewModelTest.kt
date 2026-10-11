@@ -5,15 +5,16 @@ import com.melih.kmptemplate.core.shared.test.utils.withKoin
 import com.melih.kmptemplate.core.shared.test.utils.withMainTestDispatcher
 import de.infix.testBalloon.framework.core.TestConfig
 import de.infix.testBalloon.framework.core.testSuite
-import org.koin.java.KoinJavaComponent.inject
+import org.koin.test.KoinTest
+import org.koin.test.inject
 import kotlin.test.assertEquals
 
 internal val SettingsViewModelTest by testSuite(
     testConfig = TestConfig.withMainTestDispatcher().withKoin(),
 ) {
     testFixture {
-        object {
-            val platform: Platform by inject(Platform::class.java)
+        object : KoinTest {
+            val platform: Platform by inject()
             val viewModel = SettingsViewModel(platform)
         }
     } asContextForEach {
