@@ -2,6 +2,7 @@ package com.melih.kmptemplate.features.movies.internal.list
 
 import com.melih.kmptemplate.core.shared.data.api.TestMoviesRepository
 import com.melih.kmptemplate.core.shared.model.Movie
+import com.melih.kmptemplate.core.shared.model.fakeMovie
 import com.melih.kmptemplate.core.shared.test.utils.launchInBackground
 import com.melih.kmptemplate.core.shared.test.utils.withKoin
 import com.melih.kmptemplate.core.shared.test.utils.withMainTestDispatcher
@@ -30,8 +31,8 @@ internal val MovieListViewModelTest by testSuite(
         }
 
         test("emits movies when repository has movies") {
-            val movie1 = createFakeMovie(id = 1L, title = "Movie 1")
-            val movie2 = createFakeMovie(id = 2L, title = "Movie 2")
+            val movie1 = fakeMovie(id = 1L, title = "Movie 1")
+            val movie2 = fakeMovie(id = 2L, title = "Movie 2")
             val movieList = listOf(movie1, movie2)
             repository.setMovies(movieList)
 
@@ -54,8 +55,8 @@ internal val MovieListViewModelTest by testSuite(
         }
 
         test("updates state dynamically when repository emits new values") {
-            val movie1 = createFakeMovie(id = 1L, title = "Movie 1")
-            val movie2 = createFakeMovie(id = 2L, title = "Movie 2")
+            val movie1 = fakeMovie(id = 1L, title = "Movie 1")
+            val movie2 = fakeMovie(id = 2L, title = "Movie 2")
 
             val states = mutableListOf<List<Movie>>()
             it.testScope.launchInBackground {
@@ -80,33 +81,3 @@ internal val MovieListViewModelTest by testSuite(
         repository.setMovies(emptyList())
     }
 }
-
-private fun createFakeMovie(
-    id: Long = 1L,
-    title: String = "Test Movie",
-    overview: String = "Test Overview",
-    backdropUrl: String = "https://image.tmdb.org/t/p/w500/backdrop.jpg",
-    posterUrl: String = "https://image.tmdb.org/t/p/w500/poster.jpg",
-    adult: Boolean = false,
-    originalLanguage: String = "en",
-    originalTitle: String = "Test Movie",
-    popularity: Float = 8.5f,
-    releaseDate: String = "2024-01-01",
-    video: Boolean = false,
-    voteAverage: String = "8.5",
-    voteCount: Int = 100,
-) = Movie(
-    adult = adult,
-    backdropUrl = backdropUrl,
-    id = id,
-    originalLanguage = originalLanguage,
-    originalTitle = originalTitle,
-    overview = overview,
-    popularity = popularity,
-    posterUrl = posterUrl,
-    releaseDate = releaseDate,
-    title = title,
-    video = video,
-    voteAverage = voteAverage,
-    voteCount = voteCount,
-)

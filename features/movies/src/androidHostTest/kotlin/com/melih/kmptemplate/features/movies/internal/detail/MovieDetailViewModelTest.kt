@@ -1,7 +1,7 @@
 package com.melih.kmptemplate.features.movies.internal.detail
 
 import com.melih.kmptemplate.core.shared.data.api.TestMoviesRepository
-import com.melih.kmptemplate.core.shared.model.Movie
+import com.melih.kmptemplate.core.shared.model.fakeMovie
 import com.melih.kmptemplate.core.shared.test.utils.launchInBackground
 import com.melih.kmptemplate.core.shared.test.utils.withKoin
 import com.melih.kmptemplate.core.shared.test.utils.withMainTestDispatcher
@@ -36,7 +36,7 @@ internal val MovieDetailViewModelTest by testSuite(
         }
 
         test("emits Success when repository returns a movie") {
-            val movie = createFakeMovie(id = 1L, title = "Inception")
+            val movie = fakeMovie(id = 1L, title = "Inception")
             repository.setMovies(listOf(movie))
 
             val states = mutableListOf<MovieDetailUiState>()
@@ -56,7 +56,7 @@ internal val MovieDetailViewModelTest by testSuite(
         }
 
         test("emits Error when repository returns null") {
-            val differentMovie = createFakeMovie(id = 2L, title = "Inception")
+            val differentMovie = fakeMovie(id = 2L, title = "Inception")
             repository.setMovies(listOf(differentMovie))
 
             val states = mutableListOf<MovieDetailUiState>()
@@ -78,8 +78,8 @@ internal val MovieDetailViewModelTest by testSuite(
         }
 
         test("updates state dynamically when repository emits new values") {
-            val movie1 = createFakeMovie(id = 1L, title = "Movie 1")
-            val movie2 = createFakeMovie(id = 1L, title = "Movie 2")
+            val movie1 = fakeMovie(id = 1L, title = "Movie 1")
+            val movie2 = fakeMovie(id = 1L, title = "Movie 2")
 
             val states = mutableListOf<MovieDetailUiState>()
             it.testScope.launchInBackground {
@@ -104,33 +104,3 @@ internal val MovieDetailViewModelTest by testSuite(
         repository.setMovies(emptyList())
     }
 }
-
-private fun createFakeMovie(
-    id: Long = 1L,
-    title: String = "Test Movie",
-    overview: String = "Test Overview",
-    backdropUrl: String = "https://image.tmdb.org/t/p/w500/backdrop.jpg",
-    posterUrl: String = "https://image.tmdb.org/t/p/w500/poster.jpg",
-    adult: Boolean = false,
-    originalLanguage: String = "en",
-    originalTitle: String = "Test Movie",
-    popularity: Float = 8.5f,
-    releaseDate: String = "2024-01-01",
-    video: Boolean = false,
-    voteAverage: String = "8.5",
-    voteCount: Int = 100,
-) = Movie(
-    adult = adult,
-    backdropUrl = backdropUrl,
-    id = id,
-    originalLanguage = originalLanguage,
-    originalTitle = originalTitle,
-    overview = overview,
-    popularity = popularity,
-    posterUrl = posterUrl,
-    releaseDate = releaseDate,
-    title = title,
-    video = video,
-    voteAverage = voteAverage,
-    voteCount = voteCount,
-)

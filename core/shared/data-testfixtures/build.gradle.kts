@@ -10,6 +10,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
+            api(projects.core.shared.modelTestfixtures)
             implementation(projects.core.shared.data)
             implementation(projects.core.shared.domain)
             implementation(projects.core.shared.threading)

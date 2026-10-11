@@ -4,6 +4,7 @@ import com.melih.kmptemplate.core.shared.data.api.di.Qualifier
 import com.melih.kmptemplate.core.shared.data.internal.local.InMemoryMoviesDataSource
 import com.melih.kmptemplate.core.shared.data.internal.remote.RemoteMoviesDataSource
 import com.melih.kmptemplate.core.shared.model.Movie
+import com.melih.kmptemplate.core.shared.model.fakeMovie
 import com.melih.kmptemplate.core.shared.test.utils.launchInBackground
 import com.melih.kmptemplate.core.shared.test.utils.withKoin
 import com.melih.kmptemplate.core.shared.test.utils.withMainTestDispatcher
@@ -61,8 +62,8 @@ internal val DefaultMoviesRepositoryTest by testSuite(
 
         test("refresh calls remote with first page and saves movies") {
             // Given
-            val movie1 = createFakeMovie(id = 10L, title = "Interstellar")
-            val movie2 = createFakeMovie(id = 20L, title = "Dunkirk")
+            val movie1 = fakeMovie(id = 10L, title = "Interstellar")
+            val movie2 = fakeMovie(id = 20L, title = "Dunkirk")
             val newMovies = listOf(movie1, movie2)
             coEvery { remote.getPopularMovies(any()) } returns newMovies
 
@@ -118,7 +119,7 @@ internal val DefaultMoviesRepositoryTest by testSuite(
         test("getMovieById delegates to cache getMovieById") {
             // Given
             val movieId = 42L
-            val movie = createFakeMovie(id = movieId, title = "The Matrix")
+            val movie = fakeMovie(id = movieId, title = "The Matrix")
             val expectedFlow = flowOf(movie)
             every { cache.getMovieById(movieId) } returns expectedFlow
 
@@ -167,8 +168,8 @@ internal val DefaultMoviesRepositoryTest by testSuite(
         test("multiple refreshes update the cache sequentially") {
             // Given
             clearAllMocks()
-            val batch1 = listOf(createFakeMovie(id = 1L, title = "Batch 1"))
-            val batch2 = listOf(createFakeMovie(id = 2L, title = "Batch 2"))
+            val batch1 = listOf(fakeMovie(id = 1L, title = "Batch 1"))
+            val batch2 = listOf(fakeMovie(id = 2L, title = "Batch 2"))
 
             coEvery { remote.getPopularMovies(1) } returns batch1 andThen batch2
 
@@ -193,34 +194,4 @@ internal val DefaultMoviesRepositoryTest by testSuite(
     }
 }
 
-val MOVIES = listOf(createFakeMovie(id = 1L, title = "Inception"))
-
-private fun createFakeMovie(
-    id: Long = 1L,
-    title: String = "Test Movie",
-    overview: String = "Test Overview",
-    backdropUrl: String = "https://image.tmdb.org/t/p/w500/backdrop.jpg",
-    posterUrl: String = "https://image.tmdb.org/t/p/w500/poster.jpg",
-    adult: Boolean = false,
-    originalLanguage: String = "en",
-    originalTitle: String = "Test Movie",
-    popularity: Float = 8.5f,
-    releaseDate: String = "2024-01-01",
-    video: Boolean = false,
-    voteAverage: String = "8.5",
-    voteCount: Int = 100,
-) = Movie(
-    adult = adult,
-    backdropUrl = backdropUrl,
-    id = id,
-    originalLanguage = originalLanguage,
-    originalTitle = originalTitle,
-    overview = overview,
-    popularity = popularity,
-    posterUrl = posterUrl,
-    releaseDate = releaseDate,
-    title = title,
-    video = video,
-    voteAverage = voteAverage,
-    voteCount = voteCount,
-)
+val MOVIES = listOf(fakeMovie(id = 1L, title = "Inception"))
