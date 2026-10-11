@@ -7,13 +7,16 @@ import com.melih.kmptemplate.core.shared.domain.api.MoviesRepository
 import com.melih.kmptemplate.core.shared.network.api.di.networkModule
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import org.koin.plugin.module.dsl.factory
+
+object Qualifier {
+    val APPLICATION_SCOPE = named("applicationScope")
+}
 
 val dataModule = module {
     includes(networkModule)
 
     single<MoviesRepository> {
-        DefaultMoviesRepository(get(named("applicationScope")), get(), get())
+        DefaultMoviesRepository(get(Qualifier.APPLICATION_SCOPE), get(), get())
     }
 
     factory { RemoteMoviesDataSource(get()) }

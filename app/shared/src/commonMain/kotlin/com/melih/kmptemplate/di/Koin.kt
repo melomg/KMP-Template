@@ -1,24 +1,24 @@
 package com.melih.kmptemplate.di
 
 import com.melih.kmptemplate.BuildKonfig
+import com.melih.kmptemplate.core.shared.data.api.di.Qualifier
 import com.melih.kmptemplate.core.shared.data.api.di.dataModule
 import com.melih.kmptemplate.core.shared.logging.Klog
 import com.melih.kmptemplate.core.shared.logging.getKloggers
 import com.melih.kmptemplate.core.shared.model.platform.BuildType
 import com.melih.kmptemplate.core.shared.model.platform.Platform
-import com.melih.kmptemplate.features.movies.api.di.moviesFeatureModule
 import com.melih.kmptemplate.core.shared.threading.DispatcherProvider
+import com.melih.kmptemplate.features.movies.api.di.moviesFeatureModule
 import com.melih.kmptemplate.features.settings.api.di.settingsFeatureModule
 import com.melih.kmptemplate.platform.platformVersionName
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.core.context.startKoin
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 private val appModule = module {
-    single(named("applicationScope")) {
+    single(Qualifier.APPLICATION_SCOPE) {
         CoroutineScope(
             DispatcherProvider.Main + SupervisorJob() + CoroutineExceptionHandler { _, error ->
                 Klog.error(

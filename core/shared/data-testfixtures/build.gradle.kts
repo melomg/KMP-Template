@@ -12,6 +12,7 @@ kotlin {
         commonMain.dependencies {
             implementation(projects.core.shared.data)
             implementation(projects.core.shared.domain)
+            implementation(projects.core.shared.threading)
             implementation(libs.jetbrains.kotlin.test)
             implementation(libs.jetbrains.kotlinx.coroutines.test)
             implementation(libs.koin.test)
