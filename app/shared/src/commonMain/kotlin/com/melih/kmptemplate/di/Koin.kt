@@ -1,7 +1,7 @@
 package com.melih.kmptemplate.di
 
 import com.melih.kmptemplate.BuildKonfig
-import com.melih.kmptemplate.core.shared.data.api.di.Qualifier
+import com.melih.kmptemplate.core.shared.data.api.di.Qualifiers
 import com.melih.kmptemplate.core.shared.data.api.di.dataModule
 import com.melih.kmptemplate.core.shared.logging.Klog
 import com.melih.kmptemplate.core.shared.logging.getKloggers
@@ -18,7 +18,7 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 private val appModule = module {
-    single(Qualifier.APPLICATION_SCOPE) {
+    single(Qualifiers.APPLICATION_SCOPE) {
         CoroutineScope(
             DispatcherProvider.Main + SupervisorJob() + CoroutineExceptionHandler { _, error ->
                 Klog.error(

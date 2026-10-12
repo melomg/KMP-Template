@@ -1,6 +1,6 @@
 package com.melih.kmptemplate.core.shared.data.internal
 
-import com.melih.kmptemplate.core.shared.data.api.di.Qualifier
+import com.melih.kmptemplate.core.shared.data.api.di.Qualifiers
 import com.melih.kmptemplate.core.shared.data.internal.local.InMemoryMoviesDataSource
 import com.melih.kmptemplate.core.shared.data.internal.remote.RemoteMoviesDataSource
 import com.melih.kmptemplate.core.shared.model.Movie
@@ -29,7 +29,7 @@ internal val DefaultMoviesRepositoryTest by testSuite(
 ) {
     testFixture {
         object : KoinTest {
-            val applicationScope: CoroutineScope by inject(Qualifier.APPLICATION_SCOPE)
+            val applicationScope: CoroutineScope by inject(Qualifiers.APPLICATION_SCOPE)
             val remote = mockk<RemoteMoviesDataSource>()
             val cache = mockk<InMemoryMoviesDataSource>(relaxed = true)
             val repository = DefaultMoviesRepository(

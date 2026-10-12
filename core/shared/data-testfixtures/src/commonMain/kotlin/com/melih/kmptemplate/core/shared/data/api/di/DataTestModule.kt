@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val dataTestModule = module {
     single { TestMoviesRepository() } bind MoviesRepository::class
-    single(Qualifier.APPLICATION_SCOPE) {
+    single(Qualifiers.APPLICATION_SCOPE) {
         CoroutineScope(DispatcherProvider.Default + SupervisorJob())
     }
 }

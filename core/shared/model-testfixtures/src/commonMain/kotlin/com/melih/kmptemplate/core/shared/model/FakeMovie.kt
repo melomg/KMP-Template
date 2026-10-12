@@ -1,5 +1,6 @@
 package com.melih.kmptemplate.core.shared.model
 
+@Suppress("LongParameterList")
 fun fakeMovie(
     id: Long = 1L,
     title: String = "Test Movie",
