@@ -36,6 +36,7 @@ ktor = "3.6.0"
 detekt = "1.23.8"
 buildkonfig = "0.23.0"
 testBalloon = "1.1.0"
+mockk = "1.14.11"
 # build logic
 androidx-lint-gradle = "1.0.0"
 ksp = "2.3.10"
@@ -75,6 +76,8 @@ navigation3-browser = { module = "com.github.terrakok:navigation3-browser", vers
 # testBalloon
 testBalloon-framework-core = { module = "de.infix.testBalloon:testBalloon-framework-core", version.ref = "testBalloon" }
 testBalloon-gradlePlugin = { module = "de.infix.testBalloon:testBalloon-gradle-plugin", version.ref = "testBalloon" }
+# mockk
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 # coil
 coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
 coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
@@ -82,6 +85,7 @@ coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", v
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-navigation3 = { module = "io.insert-koin:koin-compose-navigation3", version.ref = "koin" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
 # konsist
 konsist = { module = "com.lemonappdev:konsist", version.ref = "konsist" }

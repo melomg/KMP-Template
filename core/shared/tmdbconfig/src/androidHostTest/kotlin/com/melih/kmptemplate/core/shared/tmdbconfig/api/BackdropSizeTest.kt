@@ -1,6 +1,6 @@
 package com.melih.kmptemplate.core.shared.tmdbconfig.api
 
-import com.melih.kmptemplate.core.shared.test.util.cartesianProduct
+import com.melih.kmptemplate.core.shared.test.utils.cartesianProduct
 import de.infix.testBalloon.framework.core.testSuite
 import kotlin.test.assertEquals
 

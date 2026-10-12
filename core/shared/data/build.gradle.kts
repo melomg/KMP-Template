@@ -18,5 +18,9 @@ kotlin {
             implementation(libs.ktor.client.core)
             implementation(libs.koin.core)
         }
+
+        androidHostTest.dependencies {
+            implementation(projects.core.shared.testutils)
+        }
     }
 }
