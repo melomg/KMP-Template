@@ -19,6 +19,7 @@ internal val SettingsViewModelTest by testSuite(
         }
     } asContextForEach {
         test("initial state") {
+            // Then
             val expectedState = SettingsState(
                 appVersion = "${platform.appVersionName} (${platform.appVersionCode})",
                 platformVersion = platform.platformVersionName,

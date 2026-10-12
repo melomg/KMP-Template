@@ -24,6 +24,7 @@ internal val MovieListViewModelTest by testSuite(
         }
     } asContextForEach {
         test("initial state is empty list") {
+            // Then
             assertEquals(
                 expected = emptyList(),
                 actual = viewModel.movies.value,
@@ -31,16 +32,19 @@ internal val MovieListViewModelTest by testSuite(
         }
 
         test("emits movies when repository has movies") {
+            // Given
             val movie1 = fakeMovie(id = 1L, title = "Movie 1")
             val movie2 = fakeMovie(id = 2L, title = "Movie 2")
             val movieList = listOf(movie1, movie2)
             repository.setMovies(movieList)
 
+            // When
             val states = mutableListOf<List<Movie>>()
             it.testScope.launchInBackground {
                 viewModel.movies.toList(states)
             }
 
+            // Then
             assertEquals(
                 expected = listOf(
                     emptyList(),
@@ -55,9 +59,11 @@ internal val MovieListViewModelTest by testSuite(
         }
 
         test("updates state dynamically when repository emits new values") {
+            // Given
             val movie1 = fakeMovie(id = 1L, title = "Movie 1")
             val movie2 = fakeMovie(id = 2L, title = "Movie 2")
 
+            // When
             val states = mutableListOf<List<Movie>>()
             it.testScope.launchInBackground {
                 viewModel.movies.toList(states)
@@ -68,6 +74,7 @@ internal val MovieListViewModelTest by testSuite(
             repository.addMovie(movie2)
             it.testScope.advanceUntilIdle()
 
+            // Then
             assertEquals(
                 expected = listOf(
                     emptyList(),

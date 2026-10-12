@@ -24,11 +24,11 @@ internal val MovieDetailViewModelTest by testSuite(
         }
     } asContextForEach {
         test("initial state is Loading") {
+            // Then
             assertEquals(
                 expected = MovieDetailUiState.Loading,
                 actual = viewModel.uiState.value,
             )
-
             assertEquals(
                 expected = 1L,
                 actual = repository.requestedMovieId,
@@ -36,14 +36,17 @@ internal val MovieDetailViewModelTest by testSuite(
         }
 
         test("emits Success when repository returns a movie") {
+            // Given
             val movie = fakeMovie(id = 1L, title = "Inception")
             repository.setMovies(listOf(movie))
 
+            // When
             val states = mutableListOf<MovieDetailUiState>()
             it.testScope.launchInBackground {
                 viewModel.uiState.toList(states)
             }
 
+            // Then
             assertEquals(
                 expected = listOf(
                     MovieDetailUiState.Loading,
@@ -56,14 +59,17 @@ internal val MovieDetailViewModelTest by testSuite(
         }
 
         test("emits Error when repository returns null") {
+            // Given
             val differentMovie = fakeMovie(id = 2L, title = "Inception")
             repository.setMovies(listOf(differentMovie))
 
+            // When
             val states = mutableListOf<MovieDetailUiState>()
             it.testScope.launchInBackground {
                 viewModel.uiState.toList(states)
             }
 
+            // Then
             assertEquals(
                 expected = listOf(
                     MovieDetailUiState.Loading,
@@ -78,9 +84,11 @@ internal val MovieDetailViewModelTest by testSuite(
         }
 
         test("updates state dynamically when repository emits new values") {
+            // Given
             val movie1 = fakeMovie(id = 1L, title = "Movie 1")
             val movie2 = fakeMovie(id = 1L, title = "Movie 2")
 
+            // When
             val states = mutableListOf<MovieDetailUiState>()
             it.testScope.launchInBackground {
                 viewModel.uiState.toList(states)
@@ -91,6 +99,7 @@ internal val MovieDetailViewModelTest by testSuite(
             repository.addMovie(movie2)
             it.testScope.advanceUntilIdle()
 
+            // Then
             assertEquals(
                 expected = listOf(
                     MovieDetailUiState.Loading,
