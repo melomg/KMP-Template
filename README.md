@@ -80,7 +80,7 @@ The KMP template tries to help you get started with these points:
     - [x] Network: [ktor](https://ktor.io/)
     - [x] Lint & Static code analysis [Detekt](https://medium.com/@mmelihgultekin/starting-a-kmp-project-the-one-with-static-code-analysis-episode-2-0a410146fb68)
     - [x] Build info [Blog](https://medium.com/@mmelihgultekin/starting-a-kmp-project-the-one-with-build-info-episode-3-54e77dcc0849)
-    - [x] Logging: [Kermit](https://medium.com/@mmelihgultekin/kermikermit-androidstarting-a-kmp-project-the-one-with-logging-episode-4-a5aeaa9f2aeb)
+    - [x] Logging: [Blog](https://medium.com/@mmelihgultekin/kermikermit-androidstarting-a-kmp-project-the-one-with-logging-episode-4-a5aeaa9f2aeb)
       - [x] Error reporting
         - [ ] Analytics
         - [ ] Tracing
