@@ -17,7 +17,7 @@ val FitnesseTest by testSuite {
             ) { it.hasPublicOrDefaultModifier }
     }
 
-    test("Logs are NOT logged by Klog") {
+    test("Logs must be logged by Klog") {
         val project = Konsist
             .scopeFromProduction()
 
@@ -32,5 +32,25 @@ val FitnesseTest by testSuite {
             .assertFalse(
                 additionalMessage = "See ADR-0002"
             ) { it.text.contains("println(") }
+    }
+
+    test("Koin must be used for dependency injection") {
+        val files = Konsist.scopeFromProduction().files
+        val otherDiPackages = listOf(
+            "dagger",
+            "javax.inject",
+            "jakarta.inject",
+            "org.kodein.di",
+            "dev.zacsweers.metro",
+            "me.tatarka.inject"
+        )
+
+        files.assertFalse(additionalMessage = "See ADR-0003") { file ->
+            file.hasImport { import ->
+                otherDiPackages.any { dependency ->
+                    import.name == dependency || import.name.startsWith("$dependency.")
+                }
+            }
+        }
     }
 }
