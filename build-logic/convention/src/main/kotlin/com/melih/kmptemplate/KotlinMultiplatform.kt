@@ -35,6 +35,17 @@ internal fun Project.configureKotlinMultiplatform(
             instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             execution = "HOST"
         }
+        testOptions {
+            screenshotTests.create("screenshotTest") { // suiteName can be customized (for example, "uiTests")
+                engineVersion = "0.0.1-alpha16"
+                targetVariants.add("demoDebug") // Add specific variants to test
+
+                dependencies {
+                    implementation(libs.jetbrains.uiTooling)
+                    implementation("com.android.tools.screenshot:screenshot-validation-api:0.0.1-alpha16")
+                }
+            }
+        }
     }
 
     jvm("desktop")
